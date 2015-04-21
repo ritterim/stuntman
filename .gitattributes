@@ -1,0 +1,46 @@
+*          text=auto
+
+*.config   text=auto
+*.Config   text=auto
+*.cs       text=auto diff=csharp
+*.cshtml   text=auto
+*.css      text=auto
+*.csv      text=auto
+*.less     text=auto
+*.feature  text=auto
+*.htm      text=auto
+*.html     text=auto
+*.js       text=auto
+*.md       text=auto
+*.msbuild  text=auto
+*.resx     text=auto
+*.props    text=auto
+*.pubxml   text=auto
+*.readme   text=auto
+*.ruleset  text=auto
+*.StyleCop text=auto
+*.sql      text=auto eol=crlf
+*.svg      text=auto
+*.txt      text=auto
+*.xml      text=auto
+*.targets  text=auto
+*.vsmdi    text=auto
+
+*.proj     text=auto
+*.csproj   text=auto eol=crlf
+*.vbproj   text=auto eol=crlf
+*.fsproj   text=auto eol=crlf
+*.dbproj   text=auto eol=crlf
+*.sln      text=auto eol=crlf
+
+*.dll      binary
+*.eot      binary
+*.exe      binary
+*.gif      binary
+*.ico      binary
+*.jpg      binary
+*.otf      binary
+*.png      binary
+*.psd      binary
+*.ttf      binary
+*.woff     binary
