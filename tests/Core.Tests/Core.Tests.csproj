@@ -11,7 +11,7 @@
     <OutputType>Library</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>RimDev.Stuntman.Core.Tests</RootNamespace>
-    <AssemblyName>RimDev.Stuntman.Core</AssemblyName>
+    <AssemblyName>RimDev.Stuntman.Core.Tests</AssemblyName>
     <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
     <ErrorReport>prompt</ErrorReport>
