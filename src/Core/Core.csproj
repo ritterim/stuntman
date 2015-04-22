@@ -64,6 +64,7 @@
     <Compile Include="UserPicker.cs" />
   </ItemGroup>
   <ItemGroup>
+    <None Include="Core.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
