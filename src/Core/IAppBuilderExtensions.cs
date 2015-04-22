@@ -21,6 +21,7 @@ namespace RimDev.Stuntman.Core
                 AuthenticationType = StuntmanAuthenticationType,
                 LoginPath = new PathString(options.SignInUri),
                 LogoutPath = new PathString(options.SignOutUri),
+                ReturnUrlParameter = StuntmanOptions.ReturnUrlQueryStringKey,
             });
 
             app.Map(options.SignInUri, signin =>
