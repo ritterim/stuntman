@@ -9,7 +9,7 @@ namespace RimDev.Stuntman.UsageSample
     {
         public void Configuration(IAppBuilder app)
         {
-            app.UseStuntman(new StuntmanOptions
+            var options = new StuntmanOptions
             {
                 Users = new[]
                 {
@@ -24,7 +24,11 @@ namespace RimDev.Stuntman.UsageSample
                         }
                     },
                 }
-            });
+            };
+
+            app.UseStuntman(options);
+
+            var userPicker = new UserPicker(options);
 
             app.Map("/secure", secure =>
             {
@@ -37,10 +41,13 @@ namespace RimDev.Stuntman.UsageSample
                     if (string.IsNullOrEmpty(userName))
                         userName = "Anonymous / Unknown";
 
-                    context.Response.ContentType = "text/plain";
-                    return context.Response.WriteAsync(string.Format(
+                    context.Response.ContentType = "text/html";
+                    context.Response.WriteAsync(string.Format(
                         "Hello, {0}. This is the /secure endpoint.",
                         userName));
+
+                    return context.Response.WriteAsync(
+                        userPicker.GetHtml(context.Request.Uri.AbsoluteUri));
                 });
             });
 
@@ -62,10 +69,13 @@ namespace RimDev.Stuntman.UsageSample
                     if (string.IsNullOrEmpty(userName))
                         userName = "Anonymous / Unknown";
 
-                    context.Response.ContentType = "text/plain";
-                    return context.Response.WriteAsync(string.Format(
+                    context.Response.ContentType = "text/html";
+                    context.Response.WriteAsync(string.Format(
                         "Hello, {0}.",
                         userName));
+
+                    return context.Response.WriteAsync(
+                        userPicker.GetHtml(context.Request.Uri.AbsoluteUri));
                 });
             });
         }

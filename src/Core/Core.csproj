@@ -61,6 +61,7 @@
     </Compile>
     <Compile Include="StuntmanOptions.cs" />
     <Compile Include="StuntmanUser.cs" />
+    <Compile Include="UserPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
