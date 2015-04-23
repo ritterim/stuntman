@@ -1,8 +1,8 @@
 # Stuntman
 
-> "Sometimes, you need to be a stand-in."
+> "Sometimes, you need a stand-in."
 
-A library for impersonating users during development leveraging ASP.NET Identity.
+**Stuntman** is a library for impersonating users during development leveraging .NET Claims Identity. Used primarily in web environments like ASP.NET MVC, ASP.NET Web Forms, and OWIN applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.
 
 ## Installation
 
@@ -14,7 +14,9 @@ NOT_YET_AVAILABLE Install-Package RimDev.Stuntman
 
 ## Usage
 
-Stuntman uses OWIN. If you're using ASP.NET MVC, you can add OWIN and find a way to render the HTML as necessary for the user picker.
+### Startup / Middleware registration
+
+Stuntman uses OWIN and is registered as middleware, and allows for programmatictally preset user scenarios, in the form of claims identities. These presets can be utilized by you or other team members working on the same code base.
 
 ```csharp
 // OWIN Startup class
@@ -43,16 +45,16 @@ public class Startup
 
         // Wire up Stuntman authentication.
         app.UseStuntman(options);
-
-        // The return uri to redirect to after a Stuntman login.
-        // You probably want this to be the current page.
-        var loginReturnUri = "https://return-uri";
-
-        // Inject this HTML into your page
-        // to have a method to pick users.
-        var html = new UserPicker(options).GetHtml(loginReturnUri);
     }
 }
+```
+
+### View
+
+The below example shows how to use Stuntman in a **Razor** view to get the user picker during development.
+
+```
+@Html.Raw(Stuntman.Picker.GetHtml(Request.RawUrl));
 ```
 
 ## License
