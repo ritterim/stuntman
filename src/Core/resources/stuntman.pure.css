@@ -1,0 +1,1107 @@
+/*!
+Pure v0.6.0
+Copyright 2014 Yahoo! Inc. All rights reserved.
+Licensed under the BSD License.
+https://github.com/yahoo/pure/blob/master/LICENSE.md
+*/
+
+/*csslint important:false*/
+
+/* ==========================================================================
+   Pure Base Extras
+   ========================================================================== */
+
+/**
+ * Extra rules that Pure adds on top of Normalize.css
+ */
+
+/**
+ * Always hide an element when it has the `hidden` HTML attribute.
+ */
+
+.hidden,
+[hidden] {
+    display: none !important;
+}
+
+/**
+ * Add this class to an image to make it fit within it's fluid parent wrapper while maintaining
+ * aspect ratio.
+ */
+
+.stuntman-img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/*csslint regex-selectors:false, known-properties:false, duplicate-properties:false*/
+
+.stuntman-g {
+    letter-spacing: -0.31em;
+    /* Webkit: collapse white-space between units */
+    *letter-spacing: normal;
+    /* reset IE < 8 */
+    *word-spacing: -0.43em;
+    /* IE < 8: collapse white-space between units */
+    text-rendering: optimizespeed;
+    /* Webkit: fixes text-rendering: optimizeLegibility */
+    /*
+    Sets the font stack to fonts known to work properly with the above letter
+    and word spacings. See: https://github.com/yahoo/pure/issues/41/
+
+    The following font stack makes Pure Grids work on all known environments.
+
+    * FreeSans: Ships with many Linux distros, including Ubuntu
+
+    * Arimo: Ships with Chrome OS. Arimo has to be defined before Helvetica and
+      Arial to get picked up by the browser, even though neither is available
+      in Chrome OS.
+
+    * Droid Sans: Ships with all versions of Android.
+
+    * Helvetica, Arial, sans-serif: Common font stack on OS X and Windows.
+    */
+    font-family: FreeSans, Arimo, "Droid Sans", Helvetica, Arial, sans-serif;
+    /*
+    Use flexbox when possible to avoid `letter-spacing` side-effects.
+
+    NOTE: Firefox (as of 25) does not currently support flex-wrap, so the
+    `-moz-` prefix version is omitted.
+    */
+    display: -webkit-flex;
+    -webkit-flex-flow: row wrap;
+    /* IE10 uses display: flexbox */
+    display: -ms-flexbox;
+    -ms-flex-flow: row wrap;
+    /* Prevents distributing space between rows */
+    -ms-align-content: flex-start;
+    -webkit-align-content: flex-start;
+    align-content: flex-start;
+}
+
+/* Opera as of 12 on Windows needs word-spacing.
+   The ".opera-only" selector is used to prevent actual prefocus styling
+   and is not required in markup.
+*/
+
+.opera-only :-o-prefocus,
+.stuntman-g {
+    word-spacing: -0.43em;
+}
+
+.stuntman-u {
+    display: inline-block;
+    *display: inline;
+    /* IE < 8: fake inline-block */
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+
+/*
+Resets the font family back to the OS/browser's default sans-serif font,
+this the same font stack that Normalize.css sets for the `body`.
+*/
+
+.stuntman-g [class *= "stuntman-u"] {
+    font-family: sans-serif;
+}
+
+.stuntman-u-1,
+.stuntman-u-1-1,
+.stuntman-u-1-2,
+.stuntman-u-1-3,
+.stuntman-u-2-3,
+.stuntman-u-1-4,
+.stuntman-u-3-4,
+.stuntman-u-1-5,
+.stuntman-u-2-5,
+.stuntman-u-3-5,
+.stuntman-u-4-5,
+.stuntman-u-5-5,
+.stuntman-u-1-6,
+.stuntman-u-5-6,
+.stuntman-u-1-8,
+.stuntman-u-3-8,
+.stuntman-u-5-8,
+.stuntman-u-7-8,
+.stuntman-u-1-12,
+.stuntman-u-5-12,
+.stuntman-u-7-12,
+.stuntman-u-11-12,
+.stuntman-u-1-24,
+.stuntman-u-2-24,
+.stuntman-u-3-24,
+.stuntman-u-4-24,
+.stuntman-u-5-24,
+.stuntman-u-6-24,
+.stuntman-u-7-24,
+.stuntman-u-8-24,
+.stuntman-u-9-24,
+.stuntman-u-10-24,
+.stuntman-u-11-24,
+.stuntman-u-12-24,
+.stuntman-u-13-24,
+.stuntman-u-14-24,
+.stuntman-u-15-24,
+.stuntman-u-16-24,
+.stuntman-u-17-24,
+.stuntman-u-18-24,
+.stuntman-u-19-24,
+.stuntman-u-20-24,
+.stuntman-u-21-24,
+.stuntman-u-22-24,
+.stuntman-u-23-24,
+.stuntman-u-24-24 {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    letter-spacing: normal;
+    word-spacing: normal;
+    vertical-align: top;
+    text-rendering: auto;
+}
+
+.stuntman-u-1-24 {
+    width: 4.1667%;
+    *width: 4.1357%;
+}
+
+.stuntman-u-1-12,
+.stuntman-u-2-24 {
+    width: 8.3333%;
+    *width: 8.3023%;
+}
+
+.stuntman-u-1-8,
+.stuntman-u-3-24 {
+    width: 12.5000%;
+    *width: 12.4690%;
+}
+
+.stuntman-u-1-6,
+.stuntman-u-4-24 {
+    width: 16.6667%;
+    *width: 16.6357%;
+}
+
+.stuntman-u-1-5 {
+    width: 20%;
+    *width: 19.9690%;
+}
+
+.stuntman-u-5-24 {
+    width: 20.8333%;
+    *width: 20.8023%;
+}
+
+.stuntman-u-1-4,
+.stuntman-u-6-24 {
+    width: 25%;
+    *width: 24.9690%;
+}
+
+.stuntman-u-7-24 {
+    width: 29.1667%;
+    *width: 29.1357%;
+}
+
+.stuntman-u-1-3,
+.stuntman-u-8-24 {
+    width: 33.3333%;
+    *width: 33.3023%;
+}
+
+.stuntman-u-3-8,
+.stuntman-u-9-24 {
+    width: 37.5000%;
+    *width: 37.4690%;
+}
+
+.stuntman-u-2-5 {
+    width: 40%;
+    *width: 39.9690%;
+}
+
+.stuntman-u-5-12,
+.stuntman-u-10-24 {
+    width: 41.6667%;
+    *width: 41.6357%;
+}
+
+.stuntman-u-11-24 {
+    width: 45.8333%;
+    *width: 45.8023%;
+}
+
+.stuntman-u-1-2,
+.stuntman-u-12-24 {
+    width: 50%;
+    *width: 49.9690%;
+}
+
+.stuntman-u-13-24 {
+    width: 54.1667%;
+    *width: 54.1357%;
+}
+
+.stuntman-u-7-12,
+.stuntman-u-14-24 {
+    width: 58.3333%;
+    *width: 58.3023%;
+}
+
+.stuntman-u-3-5 {
+    width: 60%;
+    *width: 59.9690%;
+}
+
+.stuntman-u-5-8,
+.stuntman-u-15-24 {
+    width: 62.5000%;
+    *width: 62.4690%;
+}
+
+.stuntman-u-2-3,
+.stuntman-u-16-24 {
+    width: 66.6667%;
+    *width: 66.6357%;
+}
+
+.stuntman-u-17-24 {
+    width: 70.8333%;
+    *width: 70.8023%;
+}
+
+.stuntman-u-3-4,
+.stuntman-u-18-24 {
+    width: 75%;
+    *width: 74.9690%;
+}
+
+.stuntman-u-19-24 {
+    width: 79.1667%;
+    *width: 79.1357%;
+}
+
+.stuntman-u-4-5 {
+    width: 80%;
+    *width: 79.9690%;
+}
+
+.stuntman-u-5-6,
+.stuntman-u-20-24 {
+    width: 83.3333%;
+    *width: 83.3023%;
+}
+
+.stuntman-u-7-8,
+.stuntman-u-21-24 {
+    width: 87.5000%;
+    *width: 87.4690%;
+}
+
+.stuntman-u-11-12,
+.stuntman-u-22-24 {
+    width: 91.6667%;
+    *width: 91.6357%;
+}
+
+.stuntman-u-23-24 {
+    width: 95.8333%;
+    *width: 95.8023%;
+}
+
+.stuntman-u-1,
+.stuntman-u-1-1,
+.stuntman-u-5-5,
+.stuntman-u-24-24 {
+    width: 100%;
+}
+
+.stuntman-button {
+    /* Structure */
+    display: inline-block;
+    zoom: 1;
+    line-height: normal;
+    white-space: nowrap;
+    vertical-align: middle;
+    text-align: center;
+    cursor: pointer;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Firefox: Get rid of the inner focus border */
+
+.stuntman-button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+/*csslint outline-none:false*/
+
+.stuntman-button {
+    font-family: inherit;
+    font-size: 100%;
+    padding: 0.5em 1em;
+    color: #444;
+    /* rgba not supported (IE 8) */
+    color: rgba(0, 0, 0, 0.80);
+    /* rgba supported */
+    border: 1px solid #999;
+    /*IE 6/7/8*/
+    border: none rgba(0, 0, 0, 0);
+    /*IE9 + everything else*/
+    background-color: #E6E6E6;
+    text-decoration: none;
+    border-radius: 2px;
+}
+
+.stuntman-button-hover,
+.stuntman-button:hover,
+.stuntman-button:focus {
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#00000000', endColorstr='#1a000000',GradientType=0);
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), color-stop(40%, rgba(0,0,0, 0.05)), to(rgba(0,0,0, 0.10)));
+    background-image: -webkit-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: -moz-linear-gradient(top, rgba(0,0,0, 0.05) 0%, rgba(0,0,0, 0.10));
+    background-image: -o-linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+    background-image: linear-gradient(transparent, rgba(0,0,0, 0.05) 40%, rgba(0,0,0, 0.10));
+}
+
+.stuntman-button:focus {
+    outline: 0;
+}
+
+.stuntman-button-active,
+.stuntman-button:active {
+    box-shadow: 0 0 0 1px rgba(0,0,0, 0.15) inset, 0 0 6px rgba(0,0,0, 0.20) inset;
+    border-color: #000\9;
+}
+
+.stuntman-button[disabled],
+.stuntman-button-disabled,
+.stuntman-button-disabled:hover,
+.stuntman-button-disabled:focus,
+.stuntman-button-disabled:active {
+    border: none;
+    background-image: none;
+    filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
+    filter: alpha(opacity=40);
+    -khtml-opacity: 0.40;
+    -moz-opacity: 0.40;
+    opacity: 0.40;
+    cursor: not-allowed;
+    box-shadow: none;
+}
+
+.stuntman-button-hidden {
+    display: none;
+}
+
+/* Firefox: Get rid of the inner focus border */
+
+.stuntman-button::-moz-focus-inner {
+    padding: 0;
+    border: 0;
+}
+
+.stuntman-button-primary,
+.stuntman-button-selected,
+a.stuntman-button-primary,
+a.stuntman-button-selected {
+    background-color: rgb(0, 120, 231);
+    color: #fff;
+}
+
+/*csslint box-model:false*/
+
+/*
+Box-model set to false because we're setting a height on select elements, which
+also have border and padding. This is done because some browsers don't render
+the padding. We explicitly set the box-model for select elements to border-box,
+so we can ignore the csslint warning.
+*/
+
+.stuntman-form input[type="text"],
+.stuntman-form input[type="password"],
+.stuntman-form input[type="email"],
+.stuntman-form input[type="url"],
+.stuntman-form input[type="date"],
+.stuntman-form input[type="month"],
+.stuntman-form input[type="time"],
+.stuntman-form input[type="datetime"],
+.stuntman-form input[type="datetime-local"],
+.stuntman-form input[type="week"],
+.stuntman-form input[type="number"],
+.stuntman-form input[type="search"],
+.stuntman-form input[type="tel"],
+.stuntman-form input[type="color"],
+.stuntman-form select,
+.stuntman-form textarea {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    vertical-align: middle;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.stuntman-form input:not([type]) {
+    padding: 0.5em 0.6em;
+    display: inline-block;
+    border: 1px solid #ccc;
+    box-shadow: inset 0 1px 3px #ddd;
+    border-radius: 4px;
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+/* Chrome (as of v.32/34 on OS X) needs additional room for color to display. */
+
+/* May be able to remove this tweak as color inputs become more standardized across browsers. */
+
+.stuntman-form input[type="color"] {
+    padding: 0.2em 0.5em;
+}
+
+.stuntman-form input[type="text"]:focus,
+.stuntman-form input[type="password"]:focus,
+.stuntman-form input[type="email"]:focus,
+.stuntman-form input[type="url"]:focus,
+.stuntman-form input[type="date"]:focus,
+.stuntman-form input[type="month"]:focus,
+.stuntman-form input[type="time"]:focus,
+.stuntman-form input[type="datetime"]:focus,
+.stuntman-form input[type="datetime-local"]:focus,
+.stuntman-form input[type="week"]:focus,
+.stuntman-form input[type="number"]:focus,
+.stuntman-form input[type="search"]:focus,
+.stuntman-form input[type="tel"]:focus,
+.stuntman-form input[type="color"]:focus,
+.stuntman-form select:focus,
+.stuntman-form textarea:focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.stuntman-form input:not([type]):focus {
+    outline: 0;
+    border-color: #129FEA;
+}
+
+.stuntman-form input[type="file"]:focus,
+.stuntman-form input[type="radio"]:focus,
+.stuntman-form input[type="checkbox"]:focus {
+    outline: thin solid #129FEA;
+    outline: 1px auto #129FEA;
+}
+
+.stuntman-form .stuntman-checkbox,
+.stuntman-form .stuntman-radio {
+    margin: 0.5em 0;
+    display: block;
+}
+
+.stuntman-form input[type="text"][disabled],
+.stuntman-form input[type="password"][disabled],
+.stuntman-form input[type="email"][disabled],
+.stuntman-form input[type="url"][disabled],
+.stuntman-form input[type="date"][disabled],
+.stuntman-form input[type="month"][disabled],
+.stuntman-form input[type="time"][disabled],
+.stuntman-form input[type="datetime"][disabled],
+.stuntman-form input[type="datetime-local"][disabled],
+.stuntman-form input[type="week"][disabled],
+.stuntman-form input[type="number"][disabled],
+.stuntman-form input[type="search"][disabled],
+.stuntman-form input[type="tel"][disabled],
+.stuntman-form input[type="color"][disabled],
+.stuntman-form select[disabled],
+.stuntman-form textarea[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.stuntman-form input:not([type])[disabled] {
+    cursor: not-allowed;
+    background-color: #eaeded;
+    color: #cad2d3;
+}
+
+.stuntman-form input[readonly],
+.stuntman-form select[readonly],
+.stuntman-form textarea[readonly] {
+    background-color: #eee;
+    /* menu hover bg color */
+    color: #777;
+    /* menu text color */
+    border-color: #ccc;
+}
+
+.stuntman-form input:focus:invalid,
+.stuntman-form textarea:focus:invalid,
+.stuntman-form select:focus:invalid {
+    color: #b94a48;
+    border-color: #e9322d;
+}
+
+.stuntman-form input[type="file"]:focus:invalid:focus,
+.stuntman-form input[type="radio"]:focus:invalid:focus,
+.stuntman-form input[type="checkbox"]:focus:invalid:focus {
+    outline-color: #e9322d;
+}
+
+.stuntman-form select {
+    /* Normalizes the height; padding is not sufficient. */
+    height: 2.25em;
+    border: 1px solid #ccc;
+    background-color: white;
+}
+
+.stuntman-form select[multiple] {
+    height: auto;
+}
+
+.stuntman-form label {
+    margin: 0.5em 0 0.2em;
+}
+
+.stuntman-form fieldset {
+    margin: 0;
+    padding: 0.35em 0 0.75em;
+    border: 0;
+}
+
+.stuntman-form legend {
+    display: block;
+    width: 100%;
+    padding: 0.3em 0;
+    margin-bottom: 0.3em;
+    color: #333;
+    border-bottom: 1px solid #e5e5e5;
+}
+
+.stuntman-form-stacked input[type="text"],
+.stuntman-form-stacked input[type="password"],
+.stuntman-form-stacked input[type="email"],
+.stuntman-form-stacked input[type="url"],
+.stuntman-form-stacked input[type="date"],
+.stuntman-form-stacked input[type="month"],
+.stuntman-form-stacked input[type="time"],
+.stuntman-form-stacked input[type="datetime"],
+.stuntman-form-stacked input[type="datetime-local"],
+.stuntman-form-stacked input[type="week"],
+.stuntman-form-stacked input[type="number"],
+.stuntman-form-stacked input[type="search"],
+.stuntman-form-stacked input[type="tel"],
+.stuntman-form-stacked input[type="color"],
+.stuntman-form-stacked input[type="file"],
+.stuntman-form-stacked select,
+.stuntman-form-stacked label,
+.stuntman-form-stacked textarea {
+    display: block;
+    margin: 0.25em 0;
+}
+
+/*
+Need to separate out the :not() selector from the rest of the CSS 2.1 selectors
+since IE8 won't execute CSS that contains a CSS3 selector.
+*/
+
+.stuntman-form-stacked input:not([type]) {
+    display: block;
+    margin: 0.25em 0;
+}
+
+.stuntman-form-aligned input,
+.stuntman-form-aligned textarea,
+.stuntman-form-aligned select,
+.stuntman-form-aligned .stuntman-help-inline,
+.stuntman-form-message-inline {
+    display: inline-block;
+    *display: inline;
+    *zoom: 1;
+    vertical-align: middle;
+}
+
+.stuntman-form-aligned textarea {
+    vertical-align: top;
+}
+
+/* Aligned Forms */
+
+.stuntman-form-aligned .stuntman-control-group {
+    margin-bottom: 0.5em;
+}
+
+.stuntman-form-aligned .stuntman-control-group label {
+    text-align: right;
+    display: inline-block;
+    vertical-align: middle;
+    width: 10em;
+    margin: 0 1em 0 0;
+}
+
+.stuntman-form-aligned .stuntman-controls {
+    margin: 1.5em 0 0 11em;
+}
+
+/* Rounded Inputs */
+
+.stuntman-form input.stuntman-input-rounded,
+.stuntman-form .stuntman-input-rounded {
+    border-radius: 2em;
+    padding: 0.5em 1em;
+}
+
+/* Grouped Inputs */
+
+.stuntman-form .stuntman-group fieldset {
+    margin-bottom: 10px;
+}
+
+.stuntman-form .stuntman-group input,
+.stuntman-form .stuntman-group textarea {
+    display: block;
+    padding: 10px;
+    margin: 0 0 -1px;
+    border-radius: 0;
+    position: relative;
+    top: -1px;
+}
+
+.stuntman-form .stuntman-group input:focus,
+.stuntman-form .stuntman-group textarea:focus {
+    z-index: 3;
+}
+
+.stuntman-form .stuntman-group input:first-child,
+.stuntman-form .stuntman-group textarea:first-child {
+    top: 1px;
+    border-radius: 4px 4px 0 0;
+    margin: 0;
+}
+
+.stuntman-form .stuntman-group input:first-child:last-child,
+.stuntman-form .stuntman-group textarea:first-child:last-child {
+    top: 1px;
+    border-radius: 4px;
+    margin: 0;
+}
+
+.stuntman-form .stuntman-group input:last-child,
+.stuntman-form .stuntman-group textarea:last-child {
+    top: -2px;
+    border-radius: 0 0 4px 4px;
+    margin: 0;
+}
+
+.stuntman-form .stuntman-group button {
+    margin: 0.35em 0;
+}
+
+.stuntman-form .stuntman-input-1 {
+    width: 100%;
+}
+
+.stuntman-form .stuntman-input-2-3 {
+    width: 66%;
+}
+
+.stuntman-form .stuntman-input-1-2 {
+    width: 50%;
+}
+
+.stuntman-form .stuntman-input-1-3 {
+    width: 33%;
+}
+
+.stuntman-form .stuntman-input-1-4 {
+    width: 25%;
+}
+
+/* Inline help for forms */
+
+/* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
+
+.stuntman-form .stuntman-help-inline,
+.stuntman-form-message-inline {
+    display: inline-block;
+    padding-left: 0.3em;
+    color: #666;
+    vertical-align: middle;
+    font-size: 0.875em;
+}
+
+/* Block help for forms */
+
+.stuntman-form-message {
+    display: block;
+    color: #666;
+    font-size: 0.875em;
+}
+
+@media only screen and (max-width : 480px) {
+    .stuntman-form button[type="submit"] {
+        margin: 0.7em 0 0;
+    }
+
+    .stuntman-form input:not([type]),
+    .stuntman-form input[type="text"],
+    .stuntman-form input[type="password"],
+    .stuntman-form input[type="email"],
+    .stuntman-form input[type="url"],
+    .stuntman-form input[type="date"],
+    .stuntman-form input[type="month"],
+    .stuntman-form input[type="time"],
+    .stuntman-form input[type="datetime"],
+    .stuntman-form input[type="datetime-local"],
+    .stuntman-form input[type="week"],
+    .stuntman-form input[type="number"],
+    .stuntman-form input[type="search"],
+    .stuntman-form input[type="tel"],
+    .stuntman-form input[type="color"],
+    .stuntman-form label {
+        margin-bottom: 0.3em;
+        display: block;
+    }
+
+    .stuntman-group input:not([type]),
+    .stuntman-group input[type="text"],
+    .stuntman-group input[type="password"],
+    .stuntman-group input[type="email"],
+    .stuntman-group input[type="url"],
+    .stuntman-group input[type="date"],
+    .stuntman-group input[type="month"],
+    .stuntman-group input[type="time"],
+    .stuntman-group input[type="datetime"],
+    .stuntman-group input[type="datetime-local"],
+    .stuntman-group input[type="week"],
+    .stuntman-group input[type="number"],
+    .stuntman-group input[type="search"],
+    .stuntman-group input[type="tel"],
+    .stuntman-group input[type="color"] {
+        margin-bottom: 0;
+    }
+
+    .stuntman-form-aligned .stuntman-control-group label {
+        margin-bottom: 0.3em;
+        text-align: left;
+        display: block;
+        width: 100%;
+    }
+
+    .stuntman-form-aligned .stuntman-controls {
+        margin: 1.5em 0 0 0;
+    }
+
+    /* NOTE: pure-help-inline is deprecated. Use .pure-form-message-inline instead. */
+
+    .stuntman-form .stuntman-help-inline,
+    .stuntman-form-message-inline,
+    .stuntman-form-message {
+        display: block;
+        font-size: 0.75em;
+        /* Increased bottom padding to make it group with its related input element. */
+        padding: 0.2em 0 0.8em;
+    }
+}
+
+/*csslint adjoining-classes: false, box-model:false*/
+
+.stuntman-menu {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.stuntman-menu-fixed {
+    position: fixed;
+    left: 0;
+    top: 0;
+    z-index: 3;
+}
+
+.stuntman-menu-list,
+.stuntman-menu-item {
+    position: relative;
+}
+
+.stuntman-menu-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+}
+
+.stuntman-menu-item {
+    padding: 0;
+    margin: 0;
+    height: 100%;
+}
+
+.stuntman-menu-link,
+.stuntman-menu-heading {
+    display: block;
+    text-decoration: none;
+    white-space: nowrap;
+}
+
+/* HORIZONTAL MENU */
+
+.stuntman-menu-horizontal {
+    width: 100%;
+    white-space: nowrap;
+}
+
+.stuntman-menu-horizontal .stuntman-menu-list {
+    display: inline-block;
+}
+
+/* Initial menus should be inline-block so that they are horizontal */
+
+.stuntman-menu-horizontal .stuntman-menu-item,
+.stuntman-menu-horizontal .stuntman-menu-heading,
+.stuntman-menu-horizontal .stuntman-menu-separator {
+    display: inline-block;
+    *display: inline;
+    zoom: 1;
+    vertical-align: middle;
+}
+
+/* Submenus should still be display: block; */
+
+.stuntman-menu-item .stuntman-menu-item {
+    display: block;
+}
+
+.stuntman-menu-children {
+    display: none;
+    position: absolute;
+    left: 100%;
+    top: 0;
+    margin: 0;
+    padding: 0;
+    z-index: 3;
+}
+
+.stuntman-menu-horizontal .stuntman-menu-children {
+    left: 0;
+    top: auto;
+    width: inherit;
+}
+
+.stuntman-menu-allow-hover:hover > .stuntman-menu-children,
+.stuntman-menu-active > .stuntman-menu-children {
+    display: block;
+    position: absolute;
+}
+
+/* Vertical Menus - show the dropdown arrow */
+
+.stuntman-menu-has-children > .stuntman-menu-link:after {
+    padding-left: 0.5em;
+    content: "\25B8";
+    font-size: small;
+}
+
+/* Horizontal Menus - show the dropdown arrow */
+
+.stuntman-menu-horizontal .stuntman-menu-has-children > .stuntman-menu-link:after {
+    content: "\25BE";
+}
+
+/* scrollable menus */
+
+.stuntman-menu-scrollable {
+    overflow-y: scroll;
+    overflow-x: hidden;
+}
+
+.stuntman-menu-scrollable .stuntman-menu-list {
+    display: block;
+}
+
+.stuntman-menu-horizontal.stuntman-menu-scrollable .stuntman-menu-list {
+    display: inline-block;
+}
+
+.stuntman-menu-horizontal.stuntman-menu-scrollable {
+    white-space: nowrap;
+    overflow-y: hidden;
+    overflow-x: auto;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    /* a little extra padding for this style to allow for scrollbars */
+    padding: .5em 0;
+}
+
+.stuntman-menu-horizontal.stuntman-menu-scrollable::-webkit-scrollbar {
+    display: none;
+}
+
+/* misc default styling */
+
+.stuntman-menu-separator {
+    background-color: #ccc;
+    height: 1px;
+    margin: .3em 0;
+}
+
+.stuntman-menu-horizontal .stuntman-menu-separator {
+    width: 1px;
+    height: 1.3em;
+    margin: 0 .3em;
+}
+
+.stuntman-menu-heading {
+    text-transform: uppercase;
+    color: #565d64;
+}
+
+.stuntman-menu-link {
+    color: #777;
+}
+
+.stuntman-menu-children {
+    background-color: #fff;
+}
+
+.stuntman-menu-link,
+.stuntman-menu-disabled,
+.stuntman-menu-heading {
+    padding: .5em 1em;
+}
+
+.stuntman-menu-disabled {
+    opacity: .5;
+}
+
+.stuntman-menu-disabled .stuntman-menu-link:hover {
+    background-color: transparent;
+}
+
+.stuntman-menu-active > .stuntman-menu-link,
+.stuntman-menu-link:hover,
+.stuntman-menu-link:focus {
+    background-color: #eee;
+}
+
+.stuntman-menu-selected .stuntman-menu-link,
+.stuntman-menu-selected .stuntman-menu-link:visited {
+    color: #000;
+}
+
+.stuntman-table {
+    /* Remove spacing between table cells (from Normalize.css) */
+    border-collapse: collapse;
+    border-spacing: 0;
+    empty-cells: show;
+    border: 1px solid #cbcbcb;
+}
+
+.stuntman-table caption {
+    color: #000;
+    font: italic 85%/1 arial, sans-serif;
+    padding: 1em 0;
+    text-align: center;
+}
+
+.stuntman-table td,
+.stuntman-table th {
+    border-left: 1px solid #cbcbcb;
+    /*  inner column border */
+    border-width: 0 0 0 1px;
+    font-size: inherit;
+    margin: 0;
+    overflow: visible;
+    /*to make ths where the title is really long work*/
+    padding: 0.5em 1em;
+    /* cell padding */
+}
+
+/* Consider removing this next declaration block, as it causes problems when
+there's a rowspan on the first cell. Case added to the tests. issue#432 */
+
+.stuntman-table td:first-child,
+.stuntman-table th:first-child {
+    border-left-width: 0;
+}
+
+.stuntman-table thead {
+    background-color: #e0e0e0;
+    color: #000;
+    text-align: left;
+    vertical-align: bottom;
+}
+
+/*
+striping:
+   even - #fff (white)
+   odd  - #f2f2f2 (light gray)
+*/
+
+.stuntman-table td {
+    background-color: transparent;
+}
+
+.stuntman-table-odd td {
+    background-color: #f2f2f2;
+}
+
+/* nth-child selector for modern browsers */
+
+.stuntman-table-striped tr:nth-child(2n-1) td {
+    background-color: #f2f2f2;
+}
+
+/* BORDERED TABLES */
+
+.stuntman-table-bordered td {
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.stuntman-table-bordered tbody > tr:last-child > td {
+    border-bottom-width: 0;
+}
+
+/* HORIZONTAL BORDERED TABLES */
+
+.stuntman-table-horizontal td,
+.stuntman-table-horizontal th {
+    border-width: 0 0 1px 0;
+    border-bottom: 1px solid #cbcbcb;
+}
+
+.stuntman-table-horizontal tbody > tr:last-child > td {
+    border-bottom-width: 0;
+}

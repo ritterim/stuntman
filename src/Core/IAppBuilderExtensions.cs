@@ -149,7 +149,7 @@ namespace RimDev.Stuntman.Core
             context.Response.ContentType = "text/html";
             context.Response.StatusCode = 200;
 
-            var css = GetResource("RimDev.Stuntman.Core.resources.bootstrap-3.3.4.min.css");
+            var css = GetResource("RimDev.Stuntman.Core.resources.stuntman.pure.css");
             var usersHtml = GetUsersLoginUI(context, options);
 
             context.Response.Write(string.Format(@"
