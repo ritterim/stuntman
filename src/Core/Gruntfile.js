@@ -14,10 +14,18 @@ module.exports = function(grunt) {
                     'resources/stuntman.pure.css': ['assets/pure/pure.css'],
                 }
             }
+        },
+        less: {
+            default: {
+                files: {
+                    "resources/stuntman.css": "assets/stuntman/stuntman.less"
+                }
+            }
         }
     });
 
     grunt.loadNpmTasks('grunt-css-selectors');
+    grunt.loadNpmTasks('grunt-contrib-less');
 
-    grunt.registerTask('default', ['css_selectors']);
+    grunt.registerTask('default', ['css_selectors', 'less']);
 };
