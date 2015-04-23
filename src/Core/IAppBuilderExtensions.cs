@@ -14,7 +14,7 @@ namespace RimDev.Stuntman.Core
 {
     public static class IAppBuilderExtensions
     {
-        private const string StuntmanAuthenticationType = "StuntmanAuthentication";
+        public const string StuntmanAuthenticationType = "StuntmanAuthentication";
 
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
