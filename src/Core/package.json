@@ -1,0 +1,22 @@
+{
+  "name": "stuntman",
+  "version": "0.1.0",
+  "description": "",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://www.github.com/ritterim/stuntman"
+  },
+  "author": "Ritter Insurance Marketing, Inc.",
+  "license": "MIT",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-css-selectors": "^1.2.0"
+  }
+}
