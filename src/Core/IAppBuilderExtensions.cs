@@ -1,7 +1,6 @@
 ﻿using Microsoft.Owin;
 using Microsoft.Owin.Security.Cookies;
 using Owin;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -15,7 +14,7 @@ namespace RimDev.Stuntman.Core
 {
     public static class IAppBuilderExtensions
     {
-        private const string StuntmanAuthenticationType = "StuntmanAuthentication";
+        public const string StuntmanAuthenticationType = "StuntmanAuthentication";
 
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
@@ -49,9 +48,12 @@ namespace RimDev.Stuntman.Core
 
                         if (user == null)
                         {
-                            throw new ArgumentException(string.Format(
+                            context.Response.StatusCode = 404;
+                            await context.Response.WriteAsync(string.Format(
                                 "options provided does not include the requested '{0}' user.",
                                 overrideUserId));
+
+                            return;
                         }
 
                         claims.Add(new Claim(ClaimTypes.Name, user.Name));
