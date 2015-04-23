@@ -116,9 +116,9 @@ namespace RimDev.Stuntman.Core
                     WebUtility.UrlEncode(context.Request.Query[StuntmanOptions.ReturnUrlQueryStringKey]));
 
                 usersHtml.Append(string.Format(@"
-<div class=""row"">
-    <div class=""col-xs-12"">
-        <a href=""{0}"" class=""btn btn-default col-xs-12"">{1}</a>
+<div class=""stuntman-g"">
+    <div class=""stuntman-u-1"">
+        <a href=""{0}"" class=""stuntman-button stuntman-u-1"">{1}</a>
     </div>
 </div>
 ", href, user.Name));
@@ -149,7 +149,9 @@ namespace RimDev.Stuntman.Core
             context.Response.ContentType = "text/html";
             context.Response.StatusCode = 200;
 
-            var css = GetResource("RimDev.Stuntman.Core.resources.stuntman.pure.css");
+            var css = 
+                GetResource("RimDev.Stuntman.Core.resources.stuntman.pure.css") +
+                GetResource("RimDev.Stuntman.Core.resources.stuntman.css");
             var usersHtml = GetUsersLoginUI(context, options);
 
             context.Response.Write(string.Format(@"
@@ -160,13 +162,18 @@ namespace RimDev.Stuntman.Core
         </style>
     </head>
     <body>
-        <div class=""container"">
-            <h2 class=""text-center"">Please select a user to continue authentication.</h2>
-            <div class=""row"">
-                <div class=""col-md-6 col-md-offset-3"">
-                    {1}
+        <div class=""stuntman-g"">
+            <div class=""stuntman-u-1-4"">&nbsp;</div>
+            <div class=""stuntman-u-1-2"">
+                <h2 class=""stuntman text-center"">Please select a user to continue authentication.</h2>
+                <div class=""stuntman-g"">
+                    <div class=""stuntman-u-1-6"">&nbsp;</div>
+                    <div class=""stuntman-u-2-3"">
+                        {1}
+                    </div>
                 </div>
             </div>
+            <div class=""stuntman-u-1-4"">&nbsp;</div>
         </div>
     </body>
 </html>

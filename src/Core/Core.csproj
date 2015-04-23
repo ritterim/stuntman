@@ -64,16 +64,18 @@
     <Compile Include="UserPicker.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="assets\pure\stuntman.pure.less" />
     <None Include="Core.nuspec" />
     <None Include="package.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="assets\pure\pure.css" />
+    <EmbeddedResource Include="resources\stuntman.css" />
+    <None Include="assets\stuntman\stuntman.less" />
     <Content Include="Gruntfile.js" />
     <EmbeddedResource Include="resources\stuntman.pure.css" />
     <EmbeddedResource Include="resources\stuntman.pure.min.css" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
