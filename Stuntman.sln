@@ -13,6 +13,8 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{418B
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample", "samples\UsageSample\UsageSample.csproj", "{6CCC791E-78A8-415F-8D9C-4A9F11449A19}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSampleMvc", "samples\UsageSampleMvc\UsageSampleMvc.csproj", "{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -31,6 +33,10 @@ Global
 		{6CCC791E-78A8-415F-8D9C-4A9F11449A19}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6CCC791E-78A8-415F-8D9C-4A9F11449A19}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{6CCC791E-78A8-415F-8D9C-4A9F11449A19}.Release|Any CPU.Build.0 = Release|Any CPU
+		{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -38,5 +44,6 @@ Global
 	GlobalSection(NestedProjects) = preSolution
 		{4E5816B2-5AFC-45FE-B7F2-B9B85B2F1967} = {5243DBF7-7270-4460-9AC2-C343D653826E}
 		{6CCC791E-78A8-415F-8D9C-4A9F11449A19} = {418B6F96-6578-4B18-823C-0FC7A712F0BE}
+		{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC} = {418B6F96-6578-4B18-823C-0FC7A712F0BE}
 	EndGlobalSection
 EndGlobal
