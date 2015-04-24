@@ -18,6 +18,24 @@ namespace RimDev.Stuntman.Core.Tests
             }
 
             [Fact]
+            public void ThrowsForEmptyIdArgument()
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser(string.Empty, "some-name"));
+
+                Assert.Equal("id must not be empty.", exception.Message);
+            }
+
+            [Fact]
+            public void ThrowsForEmptyNameArgument()
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("some-id", string.Empty));
+
+                Assert.Equal("name must not be empty.", exception.Message);
+            }
+
+            [Fact]
             public void SetsId()
             {
                 var user = new StuntmanUser("user-1", "User 1");
@@ -52,6 +70,26 @@ namespace RimDev.Stuntman.Core.Tests
                 Assert.Throws<ArgumentNullException>(
                     () => new StuntmanUser("user-1", "User 1")
                         .AddClaim(type, value));
+            }
+
+            [Fact]
+            public void ThrowsForEmptyType()
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .AddClaim(string.Empty, "some-value"));
+
+                Assert.Equal("type must not be empty.", exception.Message);
+            }
+
+            [Fact]
+            public void ThrowsForEmptyValue()
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .AddClaim("some-type", string.Empty));
+
+                Assert.Equal("value must not be empty.", exception.Message);
             }
 
             [Fact]
