@@ -23,6 +23,26 @@ namespace RimDev.Stuntman.UsageSample
                             new Claim("family_name", "Doe")
                         }
                     },
+                    new StuntmanUser
+                    {
+                        Id = "user-2",
+                        Name = "User 2",
+                        Claims = new[]
+                        {
+                            new Claim("given_name", "Jane"),
+                            new Claim("family_name", "Doe")
+                        }
+                    },
+                    new StuntmanUser
+                    {
+                        Id = "user-3",
+                        Name = "User 3",
+                        Claims = new[]
+                        {
+                            new Claim("given_name", "Sam"),
+                            new Claim("family_name", "Smith")
+                        }
+                    },
                 }
             };
 
@@ -47,7 +67,7 @@ namespace RimDev.Stuntman.UsageSample
                         userName));
 
                     return context.Response.WriteAsync(
-                        userPicker.GetHtml(context.Request.Uri.AbsoluteUri));
+                        userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
                 });
             });
 
@@ -75,7 +95,7 @@ namespace RimDev.Stuntman.UsageSample
                         userName));
 
                     return context.Response.WriteAsync(
-                        userPicker.GetHtml(context.Request.Uri.AbsoluteUri));
+                        userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
                 });
             });
         }

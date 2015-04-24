@@ -3,3 +3,96 @@
         text-align: center;
     }
 }
+
+// Starting point for below: http://codepen.io/andytran/pen/OPxVmq
+@accent: #ff5842;
+@white: #ffffff;
+@black: #000000;
+
+.transitions( @property: all; @duration: 0.3s; @timing: linear; @delay: 0s; ) {
+  -webkit-transition: @arguments;
+  -moz-transition: @arguments;
+  -ms-transition: @arguments;
+  -o-transition: @arguments;
+  transition: @arguments;
+}
+
+.stuntman-widget {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-family: 'Roboto', sans-serif;
+  background: @white;
+  margin: 0 auto;
+  .stuntman-header {
+    cursor: pointer;
+    background: @accent;
+    padding: 10px 15px;
+    color: @white;
+    font-size: 12px;
+    opacity: .9;
+    &:before,
+    &:after {
+      display: block;
+      content: '';
+      clear: both;
+    }
+    h2 {
+      margin: 0;
+      padding: 0;
+      font-size: 12px;
+      float: left;
+      a {
+        color: @white;
+        text-decoration: none;
+      }
+    }
+    &:hover {
+      opacity: 1;
+      .transitions(@property: opacity;)
+    }
+  }
+  .stuntman-body {
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: relative;
+    max-height: 360px;
+    ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      border-top: 1px solid darken(@white, 5%);
+      li {
+        position: relative;
+        background: @white;
+        display: block;
+        width: 100%;
+        box-sizing: border-box;
+        &:before,
+        &:after {
+          display: block;
+          content: '';
+          clear: both;
+        }
+        &:nth-child(2n) {
+          background: darken(@white, 5%);
+        }
+        a {
+          padding: 10px 16px;
+          width: 100%;
+        }
+        .stuntman-item {
+          display: inline-block;
+          vertical-align: top;
+          line-height: 1;
+          h3 {
+            &:extend(.stuntman-widget .stuntman-header h2);
+            display: block;
+            margin-bottom: 5px;
+            color: lighten(@black, 50%);
+          }
+        }
+      }
+    }
+  }
+}
