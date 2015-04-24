@@ -71,11 +71,7 @@ namespace RimDev.Stuntman.Core.Tests
                 {
                     Users = new[]
                     {
-                        new StuntmanUser
-                        {
-                            Id = "user-1",
-                            Name = "User 1"
-                        }
+                        new StuntmanUser("user-1", "User 1")
                     }
                 };
 

@@ -1,6 +1,5 @@
 ﻿using Owin;
 using RimDev.Stuntman.Core;
-using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace RimDev.Stuntman.UsageSample
@@ -13,36 +12,15 @@ namespace RimDev.Stuntman.UsageSample
             {
                 Users = new[]
                 {
-                    new StuntmanUser
-                    {
-                        Id = "user-1",
-                        Name = "User 1",
-                        Claims = new[]
-                        {
-                            new Claim("given_name", "John"),
-                            new Claim("family_name", "Doe")
-                        }
-                    },
-                    new StuntmanUser
-                    {
-                        Id = "user-2",
-                        Name = "User 2",
-                        Claims = new[]
-                        {
-                            new Claim("given_name", "Jane"),
-                            new Claim("family_name", "Doe")
-                        }
-                    },
-                    new StuntmanUser
-                    {
-                        Id = "user-3",
-                        Name = "User 3",
-                        Claims = new[]
-                        {
-                            new Claim("given_name", "Sam"),
-                            new Claim("family_name", "Smith")
-                        }
-                    },
+                    new StuntmanUser("user-1", "User 1")
+                        .AddClaim("given_name", "John")
+                        .AddClaim("family_name", "Doe"),
+                    new StuntmanUser("user-2", "User 2")
+                        .AddClaim("given_name", "Jane")
+                        .AddClaim("family_name", "Doe"),
+                    new StuntmanUser("user-1", "User 3")
+                        .AddClaim("given_name", "Sam")
+                        .AddClaim("family_name", "Smith")
                 }
             };
 

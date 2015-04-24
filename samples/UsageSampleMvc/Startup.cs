@@ -1,6 +1,5 @@
 ﻿using Owin;
 using RimDev.Stuntman.Core;
-using System.Security.Claims;
 
 namespace RimDev.Stuntman.UsageSampleMvc
 {
@@ -12,16 +11,9 @@ namespace RimDev.Stuntman.UsageSampleMvc
             {
                 Users = new[]
                 {
-                    new StuntmanUser
-                    {
-                        Id = "user-1",
-                        Name = "User 1",
-                        Claims = new[]
-                        {
-                            new Claim("given_name", "John"),
-                            new Claim("family_name", "Doe")
-                        }
-                    },
+                    new StuntmanUser("user-1", "User 1")
+                        .AddClaim("given_name", "John")
+                        .AddClaim("family_name", "Doe")
                 }
             };
 
