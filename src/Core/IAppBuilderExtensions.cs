@@ -2,10 +2,8 @@
 using Microsoft.Owin.Security.Cookies;
 using Owin;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Reflection;
 using System.Security.Claims;
 using System.Text;
 using System.Threading.Tasks;
@@ -86,23 +84,6 @@ namespace RimDev.Stuntman.Core
             });
         }
 
-        private static string GetResource(string resourceName)
-        {
-            var resource = string.Empty;
-
-            using (Stream stream = Assembly
-                .GetExecutingAssembly()
-                .GetManifestResourceStream(resourceName))
-            {
-                using (StreamReader streamReader = new StreamReader(stream))
-                {
-                    resource = streamReader.ReadToEnd();
-                }
-            }
-
-            return resource;
-        }
-
         private static string GetUsersLoginUI(
             IOwinContext context,
             StuntmanOptions options)
@@ -151,9 +132,7 @@ namespace RimDev.Stuntman.Core
             context.Response.ContentType = "text/html";
             context.Response.StatusCode = 200;
 
-            var css = 
-                GetResource("RimDev.Stuntman.Core.resources.stuntman.pure.css") +
-                GetResource("RimDev.Stuntman.Core.resources.stuntman.css");
+            var css = Resources.GetCss();
             var usersHtml = GetUsersLoginUI(context, options);
 
             context.Response.Write(string.Format(@"

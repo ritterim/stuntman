@@ -1,3 +1,92 @@
 .stuntman.text-center {
   text-align: center;
 }
+.stuntman-widget {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  font-family: 'Roboto', sans-serif;
+  background: #ffffff;
+  margin: 0 auto;
+}
+.stuntman-widget .stuntman-header {
+  cursor: pointer;
+  background: #ff5842;
+  padding: 10px 15px;
+  color: #ffffff;
+  font-size: 12px;
+  opacity: .9;
+}
+.stuntman-widget .stuntman-header:before,
+.stuntman-widget .stuntman-header:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+.stuntman-widget .stuntman-header h2,
+.stuntman-widget .stuntman-body ul li .stuntman-item h3 {
+  margin: 0;
+  padding: 0;
+  font-size: 12px;
+  float: left;
+}
+.stuntman-widget .stuntman-header h2 a {
+  color: #ffffff;
+  text-decoration: none;
+}
+.stuntman-widget .stuntman-header:hover {
+  opacity: 1;
+  -webkit-transition: opacity 0.3s linear 0s;
+  -moz-transition: opacity 0.3s linear 0s;
+  -ms-transition: opacity 0.3s linear 0s;
+  -o-transition: opacity 0.3s linear 0s;
+  transition: opacity 0.3s linear 0s;
+}
+.stuntman-widget .stuntman-body {
+  overflow-y: auto;
+  overflow-x: hidden;
+  position: relative;
+  max-height: 360px;
+}
+.stuntman-widget .stuntman-body ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  border-top: 1px solid #f2f2f2;
+}
+.stuntman-widget .stuntman-body ul li {
+  position: relative;
+  background: #ffffff;
+  display: block;
+  width: 100%;
+  box-sizing: border-box;
+}
+.stuntman-widget .stuntman-body ul li:before,
+.stuntman-widget .stuntman-body ul li:after {
+  display: block;
+  content: '';
+  clear: both;
+}
+.stuntman-widget .stuntman-body ul li:nth-child(2n) {
+  background: #f2f2f2;
+}
+.stuntman-widget .stuntman-body ul li.stuntman-active {
+  background: #99ffdb;
+}
+.stuntman-widget .stuntman-body ul li a {
+  padding: 10px 16px;
+  width: 100%;
+}
+.stuntman-widget .stuntman-body ul li .stuntman-item {
+  display: inline-block;
+  vertical-align: top;
+  line-height: 1;
+}
+.stuntman-widget .stuntman-body ul li .stuntman-item h3 {
+  display: block;
+  margin-bottom: 5px;
+  color: #808080;
+}
+.stuntman-widget .stuntman-body ul li .stuntman-item-active {
+  background: green;
+}

@@ -1,4 +1,6 @@
-﻿using System.Net;
+﻿using System;
+using System.Net;
+using System.Security.Principal;
 using System.Text.RegularExpressions;
 using Xunit;
 
@@ -8,6 +10,26 @@ namespace RimDev.Stuntman.Core.Tests
     {
         public class GetHtmlMethod
         {
+            [Fact]
+            public void ThrowsForNullCurrentPrincipal()
+            {
+                var options = new StuntmanOptions();
+
+                Assert.Throws<ArgumentNullException>(
+                    () => new UserPicker(options)
+                        .GetHtml(null, "https://return-uri/"));
+            }
+
+            [Fact]
+            public void ThrowsForNullReturnUrl()
+            {
+                var options = new StuntmanOptions();
+
+                Assert.Throws<ArgumentNullException>(
+                    () => new UserPicker(options)
+                        .GetHtml(new TestPrincipal(), null));
+            }
+
             [Fact]
             public void ReturnsExpectedItemFormat()
             {
@@ -25,7 +47,7 @@ namespace RimDev.Stuntman.Core.Tests
 
                 var returnUrl = "https://return-url";
 
-                var html = new UserPicker(options).GetHtml(returnUrl);
+                var html = new UserPicker(options).GetHtml(new TestPrincipal(), returnUrl);
 
                 Assert.Contains(
                     string.Format(
@@ -57,7 +79,7 @@ namespace RimDev.Stuntman.Core.Tests
                     }
                 };
 
-                var html = new UserPicker(options).GetHtml("https://return-url");
+                var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
                 Assert.Contains("user-1", html);
                 Assert.Contains("User 1", html);
@@ -71,7 +93,7 @@ namespace RimDev.Stuntman.Core.Tests
             {
                 var options = new StuntmanOptions();
 
-                var html = new UserPicker(options).GetHtml("https://return-url");
+                var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
                 Assert.Contains("Logout", html);
             }
@@ -91,9 +113,40 @@ namespace RimDev.Stuntman.Core.Tests
                     }
                 };
 
-                var html = new UserPicker(options).GetHtml("https://return-url");
+                var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
-                Assert.Equal(2, Regex.Matches(html, "<li>", RegexOptions.Multiline).Count);
+                Assert.Equal(2, Regex.Matches(html, "<li.*>", RegexOptions.Multiline).Count);
+            }
+        }
+
+        private class TestPrincipal : IPrincipal
+        {
+            public IIdentity Identity
+            {
+                get { return new TestIdentity(); }
+            }
+
+            public bool IsInRole(string role)
+            {
+                throw new NotImplementedException();
+            }
+        }
+
+        private class TestIdentity : IIdentity
+        {
+            public string AuthenticationType
+            {
+                get { return "TestIdentity"; }
+            }
+
+            public bool IsAuthenticated
+            {
+                get { return true; }
+            }
+
+            public string Name
+            {
+                get { return "TestIdentity User"; }
             }
         }
     }
