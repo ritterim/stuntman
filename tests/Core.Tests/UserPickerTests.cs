@@ -11,6 +11,26 @@ namespace RimDev.Stuntman.Core.Tests
         public class GetHtmlMethod
         {
             [Fact]
+            public void ThrowsForNullCurrentPrincipal()
+            {
+                var options = new StuntmanOptions();
+
+                Assert.Throws<ArgumentNullException>(
+                    () => new UserPicker(options)
+                        .GetHtml(null, "https://return-uri/"));
+            }
+
+            [Fact]
+            public void ThrowsForNullReturnUrl()
+            {
+                var options = new StuntmanOptions();
+
+                Assert.Throws<ArgumentNullException>(
+                    () => new UserPicker(options)
+                        .GetHtml(new TestPrincipal(), null));
+            }
+
+            [Fact]
             public void ReturnsExpectedItemFormat()
             {
                 var options = new StuntmanOptions

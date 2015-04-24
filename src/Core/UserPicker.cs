@@ -16,6 +16,9 @@ namespace RimDev.Stuntman.Core
 
         public string GetHtml(IPrincipal currentPrincipal, string returnUrl)
         {
+            if (currentPrincipal == null) throw new ArgumentNullException("currentPrincipal");
+            if (returnUrl == null) throw new ArgumentNullException("returnUrl");
+
             var css = Resources.GetCss();
 
             var currentUser = currentPrincipal.Identity.Name;
