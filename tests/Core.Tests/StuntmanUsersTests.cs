@@ -23,7 +23,7 @@ namespace RimDev.Stuntman.Core.Tests
                 var exception = Assert.Throws<ArgumentException>(
                     () => new StuntmanUser(string.Empty, "some-name"));
 
-                Assert.Equal("id must not be empty.", exception.Message);
+                Assert.Equal("id must not be empty or whitespace.", exception.Message);
             }
 
             [Fact]
@@ -32,7 +32,7 @@ namespace RimDev.Stuntman.Core.Tests
                 var exception = Assert.Throws<ArgumentException>(
                     () => new StuntmanUser("some-id", string.Empty));
 
-                Assert.Equal("name must not be empty.", exception.Message);
+                Assert.Equal("name must not be empty or whitespace.", exception.Message);
             }
 
             [Fact]
@@ -79,7 +79,7 @@ namespace RimDev.Stuntman.Core.Tests
                     () => new StuntmanUser("user-1", "User 1")
                         .AddClaim(string.Empty, "some-value"));
 
-                Assert.Equal("type must not be empty.", exception.Message);
+                Assert.Equal("type must not be empty or whitespace.", exception.Message);
             }
 
             [Fact]
@@ -89,7 +89,7 @@ namespace RimDev.Stuntman.Core.Tests
                     () => new StuntmanUser("user-1", "User 1")
                         .AddClaim("some-type", string.Empty));
 
-                Assert.Equal("value must not be empty.", exception.Message);
+                Assert.Equal("value must not be empty or whitespace.", exception.Message);
             }
 
             [Fact]
