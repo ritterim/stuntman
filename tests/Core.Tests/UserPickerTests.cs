@@ -37,11 +37,7 @@ namespace RimDev.Stuntman.Core.Tests
                 {
                     Users = new[]
                     {
-                        new StuntmanUser
-                        {
-                            Id = "user-1",
-                            Name = "User 1",
-                        }
+                        new StuntmanUser("user-1", "User 1")
                     }
                 };
 
@@ -66,16 +62,8 @@ namespace RimDev.Stuntman.Core.Tests
                 {
                     Users = new[]
                     {
-                        new StuntmanUser
-                        {
-                            Id = "user-1",
-                            Name = "User 1",
-                        },
-                        new StuntmanUser
-                        {
-                            Id = "user-2",
-                            Name = "User 2",
-                        }
+                        new StuntmanUser("user-1", "User 1"),
+                        new StuntmanUser("user-2", "User 2")
                     }
                 };
 
@@ -105,11 +93,7 @@ namespace RimDev.Stuntman.Core.Tests
                 {
                     Users = new[]
                     {
-                        new StuntmanUser
-                        {
-                            Id = "user-1",
-                            Name = "User 1",
-                        }
+                        new StuntmanUser("user-1", "User 1")
                     }
                 };
 
