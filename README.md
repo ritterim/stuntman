@@ -24,26 +24,11 @@ public class Startup
 {
     public void Configuration(IAppBuilder app)
     {
-        var options = new StuntmanOptions
-        {
-            Users = new[]
-            {
-                new StuntmanUser
-                {
-                    Id = "test-user-1",
-                    Name = "Test User 1",
-                    Claims = new[]
-                    {
-                        new Claim("given_name", "John"),
-                        new Claim("family_name", "Doe")
-                    }
-                },
-                // Add more users here,
-                // if you'd like.
-            }
-        };
+      var options = new StuntmanOptions()
+          .AddUser(new StuntmanUser("user-1", "User 1")
+              .AddClaim("given_name", "John")
+              .AddClaim("family_name", "Doe"));
 
-        // Wire up Stuntman authentication.
         app.UseStuntman(options);
     }
 }
@@ -54,7 +39,12 @@ public class Startup
 The below example shows how to use Stuntman in a **Razor** view to get the user picker during development.
 
 ```
-@Html.Raw(Stuntman.Picker.GetHtml(Request.RawUrl));
+@{
+    var stuntmanOptions = new StuntmanOptions()
+        .AddUser(new StuntmanUser("user-1", "User 1"));
+}
+
+@Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
 ```
 
 ## License
