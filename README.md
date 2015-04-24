@@ -47,6 +47,18 @@ The below example shows how to use Stuntman in a **Razor** view to get the user 
 @Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
 ```
 
+## Contributing
+
+### Prerequisites
+
+After cloning down the repository:
+
+```
+> npm install -g grunt-cli
+> cd the_repository_folder\src\Core
+> npm install
+```
+
 ## License
 
 MIT License
