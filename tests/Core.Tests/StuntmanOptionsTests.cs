@@ -1,4 +1,6 @@
-﻿using Xunit;
+﻿using System;
+using System.Linq;
+using Xunit;
 
 namespace RimDev.Stuntman.Core.Tests
 {
@@ -71,6 +73,29 @@ namespace RimDev.Stuntman.Core.Tests
                 var sut = new StuntmanOptions();
 
                 Assert.EndsWith(StuntmanOptions.SignOutEndpoint, sut.SignOutUri);
+            }
+        }
+
+        public class AddUserMethod
+        {
+            [Fact]
+            public void ThrowsForNullUser()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    () => new StuntmanOptions().AddUser(null));
+            }
+
+            [Fact]
+            public void AddsUser()
+            {
+                var sut = new StuntmanOptions();
+
+                sut.AddUser(new StuntmanUser("user-1", "User 1"));
+
+                var user = sut.Users.Single();
+
+                Assert.Equal("user-1", user.Id);
+                Assert.Equal("User 1", user.Name);
             }
         }
     }
