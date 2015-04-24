@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace RimDev.Stuntman.Core
 {
@@ -22,7 +23,7 @@ namespace RimDev.Stuntman.Core
                 _stuntmanRootPath += "/";
         }
 
-        public ICollection<StuntmanUser> Users { get; set; }
+        public ICollection<StuntmanUser> Users { get; private set; }
 
         public string SignInUri
         {
@@ -32,6 +33,15 @@ namespace RimDev.Stuntman.Core
         public string SignOutUri
         {
             get { return _stuntmanRootPath + SignOutEndpoint; }
+        }
+
+        public StuntmanOptions AddUser(StuntmanUser user)
+        {
+            if (user == null) throw new ArgumentNullException("user");
+
+            Users.Add(user);
+
+            return this;
         }
     }
 }

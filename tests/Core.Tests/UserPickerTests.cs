@@ -33,13 +33,8 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsExpectedItemFormat()
             {
-                var options = new StuntmanOptions
-                {
-                    Users = new[]
-                    {
-                        new StuntmanUser("user-1", "User 1")
-                    }
-                };
+                var options = new StuntmanOptions()
+                    .AddUser(new StuntmanUser("user-1", "User 1"));
 
                 var returnUrl = "https://return-url";
 
@@ -58,14 +53,9 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsUsers()
             {
-                var options = new StuntmanOptions
-                {
-                    Users = new[]
-                    {
-                        new StuntmanUser("user-1", "User 1"),
-                        new StuntmanUser("user-2", "User 2")
-                    }
-                };
+                var options = new StuntmanOptions()
+                    .AddUser(new StuntmanUser("user-1", "User 1"))
+                    .AddUser(new StuntmanUser("user-2", "User 2"));
 
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
@@ -89,13 +79,8 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsExpectedNumberOfTotalItems()
             {
-                var options = new StuntmanOptions
-                {
-                    Users = new[]
-                    {
-                        new StuntmanUser("user-1", "User 1")
-                    }
-                };
+                var options = new StuntmanOptions()
+                    .AddUser(new StuntmanUser("user-1", "User 1"));
 
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 

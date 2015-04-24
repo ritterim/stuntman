@@ -8,21 +8,16 @@ namespace RimDev.Stuntman.UsageSample
     {
         public void Configuration(IAppBuilder app)
         {
-            var options = new StuntmanOptions
-            {
-                Users = new[]
-                {
-                    new StuntmanUser("user-1", "User 1")
-                        .AddClaim("given_name", "John")
-                        .AddClaim("family_name", "Doe"),
-                    new StuntmanUser("user-2", "User 2")
-                        .AddClaim("given_name", "Jane")
-                        .AddClaim("family_name", "Doe"),
-                    new StuntmanUser("user-1", "User 3")
-                        .AddClaim("given_name", "Sam")
-                        .AddClaim("family_name", "Smith")
-                }
-            };
+            var options = new StuntmanOptions()
+                .AddUser(new StuntmanUser("user-1", "User 1")
+                    .AddClaim("given_name", "John")
+                    .AddClaim("family_name", "Doe"))
+                .AddUser(new StuntmanUser("user-2", "User 2")
+                    .AddClaim("given_name", "Jane")
+                    .AddClaim("family_name", "Doe"))
+                .AddUser(new StuntmanUser("user-3", "User 3")
+                    .AddClaim("given_name", "Sam")
+                    .AddClaim("family_name", "Smith"));
 
             app.UseStuntman(options);
 

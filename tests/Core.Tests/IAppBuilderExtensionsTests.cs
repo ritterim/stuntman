@@ -68,12 +68,7 @@ namespace RimDev.Stuntman.Core.Tests
             public async Task SignInUri_OverrideSpecified_SetsExpectedCookieName()
             {
                 var options = new StuntmanOptions()
-                {
-                    Users = new[]
-                    {
-                        new StuntmanUser("user-1", "User 1")
-                    }
-                };
+                    .AddUser(new StuntmanUser("user-1", "User 1"));
 
                 using (var server = TestServer.Create(app =>
                 {
