@@ -19,7 +19,10 @@ namespace RimDev.Stuntman.UsageSample
                     .AddClaim("given_name", "Sam")
                     .AddClaim("family_name", "Smith"));
 
-            app.UseStuntman(options);
+            if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+            {
+                app.UseStuntman(options);
+            }
 
             var userPicker = new UserPicker(options);
 
@@ -39,8 +42,13 @@ namespace RimDev.Stuntman.UsageSample
                         "Hello, {0}. This is the /secure endpoint.",
                         userName));
 
-                    return context.Response.WriteAsync(
-                        userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                    if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+                    {
+                        context.Response.WriteAsync(
+                            userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                    }
+
+                    return Task.FromResult(true);
                 });
             });
 
@@ -67,8 +75,13 @@ namespace RimDev.Stuntman.UsageSample
                         "Hello, {0}.",
                         userName));
 
-                    return context.Response.WriteAsync(
-                        userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                    if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+                    {
+                        context.Response.WriteAsync(
+                            userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                    }
+
+                    return Task.FromResult(true);
                 });
             });
         }
