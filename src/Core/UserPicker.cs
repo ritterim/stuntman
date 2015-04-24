@@ -27,7 +27,10 @@ namespace RimDev.Stuntman.Core
                 currentUser = "Anonymous";
 
             var items = _options.Users.Select(x => string.Format(
-                @"<li><a href=""{0}?{1}={2}&{3}={4}"" class=""stuntman-item""><h3>{5}</h3></a></li>",
+                @"<li class=""{0}""><a href=""{1}?{2}={3}&{4}={5}"" class=""stuntman-item""><h3>{6}</h3></a></li>",
+                string.Equals(currentUser, x.Name, StringComparison.OrdinalIgnoreCase)
+                    ? "stuntman-active"
+                    : string.Empty,
                 _options.SignInUri,
                 StuntmanOptions.OverrideQueryStringKey,
                 WebUtility.UrlEncode(x.Id),

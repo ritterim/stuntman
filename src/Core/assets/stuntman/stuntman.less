@@ -6,6 +6,7 @@
 
 // Starting point for below: http://codepen.io/andytran/pen/OPxVmq
 @accent: #ff5842;
+@active: #99ffdb;
 @white: #ffffff;
 @black: #000000;
 
@@ -77,6 +78,9 @@
         &:nth-child(2n) {
           background: darken(@white, 5%);
         }
+        &.stuntman-active {
+          background: @active;
+        }
         a {
           padding: 10px 16px;
           width: 100%;
@@ -91,6 +95,9 @@
             margin-bottom: 5px;
             color: lighten(@black, 50%);
           }
+        }
+        .stuntman-item-active {
+          background: green;
         }
       }
     }
