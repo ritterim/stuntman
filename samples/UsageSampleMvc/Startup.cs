@@ -12,7 +12,10 @@ namespace RimDev.Stuntman.UsageSampleMvc
                     .AddClaim("given_name", "John")
                     .AddClaim("family_name", "Doe"));
 
-            app.UseStuntman(options);
+            if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+            {
+                app.UseStuntman(options);
+            }
         }
     }
 }
