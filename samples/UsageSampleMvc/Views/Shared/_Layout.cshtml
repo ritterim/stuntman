@@ -1,4 +1,5 @@
-﻿<!DOCTYPE html>
+﻿@using RimDev.Stuntman.Core;
+<!DOCTYPE html>
 <html>
 <head>
     <meta charset="utf-8" />
@@ -33,6 +34,13 @@
         <footer>
             <p>&copy; @DateTime.Now.Year - My ASP.NET Application</p>
         </footer>
+        @if (HttpContext.Current.IsDebuggingEnabled)
+        {
+            var stuntmanOptions = new StuntmanOptions()
+                .AddUser(new StuntmanUser("user-1", "User 1"));
+
+            @Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
+        }
     </div>
 
     <script src="https://code.jquery.com/jquery-1.11.2.min.js"></script>
