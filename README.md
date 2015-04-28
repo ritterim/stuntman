@@ -4,19 +4,21 @@
 
 **Stuntman** is a library for impersonating users during development leveraging .NET Claims Identity. Used primarily in web environments like ASP.NET MVC, ASP.NET Web Forms, and OWIN applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.
 
+![working](https://cloud.githubusercontent.com/assets/3382469/7323032/df5e60da-ea79-11e4-9af7-0fc55c64733a.gif)
+
 ## Installation
 
-Install the [*NOT_YET_AVAILABLE RimDev.Stuntman*](https://www.nuget.org/packages/RimDev.Stuntman/) NuGet package.
+Install the [RimDev.Stuntman](https://www.nuget.org/packages/RimDev.Stuntman/) NuGet package.
 
 ```
-NOT_YET_AVAILABLE Install-Package RimDev.Stuntman
+Install-Package RimDev.Stuntman
 ```
 
 ## Usage
 
 ### Startup / Middleware registration
 
-Stuntman uses OWIN and is registered as middleware, and allows for programmatictally preset user scenarios, in the form of claims identities. These presets can be utilized by you or other team members working on the same code base.
+Stuntman uses OWIN and is registered as middleware, and allows for programmatically preset user scenarios, in the form of claims identities. These presets can be utilized by you or other team members working on the same code base.
 
 ```csharp
 // OWIN Startup class
