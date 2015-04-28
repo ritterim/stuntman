@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <MajorVersion>0</MajorVersion>
+    <MinorVersion>1</MinorVersion>
+    <PatchVersion>0</PatchVersion>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <AssemblyVersion>$(MajorVersion).$(MinorVersion)</AssemblyVersion>
+    <PackageVersion>$(MajorVersion).$(MinorVersion).$(PatchVersion)</PackageVersion>
+  </PropertyGroup>
+
+  <PropertyGroup Condition=" '$(IsRelease)' != 'true' And '$(BUILD_NUMBER)' != '' ">
+    <PackageVersion>$(PackageVersion)-build-$(BUILD_NUMBER)</PackageVersion>
+  </PropertyGroup>
+
+  <Target Name="GenerateAssemblyInfo">
+    <ItemGroup>
+      <AssemblyAttributes Include="System.Reflection.AssemblyVersion">
+        <_Parameter1>$(AssemblyVersion)</_Parameter1>
+      </AssemblyAttributes>
+      <AssemblyAttributes Include="System.Reflection.AssemblyInformationalVersion">
+        <_Parameter1>$(PackageVersion)</_Parameter1>
+      </AssemblyAttributes>
+    </ItemGroup>
+
+    <WriteCodeFragment Language="C#" OutputDirectory="$(IntermediateOutputPath)" AssemblyAttributes="@(AssemblyAttributes)">
+      <Output TaskParameter="OutputFile" ItemName="Compile" />
+      <Output TaskParameter="OutputFile" ItemName="FileWrites" />
+    </WriteCodeFragment>
+  </Target>
+
+  <PropertyGroup>
+    <BuildDependsOn>
+      GenerateAssemblyInfo;
+      $(BuildDependsOn);
+    </BuildDependsOn>
+  </PropertyGroup>
+</Project>
