@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace RimDev.Stuntman.Core
 {
@@ -39,9 +40,28 @@ namespace RimDev.Stuntman.Core
         {
             if (user == null) throw new ArgumentNullException("user");
 
-            Users.Add(user);
+            if (!IsUniqueUser(user))
+            {
+                throw new ApplicationException("user must have unique Id.");
+            }
+            else
+            {
+                Users.Add(user);
+            }
 
             return this;
+        }
+
+        /// <summary>
+        /// Uses existing user collection to validate whether potential
+        /// user's Id is already in the collection.
+        /// </summary>
+        /// <param name="user">Potential user to add to collection</param>
+        private bool IsUniqueUser(StuntmanUser user)
+        {
+            return Users
+                .Select(x => x.Id)
+                .Contains(user.Id) == false;
         }
     }
 }

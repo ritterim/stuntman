@@ -97,6 +97,22 @@ namespace RimDev.Stuntman.Core.Tests
                 Assert.Equal("user-1", user.Id);
                 Assert.Equal("User 1", user.Name);
             }
+
+            [Fact]
+            public void ThrowsForDuplicateId()
+            {
+                var sut = new StuntmanOptions();
+                var user = new StuntmanUser("user-1", "User 1");
+
+                sut.AddUser(user);
+
+                var exception = Assert.Throws<ApplicationException>(() =>
+                    {
+                        sut.AddUser(user);
+                    });
+
+                Assert.Equal("user must have unique Id.", exception.Message);
+            }
         }
     }
 }
