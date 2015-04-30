@@ -6,7 +6,7 @@ namespace RimDev.Stuntman.Core.Tests
 {
     public class StuntmanUsersTests
     {
-        public class Constructor
+        public class IdAndNameConstructor
         {
             [Theory]
             [InlineData(null, "some-name")]
@@ -57,6 +57,17 @@ namespace RimDev.Stuntman.Core.Tests
                 var user = new StuntmanUser("user-1", "User 1");
 
                 Assert.NotNull(user.Claims);
+            }
+        }
+
+        public class NameConstructor
+        {
+            [Fact]
+            public void ShouldGenerateId()
+            {
+                var user = new StuntmanUser("user-1");
+
+                Assert.NotNull(user.Id);
             }
         }
 

@@ -19,6 +19,16 @@ namespace RimDev.Stuntman.Core
             Claims = new List<Claim>();
         }
 
+        /// <summary>
+        /// Creates a new user with an auto-generated Id.
+        /// </summary>
+        public StuntmanUser(string name)
+            :this(
+            id: Guid.NewGuid().ToString("D"),
+            name: name)
+        {
+        }
+
         public string Id { get; private set; }
 
         public string Name { get; private set; }
