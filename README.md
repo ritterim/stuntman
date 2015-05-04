@@ -31,6 +31,13 @@ public class Startup
               .AddClaim("given_name", "John")
               .AddClaim("family_name", "Doe"));
 
+        // Optionally assign a user an access token.
+        options
+          .AddUser(new StuntmanUser("user-2", "User 2")
+              .SetAccessToken("123")
+              .AddClaim("given_name", "Mary")
+              .AddClaim("family_name", "Smith"));
+
         app.UseStuntman(options);
     }
 }
@@ -47,6 +54,27 @@ The below example shows how to use Stuntman in a **Razor** view to get the user 
 }
 
 @Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
+```
+
+### Bearer-token
+
+Stuntman supports bearer-tokens based on a user's access-token (`StuntmanUser.SetAccessToken`). There is nothing special about the value and no additional encoding/decoding is necessary. Upon successful authentication, the value is added as a claim. Leveraging the previous `Startup` code, you could construct an HTTP-request to utilize User 2's access-token:
+
+```shell
+> curl -i -H "Authorization: Bearer 123" http://localhost:54917/secure
+HTTP/1.1 200 OK
+```
+
+Basic format-checking is done on the value:
+
+```shell
+> curl -i -H "Authorization: Bearer not-real" http://localhost:54917/secure
+HTTP/1.1 403 options provided does not include the requested 'not-real' user.
+```
+
+```shell
+> curl -i -H "Authorization: Bearer abc 123" http://localhost:54917/secure
+HTTP/1.1 400 Authorization header is not in correct format.
 ```
 
 ## Contributing
