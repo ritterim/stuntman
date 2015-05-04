@@ -114,5 +114,28 @@ namespace RimDev.Stuntman.Core.Tests
                 Assert.Equal("some_value", claim.Value);
             }
         }
+
+        public class SetAccessToken
+        {
+            [Fact]
+            public void ThrowsForNullArguments()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetAccessToken(null));
+            }
+
+            [Theory,
+            InlineData(""),
+            InlineData(" ")]
+            public void ThrowsForEmptyValue(string accessToken)
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetAccessToken(accessToken));
+
+                Assert.Equal("accessToken must not be empty or whitespace.", exception.Message);
+            }
+        }
     }
 }

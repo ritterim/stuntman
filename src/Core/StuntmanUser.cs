@@ -29,6 +29,8 @@ namespace RimDev.Stuntman.Core
         {
         }
 
+        public string AccessToken { get; private set; }
+
         public string Id { get; private set; }
 
         public string Name { get; private set; }
@@ -44,6 +46,17 @@ namespace RimDev.Stuntman.Core
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("value must not be empty or whitespace.");
 
             Claims.Add(new Claim(type, value));
+            return this;
+        }
+
+        public StuntmanUser SetAccessToken(string accessToken)
+        {
+            if (accessToken == null) throw new ArgumentNullException("accessToken");
+
+            if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentException("accessToken must not be empty or whitespace.");
+
+            AccessToken = accessToken;
+
             return this;
         }
     }

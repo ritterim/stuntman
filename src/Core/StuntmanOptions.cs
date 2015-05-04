@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Owin.Security.OAuth;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -23,6 +24,13 @@ namespace RimDev.Stuntman.Core
             if (!_stuntmanRootPath.EndsWith("/"))
                 _stuntmanRootPath += "/";
         }
+
+        /// <summary>
+        /// Useful for testing state of IOwinContext post sign-in since the
+        /// request is redirected. Therefore, you cannot just add additional OWIN
+        /// middleware to check the state.
+        /// </summary>
+        public Action<OAuthValidateIdentityContext> AfterBearerValidateIdentity { get; set; }
 
         public ICollection<StuntmanUser> Users { get; private set; }
 
