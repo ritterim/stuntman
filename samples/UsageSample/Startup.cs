@@ -10,6 +10,7 @@ namespace RimDev.Stuntman.UsageSample
         {
             var options = new StuntmanOptions()
                 .AddUser(new StuntmanUser("user-1", "User 1")
+                    .SetAccessToken("user-1-token")
                     .AddClaim("given_name", "John")
                     .AddClaim("family_name", "Doe"))
                 .AddUser(new StuntmanUser("user-2", "User 2")
