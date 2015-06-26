@@ -50,7 +50,7 @@
 
   <Target Name="Package" DependsOnTargets="Clean; Build; Test">
     <ItemGroup>
-      <NuGetSpecs Include="$(RootPath)src\**\*.csproj" />
+      <NuGetSpecs Include="$(RootPath)src\**\*.nuspec" />
     </ItemGroup>
 
     <MakeDir Directories="$(ArtifactsPath)" Condition=" !Exists('$(ArtifactsPath)') " />
