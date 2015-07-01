@@ -11,4 +11,7 @@
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>rimdev stuntman aspnet identity impersonation</tags>
   </metadata>
+  <files>
+    <file src="bin\Release\RimDev.Stuntman.Core.dll" target="lib\net45" />
+  </files>
 </package>
