@@ -10,6 +10,13 @@
     <copyright>Copyright 2015 Ritter Insurance Marketing</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>rimdev stuntman aspnet identity impersonation</tags>
+    <dependencies>
+      <dependency id="Owin" version="1.0" />
+      <dependency id="Microsoft.Owin" version="3.0.1" />
+      <dependency id="Microsoft.Owin.Security" version="3.0.1" />
+      <dependency id="Microsoft.Owin.Security.Cookies" version="3.0.1" />
+      <dependency id="Microsoft.Owin.Security.OAuth" version="3.0.1" />
+    </dependencies>
   </metadata>
   <files>
     <file src="bin\Release\RimDev.Stuntman.Core.dll" target="lib\net45" />
