@@ -1,0 +1,452 @@
+body {
+  font-family: $body-font, arial, sans-serif;
+  color: $text-color;
+  font-size: 1.8em;
+  line-height: 2em;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+h1, h2, h3, h4, h5, h6  {
+  font-family: $headline-font, sans-serif;
+  color: $text-secondary;
+  margin: 1em auto;
+}
+h2 {font-size: 1.9em;}
+h3 {
+  font-size: 1.5em;
+  color: steelblue;
+  text-transform: uppercase;
+}
+h4 {font-size: 1.3em;}
+a {
+  color: $color;
+  @include transition (all 0.4s ease-in-out);
+  &:hover {
+    color: darken($color, 10%);
+  }
+}
+
+.btn, a.btn {
+  @include transition (all 0.4s ease-in-out);
+  font-family: $body-font, arial, sans-serif;
+  .fa {
+    margin-right: 0.3em;
+  }
+
+  &:focus {
+    color: #fff;
+  }
+}
+
+a.btn-cta-primary, .btn-cta-primary {
+  background: darken($color, 30%);
+  border: 1px solid darken($color, 30%);
+  color: #fff;
+  font-weight:600;
+  text-transform: uppercase;
+  &:hover {
+    background: darken($color, 35%);
+    border: 1px solid darken($color, 35%);
+    color: #fff;
+  }
+}
+
+a.btn-cta-secondary,  .btn-cta-secondary {
+  background: $color-2;
+  border: 1px solid $color-2;
+  color: #fff;
+  font-weight:600;
+  text-transform: uppercase;
+  &:hover {
+    background: darken($color-2, 5%);
+    border: 1px solid darken($color-2, 5%);
+    color: #fff;
+  }
+}
+
+.text-highlight {
+  color: darken($color, 30%);
+}
+
+.offset-header {
+  padding-top: 90px;
+}
+
+pre {
+  @include border-radius(0);
+  font-size: 0.9em;
+  line-height: 1.5em;
+  overflow-y: scroll;
+  padding: 1.5em !important;
+  word-wrap: normal;
+}
+
+pre.prettyprint {border: none !important;}
+
+header {
+  padding: 10px 0;
+  background: $color;
+  color: $white;
+  position: fixed;
+  width: 100%;
+
+  &.navbar-fixed-top {
+    background: $white;
+    @include opacity(0.9);
+    z-index: 1000;
+    @include box-shadow (0 0 4px rgba(0,0,0,0.4));
+    .logo-title {color: crimson;}
+    .logo {
+      a {
+        color: $color;
+      }
+    }
+    .main-nav .nav .nav-item a {
+      color: $text-secondary;
+    }
+  }
+  .logo-title {
+    font-family: $logo-font, $headline-font, sans-serif;
+    color: $white;
+    font-style: italic;
+    font-size: 1.3em;
+    img {margin-top: -0.2em;}
+  }
+  .logo {
+    margin: 0;
+    a {
+      color: $white;
+      &:hover {
+        text-decoration: none;
+      }
+    }
+  }
+  .main-nav {
+    button {
+      background: darken($color, 30%);
+      color: $white !important;
+      @include border-radius(4px);
+      &:focus {
+        outline: none;
+      }
+      .icon-bar {
+        background-color: $white;
+      }
+    }
+    .navbar-collapse {
+      padding: 0;
+    }
+    .nav {
+      .nav-item {
+        font-weight: normal;
+        margin-right: 30px;
+        font-family: $body-font, sans-serif;
+        &.active {
+          a {
+            color: $white;
+            background: none;
+          }
+        }
+        a {
+          color: darken($white, 20%);
+          @include transition (none);
+          padding: 15px 10px;
+          &:hover {
+            color: darken($color, 30%);
+            background: none;
+          }
+          &:focus {
+            outline: none;
+            background: none;
+          }
+          &:active {
+            outline: none;
+            background: none;
+          }
+        }
+        &.active {
+          color: $color;
+        }
+        &.last {
+          margin-right: 0;
+        }
+      }
+    }
+  }
+}
+
+.promo {
+  background: $color;
+  color: white;
+  padding-top: 150px;
+  padding-bottom: 4em;
+  .title {
+    color: darken($color, 30%);
+    margin-top: 0;
+    .highlight {
+      color: $color-2;
+    }
+  }
+
+  .intro {
+    max-width: 80%;
+    font-size: 2.5em;
+    line-height: 1.3em;
+    margin: 0 auto;
+    margin: 1em auto;
+  }
+
+  .btn-stuntman {
+    border-radius: 0;
+    margin-right: 15px;
+    font-size: 1.2em;
+    padding: 0.5em 2em;
+  }
+
+  .social-media {
+    background: darken($color, 15%);
+    padding: 10px 0;
+    margin: 0 auto;
+    li {
+      margin-top: 15px;
+      &.facebook-like {
+        margin-top: 0;
+        position: relative;
+        top: -5px;
+      }
+    }
+  }
+
+}
+
+.about {
+  padding: 80px 0;
+  background: $smoky-white;
+  .title {
+    margin-top: 1em;
+  }
+  .intro {
+    margin: 0 auto;
+  }
+
+  .item {
+    position: relative;
+    //margin-bottom: 30px;
+    .icon-holder {
+      position: absolute;
+      left: 30px;
+      top: 0;
+      .fa {
+        color: darken($color, 30%);
+      }
+    }
+    .content {
+      padding-left: 60px;
+      .sub-title {
+        margin-top: 0;
+        color: darken($color, 30%);
+      }
+    }
+  }
+
+}
+
+.docs {
+  background: $smoky-white;
+  .title {
+    margin-top: 2em;
+  }
+  .docs-inner {
+    max-width: 80%;
+    background: #fff;
+    padding: 1.5em;
+    @include border-radius(4px);
+    margin: 0 auto;
+  }
+  .block {
+    margin-bottom: 3em;
+  }
+}
+
+.license {
+  background: $smoky-white;
+
+  .title {
+    margin-top: 2em;
+  }
+  .license-inner {
+    max-width: 800px;
+    padding: 30px;
+    @include border-radius(4px);
+    margin: 0 auto;
+
+  }
+  .info {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .cta-container {
+    max-width: 540px;
+    margin: 0 auto;
+    margin-top: 60px;
+    @include border-radius(4px);
+    .speech-bubble {
+      background: lighten($color, 40%);
+      color: darken($color, 30%);
+      padding: 30px;
+      position: relative;
+      @include border-radius(4px);
+      &:after {
+        position: absolute;
+        left: 50%;
+        bottom: -10px;
+        margin-left: -10px;
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-left: 10px solid transparent;
+        border-right: 10px solid transparent;
+
+        border-top: 10px solid lighten($color, 40%);
+      }
+    }
+    .icon-holder {
+      margin-bottom: 15px;
+    }
+  }
+}
+
+.contact {
+  padding: 80px 0;
+  background: $color;
+  color: #fff;
+  .contact-inner {
+    max-width: 760px;
+    margin: 0 auto;
+  }
+  .title {
+    color: darken($color, 30%);
+    margin-top: 0;
+  }
+  a {
+    color: darken($color, 30%);
+    &:hover {
+      color: darken($color, 40%);
+    }
+  }
+  .author-message {
+    position: relative;
+    .profile {
+      position: absolute;
+      left: 30px;
+      top: 15px;
+      width: 100px;
+      height: 100px;
+      img {
+        @include border-radius(50%);
+      }
+    }
+    .speech-bubble {
+      margin-left: 155px;
+      background: darken($color, 3%);
+      color: darken($color, 30%);
+      padding: 30px;
+      @include border-radius(4px);
+      position: relative;
+      .sub-title {
+        color: darken($color, 30%);
+        margin-top: 0;
+      }
+
+      a {
+        color: #fff;
+      }
+
+      &:after {
+        position: absolute;
+        left: -10px;
+        top: 60px;
+        content: "";
+        display: inline-block;
+        width: 0;
+        height: 0;
+        border-top: 10px solid transparent;
+        border-bottom: 10px solid transparent;
+        border-right: 10px solid darken($color, 3%);
+      }
+      .source {
+        margin-top: 30px;
+        a {
+          color: darken($color, 30%);
+        }
+        .title {
+          color: darken($color, 15%);
+        }
+      }
+
+    }
+  }
+
+  .info {
+    .sub-title {
+      color: darken($color, 10%);
+      margin-top: 0;
+    }
+  }
+
+  .social-icons {
+    list-style: none;
+    padding: 10px 0;
+    margin-bottom: 0;
+    display: inline-block;
+    margin: 0 auto;
+    li {
+      float: left;
+      &.last {
+        margin-right: 0;
+      }
+    }
+
+    a {
+      display:inline-block;
+      background: darken($color, 15%);
+      width: 48px;
+      height: 48px;
+      text-align: center;
+      padding-top: 12px;
+      @include border-radius(50%);
+      margin-right: 8px;
+      float: left;
+
+      &:hover {
+        background: darken($color-2, 10%);
+      }
+
+      .fa {
+        color: #fff;
+        &:before {
+          //font-size: 26px;
+          text-align: center;
+          padding: 0;
+        }
+      }
+    }
+
+  }
+}
+
+.footer {
+  padding: 4em 0;
+  background: darken($color, 40%);
+  a {color: $darker-grey;}
+  img {
+    @include opacity(0.8);
+  }
+  .fa-heart {
+    color: $heart;
+  }
+}
+
+.logo {display: block;}
