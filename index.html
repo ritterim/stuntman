@@ -76,7 +76,7 @@ layout: default
         <h4>View</h4>
         <p>The below example shows how to use Stuntman in a Razor view to get the user picker during development.</p>
 <pre class="prettyprint lang-vb">
-  // OWIN Startup class
+  @using RimDev.Stuntman.Core;
   @{
       var stuntmanOptions = new StuntmanOptions()
           .AddUser(new StuntmanUser("user-1", "User 1"));
