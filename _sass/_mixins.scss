@@ -14,6 +14,18 @@ $body-font: 		'Lato';
 $headline-font: 'Roboto Slab';
 $logo-font:			'grand_hotelregular';
 
+// Not a mixin but could not call with @extend within a media query
+@mixin word-break () {
+	-ms-word-break: break-all;
+		  word-break: break-all;
+  		word-break: break-word;
+	// for use on a url string
+	-webkit-hyphens: auto;
+		 -moz-hyphens: auto;
+		  -ms-hyphens: auto;
+				  hyphens: auto;
+}
+
 @mixin text-shadow ($string: 0 1px 3px rgba(0, 0, 0, 0.25)) {
 	text-shadow: $string;
 }

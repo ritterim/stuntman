@@ -1,7 +1,9 @@
 @media (max-width: 576px) {
   .promo {
+    padding-top: 3.5em;
+    .logo {display: none;}
     .intro {
-      font-size: 2em;
+      font-size: 1.8em;
     }
   }
   .btn-stuntman {
@@ -10,17 +12,29 @@
   }
   .docs {
     .docs-inner {
-      max-width: 100%;
+      width: 100%;
     }
   }
+  #top {display: none !important;}
+  code {
+  @include word-break();
+      }
+
 }
 
 @media (max-width: 767px) {
 
   .header .main-nav button {
     margin-right: 0;
-    // margin-bottom: 1em;
   }
+
+header .main-nav button {
+    background: none;
+}
+
+header .main-nav button .icon-bar {
+  background-color: $blue !important;
+}
 
   .header .main-nav .navbar-collapse {
     padding-left: 15px;
