@@ -19,6 +19,8 @@ namespace RimDev.Stuntman.Core
 
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
+            options.VerifyUsageIsPermitted();
+
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
             {
                 AuthenticationType = StuntmanAuthenticationType,

@@ -6,6 +6,26 @@ namespace RimDev.Stuntman.Core.Tests
 {
     public class StuntmanOptionsTests
     {
+        public class NonDebugUsageAllowedProperty
+        {
+            [Fact]
+            public void FalseByDefault()
+            {
+                var sut = new StuntmanOptions();
+
+                Assert.False(sut.NonDebugUsageAllowed);
+            }
+
+            [Fact]
+            public void TrueWhenAllowNonDebugUsageIsInvoked()
+            {
+                var sut = new StuntmanOptions()
+                    .AllowNonDebugUsage();
+
+                Assert.True(sut.NonDebugUsageAllowed);
+            }
+        }
+
         public class SignInUriProperty
         {
             [Fact]
@@ -112,6 +132,57 @@ namespace RimDev.Stuntman.Core.Tests
                     });
 
                 Assert.Equal("user must have unique Id.", exception.Message);
+            }
+        }
+
+        public class AllowNonDebugUsageMethod
+        {
+            [Fact]
+            public void UpdatesNonDebugUsageAllowedProperty()
+            {
+                var sut = new StuntmanOptions();
+
+                sut.AllowNonDebugUsage();
+
+                Assert.True(sut.NonDebugUsageAllowed);
+            }
+        }
+
+        public class VerifyUsageIsPermittedMethod
+        {
+            [Fact]
+            public void ThrowsWhenDebugIsFalse()
+            {
+                var sut = new StuntmanOptions(isDebug: () => false);
+
+                Assert.Throws<InvalidOperationException>(
+                    () => sut.VerifyUsageIsPermitted());
+            }
+
+            [Fact]
+            public void DoesNotThrowWhenDebugIsFalseAndAllowNonDebugUsageIsInvoked()
+            {
+                var sut = new StuntmanOptions(isDebug: () => false)
+                    .AllowNonDebugUsage();
+
+                sut.VerifyUsageIsPermitted();
+            }
+
+            [Fact]
+            public void DoesNotThrowWhenAndDebugIsTrue()
+            {
+                var sut = new StuntmanOptions(isDebug: () => true);
+
+                sut.VerifyUsageIsPermitted();
+            }
+
+            [Fact]
+            public void DoesNotThrowWhenDebugIsTrueAndAllowNonDebugUsageIsInvoked()
+            {
+                var sut = new StuntmanOptions(isDebug: () => true)
+                    .AllowNonDebugUsage();
+
+                sut.VerifyUsageIsPermitted();
             }
         }
     }

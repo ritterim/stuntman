@@ -16,7 +16,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignInUri_Returns200Ok()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -31,7 +31,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignInUri_IfOverrideNotSpecified_ShowsLoginUI()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -49,7 +49,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignInUri_OverrideSpecified_ThrowsIfNoMatchingUser()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -70,7 +70,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignInUri_OverrideSpecified_SetsExpectedCookieName()
             {
-                var options = new StuntmanOptions()
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions()
                     .AddUser(new StuntmanUser("user-1", "User 1"));
 
                 using (var server = TestServer.Create(app =>
@@ -97,7 +97,7 @@ namespace RimDev.Stuntman.Core.Tests
             InlineData("Bearer 123 456 789")]
             public async Task AuthorizationBearerToken_400IfNoCorrectFormat(string bearerToken)
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -125,7 +125,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task AuthorizationBearerToken_ThrowsIfNoMatchingUser()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -153,7 +153,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task AuthorizationBearerToken_AddsTokenClaim()
             {
-                var options = new StuntmanOptions()
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions()
                     .AddUser(
                     new StuntmanUser("user-1", "User 1")
                     .SetAccessToken("123"));
@@ -192,7 +192,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignOutUri_Returns302Redirect()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -208,7 +208,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignOutUri_RemovesExpectedCookieName()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
@@ -229,7 +229,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public async Task SignOutUri_ReturnsExpectedLocationHeader()
             {
-                var options = new StuntmanOptions();
+                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
 
                 using (var server = TestServer.Create(app =>
                 {
