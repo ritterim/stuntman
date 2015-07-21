@@ -61,6 +61,7 @@ layout: default
 </pre>
       </div><!-- /.block-->
 
+      <div class="block">
         <h4>View</h4>
         <p>The below example shows how to use Stuntman in a Razor view to get the user picker during development.</p>
 <pre class="prettyprint lang-vb">
@@ -72,7 +73,10 @@ layout: default
 
   @Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
 </pre>
+      </div><!-- /.block-->
 
+      <div class="block">
+        <h3 class="sub-title text-center">More Options</h3>
         <h4>Bearer-token</h4>
         <p>Stuntman supports bearer-tokens based on a user's access-token (<code>StuntmanUser.SetAccessToken</code>). There is nothing special about the value and no additional encoding/decoding is necessary. Upon successful authentication, the value is added as a claim. Leveraging the previous Startup code, you could construct an HTTP-request to utilize User 2's access-token:</p>
 <pre class="prettyprint lang-vb">
