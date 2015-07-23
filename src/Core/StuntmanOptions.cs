@@ -13,9 +13,19 @@ namespace RimDev.Stuntman.Core
         public const string OverrideQueryStringKey = "OverrideUserId";
         public const string ReturnUrlQueryStringKey = "ReturnUrl";
 
-        private readonly string _stuntmanRootPath;
+        private static readonly Func<bool> IsDEBUGConstantSet = (() =>
+        {
+#if DEBUG
+            return true;
+#else
+            return false;
+#endif
+        });
 
-        public StuntmanOptions(string stuntmanRootPath = DefaultStuntmanRootPath)
+        private readonly string _stuntmanRootPath;
+        private readonly Func<bool> _isDebug;
+
+        public StuntmanOptions(string stuntmanRootPath = DefaultStuntmanRootPath, Func<bool> isDebug = null)
         {
             Users = new List<StuntmanUser>();
 
@@ -23,6 +33,8 @@ namespace RimDev.Stuntman.Core
 
             if (!_stuntmanRootPath.EndsWith("/"))
                 _stuntmanRootPath += "/";
+
+            _isDebug = isDebug ?? IsDEBUGConstantSet;
         }
 
         /// <summary>
@@ -31,6 +43,8 @@ namespace RimDev.Stuntman.Core
         /// middleware to check the state.
         /// </summary>
         public Action<OAuthValidateIdentityContext> AfterBearerValidateIdentity { get; set; }
+
+        public bool NonDebugUsageAllowed { get; private set; }
 
         public ICollection<StuntmanUser> Users { get; private set; }
 
@@ -58,6 +72,32 @@ namespace RimDev.Stuntman.Core
             }
 
             return this;
+        }
+
+        /// <summary>
+        /// Allow Stuntman to be used when the DEBUG constant is not set.
+        /// This is to prevent accidental implementation in production by default.
+        /// </summary>
+        public StuntmanOptions AllowNonDebugUsage()
+        {
+            NonDebugUsageAllowed = true;
+
+            return this;
+        }
+
+        /// <summary>
+        /// Verify the usage of Stuntman is permitted.
+        /// If usage is not permitted, an InvalidOperationException is thrown.
+        /// </summary>
+        public void VerifyUsageIsPermitted()
+        {
+            if (!_isDebug() && !NonDebugUsageAllowed)
+            {
+                throw new InvalidOperationException(
+                    "Stuntman failed to initialize because NonDebugUsageAllowed is false. " +
+                    "This default behavior is to prevent accidental implementation in production. " +
+                    "To override this behavior, invoke the AllowNonDebugUsage method on StuntmanOptions.");
+            }
         }
 
         /// <summary>
