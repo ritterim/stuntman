@@ -5,9 +5,10 @@
 }
 
 // Starting point for below: http://codepen.io/andytran/pen/OPxVmq
-@accent: #ff5842;
+@accent: #224058;
 @active: #99ffdb;
 @white: #ffffff;
+@gray: #f6f6f6;
 @black: #000000;
 
 .transitions( @property: all; @duration: 0.3s; @timing: linear; @delay: 0s; ) {
@@ -23,13 +24,13 @@
   bottom: 0;
   left: 0;
   font-family: 'Roboto', sans-serif;
-  background: @white;
   margin: 0 auto;
   .stuntman-header {
+    border-top-right-radius: 10px;
     cursor: pointer;
     background: @accent;
-    padding: 10px 15px;
-    color: @white;
+    padding: 0 15px 0 0;
+    color: @gray;
     font-size: 12px;
     opacity: .9;
     &:before,
@@ -45,12 +46,21 @@
       float: left;
       a {
         color: @white;
+        font-weight: bold;
         text-decoration: none;
       }
     }
     &:hover {
       opacity: 1;
       .transitions(@property: opacity;)
+    }
+    .stuntman-helmet {
+      padding-right: 10px;
+    }
+    .stuntman-helmet-disabled {
+      opacity: .5;
+      filter: saturate(0%);
+      -webkit-filter: saturate(0%);
     }
   }
   .stuntman-body {
@@ -62,10 +72,10 @@
       list-style: none;
       padding: 0;
       margin: 0;
-      border-top: 1px solid darken(@white, 5%);
+      border-top: 1px solid darken(@gray, 5%);
       li {
         position: relative;
-        background: @white;
+        background: @gray;
         display: block;
         width: 100%;
         box-sizing: border-box;
@@ -76,13 +86,13 @@
           clear: both;
         }
         &:nth-child(2n) {
-          background: darken(@white, 5%);
+          background: darken(@gray, 5%);
         }
-        &.stuntman-active {
-          background: @active;
+        &:hover {
+          background: lighten(@accent, 60%);
         }
         a {
-          padding: 10px 16px;
+          padding: 10px;
           width: 100%;
         }
         .stuntman-item {
@@ -95,9 +105,6 @@
             margin-bottom: 5px;
             color: lighten(@black, 50%);
           }
-        }
-        .stuntman-item-active {
-          background: green;
         }
       }
     }
