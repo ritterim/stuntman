@@ -94,6 +94,7 @@
 }
 .stuntman-widget .stuntman-body ul li .stuntman-item h3 {
   display: block;
+  font-weight: normal;
   margin-bottom: 5px;
   color: #808080;
 }
