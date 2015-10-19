@@ -1,4 +1,4 @@
-# Stuntman
+![Stuntman logo](https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png)
 
 > "Sometimes, you need a stand-in."
 
