@@ -99,6 +99,9 @@ header {
     font-style: italic;
     font-size: 1.3em;
   }
+  .logo-title img {
+    vertical-align: top;
+  }
   .main-nav {
     button {
       background: darken($color, 30%);
