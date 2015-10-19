@@ -8,8 +8,8 @@ namespace RimDev.Stuntman.Core
     {
         public StuntmanUser(string id, string name)
         {
-            if (id == null) throw new ArgumentNullException("id");
-            if (name == null) throw new ArgumentNullException("name");
+            if (id == null) throw new ArgumentNullException(nameof(id));
+            if (name == null) throw new ArgumentNullException(nameof(name));
 
             if (string.IsNullOrWhiteSpace(id)) throw new ArgumentException("id must not be empty or whitespace.");
             if (string.IsNullOrWhiteSpace(name)) throw new ArgumentException("name must not be empty or whitespace.");
@@ -39,8 +39,8 @@ namespace RimDev.Stuntman.Core
 
         public StuntmanUser AddClaim(string type, string value)
         {
-            if (type == null) throw new ArgumentNullException("type");
-            if (value == null) throw new ArgumentNullException("value");
+            if (type == null) throw new ArgumentNullException(nameof(type));
+            if (value == null) throw new ArgumentNullException(nameof(value));
 
             if (string.IsNullOrWhiteSpace(type)) throw new ArgumentException("type must not be empty or whitespace.");
             if (string.IsNullOrWhiteSpace(value)) throw new ArgumentException("value must not be empty or whitespace.");
@@ -51,7 +51,7 @@ namespace RimDev.Stuntman.Core
 
         public StuntmanUser SetAccessToken(string accessToken)
         {
-            if (accessToken == null) throw new ArgumentNullException("accessToken");
+            if (accessToken == null) throw new ArgumentNullException(nameof(accessToken));
 
             if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentException("accessToken must not be empty or whitespace.");
 

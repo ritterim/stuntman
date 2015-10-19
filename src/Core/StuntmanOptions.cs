@@ -60,7 +60,7 @@ namespace RimDev.Stuntman.Core
 
         public StuntmanOptions AddUser(StuntmanUser user)
         {
-            if (user == null) throw new ArgumentNullException("user");
+            if (user == null) throw new ArgumentNullException(nameof(user));
 
             if (!IsUniqueUser(user))
             {

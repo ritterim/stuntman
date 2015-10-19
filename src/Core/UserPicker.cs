@@ -16,8 +16,8 @@ namespace RimDev.Stuntman.Core
 
         public string GetHtml(IPrincipal currentPrincipal, string returnUrl)
         {
-            if (currentPrincipal == null) throw new ArgumentNullException("currentPrincipal");
-            if (returnUrl == null) throw new ArgumentNullException("returnUrl");
+            if (currentPrincipal == null) throw new ArgumentNullException(nameof(currentPrincipal));
+            if (returnUrl == null) throw new ArgumentNullException(nameof(returnUrl));
 
             _options.VerifyUsageIsPermitted();
 
