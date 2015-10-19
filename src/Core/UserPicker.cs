@@ -67,21 +67,23 @@ namespace RimDev.Stuntman.Core
     </div>
 </div>
 <script>
-    var header = document.getElementById('stuntman-header-js');
-    var collapseContainer = document.getElementById('stuntman-collapse-container-js');
+    (function() {{
+        var header = document.getElementById('stuntman-header-js');
+        var collapseContainer = document.getElementById('stuntman-collapse-container-js');
 
-    collapseContainer.style.display = 'none';
+        collapseContainer.style.display = 'none';
 
-    header.addEventListener('click', function() {{
-        var currentDisplay = collapseContainer.style.display;
+        header.addEventListener('click', function() {{
+            var currentDisplay = collapseContainer.style.display;
 
-        if (currentDisplay === 'none') {{
-            collapseContainer.style.display = 'inherit';
-        }}
-        else {{
-            collapseContainer.style.display = 'none';
-        }}
-    }}, false);
+            if (currentDisplay === 'none') {{
+                collapseContainer.style.display = 'inherit';
+            }}
+            else {{
+                collapseContainer.style.display = 'none';
+            }}
+        }}, false);
+    }})();
 </script>
 <!-- End Stuntman -->",
                 css,
