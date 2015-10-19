@@ -45,6 +45,7 @@
 }
 .stuntman-widget .stuntman-header .stuntman-helmet {
   padding-right: 10px;
+  vertical-align: middle;
 }
 .stuntman-widget .stuntman-header .stuntman-helmet-disabled {
   opacity: .5;
