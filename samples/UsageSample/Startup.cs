@@ -39,9 +39,8 @@ namespace RimDev.Stuntman.UsageSample
                         userName = "Anonymous / Unknown";
 
                     context.Response.ContentType = "text/html";
-                    context.Response.WriteAsync(string.Format(
-                        "Hello, {0}. This is the /secure endpoint.",
-                        userName));
+                    context.Response.WriteAsync(
+                        $"Hello, {userName}. This is the /secure endpoint.");
 
                     if (System.Web.HttpContext.Current.IsDebuggingEnabled)
                     {
@@ -72,9 +71,8 @@ namespace RimDev.Stuntman.UsageSample
                         userName = "Anonymous / Unknown";
 
                     context.Response.ContentType = "text/html";
-                    context.Response.WriteAsync(string.Format(
-                        "Hello, {0}.",
-                        userName));
+                    context.Response.WriteAsync(
+                        $"Hello, {userName}.");
 
                     if (System.Web.HttpContext.Current.IsDebuggingEnabled)
                     {

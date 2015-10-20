@@ -59,9 +59,8 @@ namespace RimDev.Stuntman.Core
                         if (user == null)
                         {
                             context.Response.StatusCode = 404;
-                            await context.Response.WriteAsync(string.Format(
-                                "options provided does not include the requested '{0}' user.",
-                                overrideUserId));
+                            await context.Response.WriteAsync(
+                                $"options provided does not include the requested '{overrideUserId}' user.");
 
                             return;
                         }
@@ -104,19 +103,15 @@ namespace RimDev.Stuntman.Core
 
             foreach (var user in options.Users)
             {
-                var href = string.Format("{0}?OverrideUserId={1}&{2}={3}",
-                    options.SignInUri,
-                    user.Id,
-                    StuntmanOptions.ReturnUrlQueryStringKey,
-                    WebUtility.UrlEncode(context.Request.Query[StuntmanOptions.ReturnUrlQueryStringKey]));
+                var href = $"{options.SignInUri}?OverrideUserId={user.Id}&{StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(context.Request.Query[StuntmanOptions.ReturnUrlQueryStringKey])}";
 
-                usersHtml.Append(string.Format(@"
+                usersHtml.Append($@"
 <div class=""stuntman-g"">
     <div class=""stuntman-u-1"">
-        <a href=""{0}"" class=""stuntman-button stuntman-u-1"">{1}</a>
+        <a href=""{href}"" class=""stuntman-button stuntman-u-1"">{user.Name}</a>
     </div>
 </div>
-", href, user.Name));
+");
             }
 
             return usersHtml.ToString();
@@ -147,11 +142,11 @@ namespace RimDev.Stuntman.Core
             var css = Resources.GetCss();
             var usersHtml = GetUsersLoginUI(context, options);
 
-            context.Response.Write(string.Format(@"
+            context.Response.Write($@"
 <html>
     <head>
         <style>
-            {0}
+            {css}
         </style>
     </head>
     <body>
@@ -162,7 +157,7 @@ namespace RimDev.Stuntman.Core
                 <div class=""stuntman-g"">
                     <div class=""stuntman-u-1-6"">&nbsp;</div>
                     <div class=""stuntman-u-2-3"">
-                        {1}
+                        {usersHtml}
                     </div>
                 </div>
             </div>
@@ -170,7 +165,7 @@ namespace RimDev.Stuntman.Core
         </div>
     </body>
 </html>
-", css, usersHtml));
+");
         }
 
         private class StuntmanOAuthBearerProvider : OAuthBearerAuthenticationProvider
@@ -192,7 +187,7 @@ namespace RimDev.Stuntman.Core
 
                     return Task.FromResult(false);
                 }
-                else 
+                else
                 {
                     var authorizationBearerTokenParts = authorizationBearerToken
                         .Split(' ');
@@ -222,9 +217,8 @@ namespace RimDev.Stuntman.Core
                         if (user == null)
                         {
                             context.Response.StatusCode = 403;
-                            context.Response.ReasonPhrase = string.Format(
-                                "options provided does not include the requested '{0}' user.",
-                                accessToken);
+                            context.Response.ReasonPhrase =
+                                $"options provided does not include the requested '{accessToken}' user.";
 
                             context.Rejected();
 

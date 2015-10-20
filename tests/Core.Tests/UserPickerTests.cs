@@ -41,12 +41,7 @@ namespace RimDev.Stuntman.Core.Tests
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), returnUrl);
 
                 Assert.Contains(
-                    string.Format(
-                        "/stuntman/{0}?{1}=user-1&{2}={3}",
-                        StuntmanOptions.SignInEndpoint,
-                        StuntmanOptions.OverrideQueryStringKey,
-                        StuntmanOptions.ReturnUrlQueryStringKey,
-                        WebUtility.UrlEncode(returnUrl)),
+                    $"/stuntman/{StuntmanOptions.SignInEndpoint}?{StuntmanOptions.OverrideQueryStringKey}=user-1&{StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(returnUrl)}",
                     html);
             }
 
