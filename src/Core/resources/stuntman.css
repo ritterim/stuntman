@@ -1,5 +1,15 @@
-.stuntman.text-center {
+.stuntman-login-ui-container {
   text-align: center;
+}
+.stuntman-login-ui-container img {
+  height: 75px;
+  max-width: 100%;
+}
+.stuntman-login-ui-container li {
+  list-style-type: none;
+}
+.stuntman-login-ui-container li a {
+  padding: 20px;
 }
 .stuntman-widget {
   position: fixed;

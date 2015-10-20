@@ -77,12 +77,9 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="assets\pure\pure.css" />
     <EmbeddedResource Include="resources\stuntman.css" />
     <None Include="assets\stuntman\stuntman.less" />
     <Content Include="Gruntfile.js" />
-    <EmbeddedResource Include="resources\stuntman.pure.css" />
-    <EmbeddedResource Include="resources\stuntman.pure.min.css" />
   </ItemGroup>
   <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

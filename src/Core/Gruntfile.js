@@ -2,19 +2,6 @@
 
 module.exports = function(grunt) {
     grunt.initConfig({
-        css_selectors: {
-            options: {
-                mutations: [
-                    { search: /\.pure/g, replace: '.stuntman' },
-                    { search: /"pure-u"/g, replace: '"stuntman-u"' }
-                ]
-            },
-            default: {
-                files: {
-                    'resources/stuntman.pure.css': ['assets/pure/pure.css'],
-                }
-            }
-        },
         less: {
             default: {
                 files: {
@@ -33,9 +20,8 @@ module.exports = function(grunt) {
         }
     });
 
-    grunt.loadNpmTasks('grunt-css-selectors');
     grunt.loadNpmTasks('grunt-contrib-less');
     grunt.loadNpmTasks('grunt-contrib-watch');
 
-    grunt.registerTask('default', ['css_selectors', 'less']);
+    grunt.registerTask('default', ['less']);
 };
