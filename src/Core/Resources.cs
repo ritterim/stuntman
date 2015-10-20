@@ -5,7 +5,7 @@ namespace RimDev.Stuntman.Core
 {
     public class Resources
     {
-        private const string StuntmanResourcesPrefix = "RimDev.Stuntman.Core.resources.";
+        private const string StuntmanEmbeddedAssetsPrefix = "RimDev.Stuntman.Core.assets.";
 
         public static string GetCss()
         {
@@ -20,7 +20,7 @@ namespace RimDev.Stuntman.Core
 
             using (var stream = Assembly
                 .GetExecutingAssembly()
-                .GetManifestResourceStream(StuntmanResourcesPrefix + resourceName))
+                .GetManifestResourceStream(StuntmanEmbeddedAssetsPrefix + resourceName))
             {
                 using (var streamReader = new StreamReader(stream))
                 {

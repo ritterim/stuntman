@@ -1,5 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="RunGrunt;Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <Import Project="..\..\build\Build.Settings.targets" />
   <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
   <PropertyGroup>
@@ -73,18 +73,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Core.nuspec" />
-    <None Include="package.json" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="resources\stuntman.css" />
-    <None Include="assets\stuntman\stuntman.less" />
-    <Content Include="Gruntfile.js" />
+    <EmbeddedResource Include="assets\stuntman.css" />
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
-  <Target Name="RunGrunt">
-    <Exec Command=".bin\npm install" />
-    <Exec Command=".bin\grunt --no-color" />
-  </Target>
 </Project>

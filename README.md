@@ -77,18 +77,6 @@ HTTP/1.1 403 options provided does not include the requested 'not-real' user.
 HTTP/1.1 400 Authorization header is not in correct format.
 ```
 
-## Contributing
-
-### Prerequisites
-
-After cloning down the repository:
-
-```
-> npm install -g grunt-cli
-> cd the_repository_folder\src\Core
-> npm install
-```
-
 ## License
 
 MIT License
