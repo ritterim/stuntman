@@ -1,0 +1,102 @@
+//
+// Stuntman icons
+// <span> or <i> tags may be used here as a matter of preference
+//
+// Usage - single icon (icon-helmet-k)
+// <span class="stunt icon-helmet-k"></span>
+//
+// Usage - full color icon (icon-helmet)
+// Establish initial element class: stunt icon-helmet
+// Wrap paths 1-11 in initial
+// <span class="stunt icon-helmet">
+//  <span class="path1"></span><span class="path2"></span><span class="path3"></span><span class="path4"></span><span class="path5"></span><span class="path6"></span><span class="path7"></span><span class="path8"></span><span class="path9"></span><span class="path10"></span><span class="path11"></span>
+// </span>
+
+// colors - define colors here to easily swap out
+@red: 		firebrick;
+@blue: 		darkblue;
+@black: 	#222;
+@grey: 		gray;
+@white: 	white;
+
+
+@font-face {
+	font-family: 'stuntman';
+	src:url('fonts/stuntman.eot?f220fe');
+	src:url('fonts/stuntman.eot?f220fe#iefix') format('embedded-opentype'),
+		url('fonts/stuntman.ttf?f220fe') format('truetype'),
+		url('fonts/stuntman.woff?f220fe') format('woff'),
+		url('fonts/stuntman.svg?f220fe#stuntman') format('svg');
+	font-weight: normal;
+	font-style: normal;
+}
+
+.stunt {
+	font-family: 'stuntman';
+	speak: none;
+	font-style: normal;
+	font-weight: normal;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+}
+
+.icon-helmet-k:before {
+	content: "\e80b";
+}
+.icon-helmet .path1:before {
+	content: "\e800";
+	color: @white;
+}
+.icon-helmet .path2:before {
+	content: "\e801";
+	margin-left: -0.9951171875em;
+	color: @red;
+}
+.icon-helmet .path3:before {
+	content: "\e802";
+	margin-left: -0.9951171875em;
+	color: @white;
+}
+.icon-helmet .path4:before {
+	content: "\e803";
+	margin-left: -0.9951171875em;
+	color: @blue;
+}
+.icon-helmet .path5:before {
+	content: "\e804";
+	margin-left: -0.9951171875em;
+	color: @grey;
+}
+.icon-helmet .path6:before {
+	content: "\e805";
+	margin-left: -0.9951171875em;
+	color: @white;
+}
+.icon-helmet .path7:before {
+	content: "\e806";
+	margin-left: -0.9951171875em;
+	color: @white;
+}
+.icon-helmet .path8:before {
+	content: "\e807";
+	margin-left: -0.9951171875em;
+	color: @white;
+}
+.icon-helmet .path9:before {
+	content: "\e808";
+	margin-left: -0.9951171875em;
+	color: @white;
+}
+.icon-helmet .path10:before {
+	content: "\e809";
+	margin-left: -0.9951171875em;
+	color: @white;
+}
+.icon-helmet .path11:before {
+	content: "\e80a";
+	margin-left: -0.9951171875em;
+	color: @black;
+}
