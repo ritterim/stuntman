@@ -56,10 +56,7 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = string.Format("{0}?{1}={2}",
-                        options.SignInUri,
-                        StuntmanOptions.OverrideQueryStringKey,
-                        "user-1");
+                    var url = $"{options.SignInUri}?{StuntmanOptions.OverrideQueryStringKey}=user-1";
 
                     var response = await server.HttpClient.GetAsync(url);
 
@@ -78,16 +75,13 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = string.Format("{0}?{1}={2}",
-                        options.SignInUri,
-                        StuntmanOptions.OverrideQueryStringKey,
-                        "user-1");
+                    var url = $"{options.SignInUri}?{StuntmanOptions.OverrideQueryStringKey}=user-1";
 
                     var response = await server.HttpClient.GetAsync(url);
                     var setCookie = response.Headers.GetValues("Set-Cookie").SingleOrDefault();
 
                     Assert.StartsWith(
-                        string.Format(".AspNet.{0}=", IAppBuilderExtensions.StuntmanAuthenticationType),
+                        $".AspNet.{IAppBuilderExtensions.StuntmanAuthenticationType}=",
                         setCookie);
                 }
             }
@@ -219,9 +213,7 @@ namespace RimDev.Stuntman.Core.Tests
                     var setCookie = response.Headers.GetValues("Set-Cookie").SingleOrDefault();
 
                     Assert.Equal(
-                        string.Format(
-                            ".AspNet.{0}=; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT",
-                            IAppBuilderExtensions.StuntmanAuthenticationType),
+                        $".AspNet.{IAppBuilderExtensions.StuntmanAuthenticationType}=; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT",
                         setCookie);
                 }
             }
@@ -236,10 +228,7 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = string.Format("{0}?{1}={2}",
-                        options.SignOutUri,
-                        StuntmanOptions.ReturnUrlQueryStringKey,
-                        "https://redirect-uri/");
+                    var url = $"{options.SignOutUri}?{StuntmanOptions.ReturnUrlQueryStringKey}=https://redirect-uri/";
 
                     var response = await server.HttpClient.GetAsync(url);
 
