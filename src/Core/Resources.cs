@@ -9,8 +9,7 @@ namespace RimDev.Stuntman.Core
 
         public static string GetCss()
         {
-            var css = GetStuntmanResource("stuntman.pure.css") +
-                GetStuntmanResource("stuntman.css");
+            var css = GetStuntmanResource("stuntman.css");
 
             return css;
         }

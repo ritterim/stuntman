@@ -105,13 +105,7 @@ namespace RimDev.Stuntman.Core
             {
                 var href = $"{options.SignInUri}?OverrideUserId={user.Id}&{StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(context.Request.Query[StuntmanOptions.ReturnUrlQueryStringKey])}";
 
-                usersHtml.Append($@"
-<div class=""stuntman-g"">
-    <div class=""stuntman-u-1"">
-        <a href=""{href}"" class=""stuntman-button stuntman-u-1"">{user.Name}</a>
-    </div>
-</div>
-");
+                usersHtml.Append($@"<li><a href=""{href}"">{user.Name}</a></li>");
             }
 
             return usersHtml.ToString();
@@ -143,29 +137,25 @@ namespace RimDev.Stuntman.Core
             var usersHtml = GetUsersLoginUI(context, options);
 
             context.Response.Write($@"
+<!DOCTYPE html>
 <html>
     <head>
+        <meta charset=""UTF-8"">
+        <title>Select a user</title>
         <style>
             {css}
         </style>
     </head>
     <body>
-        <div class=""stuntman-g"">
-            <div class=""stuntman-u-1-4"">&nbsp;</div>
-            <div class=""stuntman-u-1-2"">
-                <h2 class=""stuntman text-center"">Please select a user to continue authentication.</h2>
-                <div class=""stuntman-g"">
-                    <div class=""stuntman-u-1-6"">&nbsp;</div>
-                    <div class=""stuntman-u-2-3"">
-                        {usersHtml}
-                    </div>
-                </div>
-            </div>
-            <div class=""stuntman-u-1-4"">&nbsp;</div>
+        <div class=""stuntman-login-ui-container"">
+            <img src=""https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png"" />
+            <h3>Please select a user to continue authentication.</h3>
+            <ul>
+                {usersHtml}
+            </ul>
         </div>
     </body>
-</html>
-");
+</html>");
         }
 
         private class StuntmanOAuthBearerProvider : OAuthBearerAuthenticationProvider
