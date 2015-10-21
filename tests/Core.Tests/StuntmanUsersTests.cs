@@ -137,5 +137,51 @@ namespace RimDev.Stuntman.Core.Tests
                 Assert.Equal("accessToken must not be empty or whitespace.", exception.Message);
             }
         }
+
+        public class SetIconColorMethod_StringOverload
+        {
+            [Fact]
+            public void ThrowsForNullArgument()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetIconColor(null));
+            }
+
+            [Fact]
+            public void ThrowsWhenMissingNumberSign()
+            {
+                const string hexColor = "ccc";
+
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetIconColor(hexColor));
+
+                Assert.Equal($"{hexColor} must start with #.", exception.Message);
+            }
+
+            [Fact]
+            public void SetsExpectedColor()
+            {
+                const string hexColor = "#ccc";
+
+                var user = new StuntmanUser("user-1", "User 1")
+                    .SetIconColor(hexColor);
+
+                Assert.Equal(hexColor, user.IconColor);
+            }
+        }
+
+        public class SetIconColorMethod_StuntmanColorOverload
+        {
+            [Fact]
+            public void SetsExpectedColor()
+            {
+                var user = new StuntmanUser("user-1", "User 1")
+                    .SetIconColor(StuntmanColor.DarkBlue);
+
+                Assert.Equal("#002a4a", user.IconColor);
+            }
+        }
     }
 }

@@ -31,10 +31,11 @@ public class Startup
               .AddClaim("given_name", "John")
               .AddClaim("family_name", "Doe"));
 
-        // Optionally assign a user an access token.
+        // Optionally assign a user an access token and icon color.
         options
           .AddUser(new StuntmanUser("user-2", "User 2")
               .SetAccessToken("123")
+              .SetIconColor(StuntmanColor.DarkBlue) // Includes overload for specific hex codes, too!
               .AddClaim("given_name", "Mary")
               .AddClaim("family_name", "Smith"));
 
