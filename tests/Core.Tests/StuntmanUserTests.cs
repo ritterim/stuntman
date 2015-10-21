@@ -4,7 +4,7 @@ using Xunit;
 
 namespace RimDev.Stuntman.Core.Tests
 {
-    public class StuntmanUsersTests
+    public class StuntmanUserTests
     {
         public class IdAndNameConstructor
         {
