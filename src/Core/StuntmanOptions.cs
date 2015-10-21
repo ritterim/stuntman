@@ -31,7 +31,7 @@ namespace RimDev.Stuntman.Core
 
             _stuntmanRootPath = stuntmanRootPath;
 
-            if (!_stuntmanRootPath.EndsWith("/"))
+            if (!_stuntmanRootPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
                 _stuntmanRootPath += "/";
 
             _isDebug = isDebug ?? IsDEBUGConstantSet;
