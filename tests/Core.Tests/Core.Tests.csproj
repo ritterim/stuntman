@@ -90,7 +90,7 @@
     </Compile>
     <Compile Include="StuntmanOptionsFactory.cs" />
     <Compile Include="StuntmanOptionsTests.cs" />
-    <Compile Include="StuntmanUsersTests.cs" />
+    <Compile Include="StuntmanUserTests.cs" />
     <Compile Include="UserPickerTests.cs" />
   </ItemGroup>
   <ItemGroup>
