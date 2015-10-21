@@ -1,4 +1,4 @@
-.stuntman-login-ui-container {
+﻿.stuntman-login-ui-container {
   text-align: center;
 }
 .stuntman-login-ui-container img {
@@ -11,6 +11,8 @@
 .stuntman-login-ui-container li a {
   padding: 20px;
 }
+
+/* Starting point for .stuntman-widget: http://codepen.io/andytran/pen/OPxVmq */
 .stuntman-widget {
   position: fixed;
   bottom: 0;
