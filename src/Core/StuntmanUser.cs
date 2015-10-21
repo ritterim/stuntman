@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Security.Claims;
 
 namespace RimDev.Stuntman.Core
@@ -23,7 +24,7 @@ namespace RimDev.Stuntman.Core
         /// Creates a new user with an auto-generated Id.
         /// </summary>
         public StuntmanUser(string name)
-            :this(
+            : this(
             id: Guid.NewGuid().ToString("D"),
             name: name)
         {
@@ -34,6 +35,8 @@ namespace RimDev.Stuntman.Core
         public string Id { get; private set; }
 
         public string Name { get; private set; }
+
+        public string IconColor { get; private set; }
 
         public ICollection<Claim> Claims { get; private set; }
 
@@ -56,6 +59,30 @@ namespace RimDev.Stuntman.Core
             if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentException("accessToken must not be empty or whitespace.");
 
             AccessToken = accessToken;
+
+            return this;
+        }
+
+        public StuntmanUser SetIconColor(string hexColor)
+        {
+            if (hexColor == null) throw new ArgumentNullException(nameof(hexColor));
+
+            if (!string.IsNullOrEmpty(hexColor) && !hexColor.StartsWith("#", StringComparison.OrdinalIgnoreCase))
+                throw new ArgumentException($"{hexColor} must start with #.");
+
+            IconColor = hexColor;
+
+            return this;
+        }
+
+        public StuntmanUser SetIconColor(StuntmanColor color)
+        {
+            // http://stackoverflow.com/a/1799401/941536
+            var memInfo = typeof(StuntmanColor).GetMember(color.ToString());
+            var attributes = memInfo[0].GetCustomAttributes(typeof(DescriptionAttribute), false);
+            var description = ((DescriptionAttribute)attributes[0]).Description;
+
+            SetIconColor(description);
 
             return this;
         }
