@@ -148,8 +148,8 @@ namespace RimDev.Stuntman.Core
     </head>
     <body>
         <div class=""stuntman-login-ui-container"">
-            <img src=""https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png"" />
-            <h3>Please select a user to continue authentication.</h3>
+            <h2><img src=""https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png"" alt=""Welcome to Stuntman"" /></h2>
+            <h2>Please select a user to continue authentication.</h2>
             <ul>
                 {usersHtml}
             </ul>
