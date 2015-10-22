@@ -79,7 +79,7 @@ namespace RimDev.Stuntman.Core.Tests
 
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
-                Assert.Equal(2, Regex.Matches(html, "<li.*>", RegexOptions.Multiline).Count);
+                Assert.Equal(2, Regex.Matches(html, "<li.*?>", RegexOptions.Multiline).Count);
             }
         }
 

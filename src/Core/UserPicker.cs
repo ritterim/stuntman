@@ -31,8 +31,6 @@ namespace RimDev.Stuntman.Core
             if (string.IsNullOrEmpty(currentUser))
                 currentUser = AnonymousUser;
 
-
-
             var items = _options.Users.Select(x => string.Format(@"
 <li class=""{0}"">
     <a href=""{1}?{2}={3}&{4}={5}"" class=""stuntman-item"">
@@ -57,9 +55,9 @@ namespace RimDev.Stuntman.Core
     </a>
 </li>");
 
-            return $@"
-<!-- Begin Stuntman -->
-<style>
+            return @"
+<!-- Begin Stuntman -->" + Environment.NewLine +
+$@"<style>
     {css}
 </style>
 <div class=""stuntman-widget"">
@@ -95,8 +93,8 @@ namespace RimDev.Stuntman.Core
             }}
         }}, false);
     }})();
-</script>
-<!-- End Stuntman -->";
+</script>".Replace(Environment.NewLine, null) + Environment.NewLine +
+"<!-- End Stuntman -->";
         }
     }
 }
