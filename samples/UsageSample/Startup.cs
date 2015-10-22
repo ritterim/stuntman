@@ -71,6 +71,16 @@ namespace RimDev.Stuntman.UsageSample
                         userName = "Anonymous / Unknown";
 
                     context.Response.ContentType = "text/html";
+
+                    context.Response.WriteAsync(
+@"<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset=""utf-8"">
+        <title>Stuntman - UsageSample</title>
+    </head>
+<body>");
+
                     context.Response.WriteAsync(
                         $"Hello, {userName}.");
 
@@ -79,6 +89,10 @@ namespace RimDev.Stuntman.UsageSample
                         context.Response.WriteAsync(
                             userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
                     }
+
+                    context.Response.WriteAsync(
+@"</body>
+</html>");
 
                     return Task.FromResult(true);
                 });
