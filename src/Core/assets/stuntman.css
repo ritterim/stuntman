@@ -56,6 +56,9 @@
           box-shadow: 2px 2px 2px #ccc;
 
 }
+.stuntman-widget * {
+  box-sizing: initial;
+}
 .stuntman-widget *:focus {
   outline: none;
 }
