@@ -44,6 +44,8 @@ namespace RimDev.Stuntman.Core
         /// </summary>
         public Action<OAuthValidateIdentityContext> AfterBearerValidateIdentity { get; set; }
 
+        public StuntmanAlignment UserPickerAlignment { get; private set; }
+
         public bool NonDebugUsageAllowed { get; private set; }
 
         public ICollection<StuntmanUser> Users { get; private set; }
@@ -81,6 +83,13 @@ namespace RimDev.Stuntman.Core
         public StuntmanOptions AllowNonDebugUsage()
         {
             NonDebugUsageAllowed = true;
+
+            return this;
+        }
+
+        public StuntmanOptions SetUserPickerAlignment(StuntmanAlignment alignment)
+        {
+            UserPickerAlignment = alignment;
 
             return this;
         }

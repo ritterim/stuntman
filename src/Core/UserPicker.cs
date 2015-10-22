@@ -62,7 +62,7 @@ namespace RimDev.Stuntman.Core
 <style>
     {css}
 </style>
-<div class=""stuntman-widget"">
+<div class=""stuntman-widget stuntman-alignment-{_options.UserPickerAlignment.ToString().ToLowerInvariant()}"">
     <div id=""stuntman-header-js"" class=""stuntman-header"">
         <h2 class=""stuntman-title"">
             <a href=""#"">

@@ -96,6 +96,17 @@ namespace RimDev.Stuntman.Core.Tests
             }
         }
 
+        public class UserPickerAlignmentProperty
+        {
+            [Fact]
+            public void DefaultsToStuntmanAlignmentLeft()
+            {
+                var sut = new StuntmanOptions();
+
+                Assert.Equal(StuntmanAlignment.Left, sut.UserPickerAlignment);
+            }
+        }
+
         public class AddUserMethod
         {
             [Fact]
@@ -145,6 +156,22 @@ namespace RimDev.Stuntman.Core.Tests
                 sut.AllowNonDebugUsage();
 
                 Assert.True(sut.NonDebugUsageAllowed);
+            }
+        }
+
+        public class SetUserPickerAlignmentMethod
+        {
+            [Theory,
+                InlineData(StuntmanAlignment.Left),
+                InlineData(StuntmanAlignment.Center)
+                InlineData(StuntmanAlignment.Right)]
+            public void SetsUserPickerAlignment(StuntmanAlignment alignment)
+            {
+                var sut = new StuntmanOptions();
+
+                sut.SetUserPickerAlignment(alignment);
+
+                Assert.Equal(alignment, sut.UserPickerAlignment);
             }
         }
 

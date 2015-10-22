@@ -196,3 +196,14 @@
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:hover:after {
   color: white;
 }
+
+.stuntman-alignment-left {
+}
+.stuntman-alignment-center {
+  left: 0;
+  right: 0;
+}
+.stuntman-alignment-right {
+  left: initial;
+  right: 5px;
+}
