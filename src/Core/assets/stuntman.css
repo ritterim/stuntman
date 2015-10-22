@@ -175,9 +175,11 @@
 }
 .stuntman-widget .stuntman-body ul li.stuntman-active .stuntman-item h3:after {
   color: limegreen;
-  content: "\2B24";
+  content: "\25CF";
+  font-size: 36px;
   position: absolute;
-  right: 20px;
+  top: -12px;
+  right: 15px;
 }
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:after {
   color: tomato;
