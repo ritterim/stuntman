@@ -56,6 +56,9 @@
           box-shadow: 2px 2px 2px #ccc;
 
 }
+.stuntman-widget *:focus {
+  outline: none;
+}
 .stuntman-widget .stuntman-header {
   cursor: pointer;
   background: #2E8EB3;
