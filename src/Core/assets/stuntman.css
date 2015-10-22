@@ -1,33 +1,83 @@
 ﻿.stuntman-login-ui-container {
+  font-family: sans-serif;
   text-align: center;
 }
+.stuntman-login-ui-container h2 {font-weight: normal;}
 .stuntman-login-ui-container img {
   height: 75px;
   max-width: 100%;
 }
+.stuntman-login-ui-container ul {
+  width: 400px;
+  max-width: 100%;
+  min-width: 100px;
+  margin: 0 auto;
+  padding: 0;
+  -webkit-padding-start: 0;
+}
 .stuntman-login-ui-container li {
   list-style-type: none;
+  margin: 5px 0;
 }
 .stuntman-login-ui-container li a {
-  padding: 20px;
+  color: white;
+  background: #2E8EB3;
+  border-right: 1px solid #17607d;
+  border-bottom: 1px solid #17607d;
+  display: block;
+  padding: 1em;
+  text-decoration: none;
+  -webkit-transition: all, 0.3s;
+     -moz-transition: all, 0.3s;
+       -o-transition: all, 0.3s;
+          transition: all, 0.3s;
+  -webkit-border-radius: 3px;
+     -moz-border-radius: 3px;
+       -o-border-radius: 3px;
+          border-radius: 3px;
+}
+.stuntman-login-ui-container li a:hover {
+  background: #17607d;
+  color: white;
 }
 
 /* Starting point for .stuntman-widget: http://codepen.io/andytran/pen/OPxVmq */
 .stuntman-widget {
   position: fixed;
   bottom: 0;
-  left: 0;
-  font-family: 'Roboto', sans-serif;
+  left: 5px;
+  font-family: sans-serif;
+  font-size: 14px;
   margin: 0 auto;
+  width: 150px;
+  -webkit-box-shadow: 2px 2px 2px #ccc;
+     -moz-box-shadow: 2px 2px 2px #ccc;
+       -o-box-shadow: 2px 2px 2px #ccc;
+          box-shadow: 2px 2px 2px #ccc;
+
 }
 .stuntman-widget .stuntman-header {
-  border-top-right-radius: 10px;
   cursor: pointer;
-  background: #224058;
-  padding: 0 15px 0 0;
+  background: #2E8EB3;
+  padding: 10px;
   color: #f6f6f6;
-  font-size: 12px;
   opacity: .9;
+  -webkit-border-top-left-radius: 3px;
+     -moz-border-top-left-radius: 3px;
+       -o-border-top-left-radius: 3px;
+          border-top-left-radius: 3px;
+  -webkit-border-top-right-radius: 3px;
+     -moz-border-top-right-radius: 3px;
+       -o-border-top-right-radius: 3px;
+          border-top-right-radius: 3px;
+  -webkit-transition: all, 0.3s;
+     -moz-transition: all, 0.3s;
+       -o-transition: all, 0.3s;
+          transition: all, 0.3s;
+
+}
+.stuntman-widget .stuntman-header:hover {
+  background: #17607d;
 }
 .stuntman-widget .stuntman-header:before,
 .stuntman-widget .stuntman-header:after {
@@ -35,25 +85,24 @@
   content: '';
   clear: both;
 }
+.stuntman-widget .stuntman-header img {
+  height: 30px;
+  width: 30px;
+  padding-right: 7px;
+  vertical-align: middle;
+}
+
 .stuntman-widget .stuntman-header h2,
 .stuntman-widget .stuntman-body ul li .stuntman-item h3 {
   margin: 0;
   padding: 0;
-  font-size: 12px;
+  font-size: 14px;
   float: left;
 }
 .stuntman-widget .stuntman-header h2 a {
-  color: #ffffff;
+  color: white;
   font-weight: bold;
   text-decoration: none;
-}
-.stuntman-widget .stuntman-header:hover {
-  opacity: 1;
-  -webkit-transition: opacity 0.3s linear 0s;
-  -moz-transition: opacity 0.3s linear 0s;
-  -ms-transition: opacity 0.3s linear 0s;
-  -o-transition: opacity 0.3s linear 0s;
-  transition: opacity 0.3s linear 0s;
 }
 .stuntman-widget .stuntman-header .stuntman-helmet {
   padding-right: 10px;
@@ -74,7 +123,6 @@
   list-style: none;
   padding: 0;
   margin: 0;
-  border-top: 1px solid #e9e9e9;
 }
 .stuntman-widget .stuntman-body ul li {
   position: relative;
@@ -89,15 +137,29 @@
   content: '';
   clear: both;
 }
-.stuntman-widget .stuntman-body ul li:nth-child(2n) {
-  background: #e9e9e9;
+.stuntman-widget .stuntman-body ul li:nth-child(even) {
+  background: moccasin;
 }
-.stuntman-widget .stuntman-body ul li:hover {
-  background: #c4d8e8;
+.stuntman-widget .stuntman-body ul li:nth-child(odd) {
+  background: ivory;
+}
+.stuntman-widget .stuntman-body ul li a:hover {
+  background: tomato;
+  color: white;
+}
+.stuntman-widget .stuntman-body ul li.stuntman-logout a:hover {
+  background: firebrick;
+  color: white;
 }
 .stuntman-widget .stuntman-body ul li a {
+  color: #17607d;
   padding: 10px;
   width: 100%;
+  -webkit-transition: all, 0.3s;
+     -moz-transition: all, 0.3s;
+       -o-transition: all, 0.3s;
+          transition: all, 0.3s;
+
 }
 .stuntman-widget .stuntman-body ul li .stuntman-item {
   display: inline-block;
@@ -108,5 +170,21 @@
   display: block;
   font-weight: normal;
   margin-bottom: 5px;
-  color: #808080;
+  position: relative;
+  width: 100%;
+}
+.stuntman-widget .stuntman-body ul li.stuntman-active .stuntman-item h3:after {
+  color: limegreen;
+  content: "\2B24";
+  position: absolute;
+  right: 20px;
+}
+.stuntman-widget .stuntman-body ul li .stuntman-logout h3:after {
+  color: tomato;
+  content: "\2715";
+  position: absolute;
+  right: 23px;
+}
+.stuntman-widget .stuntman-body ul li .stuntman-logout h3:hover:after {
+  color: white;
 }
