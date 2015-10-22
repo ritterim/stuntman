@@ -36,10 +36,7 @@
         </footer>
         @if (HttpContext.Current.IsDebuggingEnabled)
         {
-            var stuntmanOptions = new StuntmanOptions()
-                .AddUser(new StuntmanUser("user-1", "User 1"));
-
-            @Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
+            @Html.Raw(new UserPicker(RimDev.Stuntman.UsageSampleMvc.Startup.StuntmanOptions).GetHtml(User, Request.RawUrl))
         }
     </div>
 

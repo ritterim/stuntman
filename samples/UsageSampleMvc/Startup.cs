@@ -5,16 +5,18 @@ namespace RimDev.Stuntman.UsageSampleMvc
 {
     public class Startup
     {
+        public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
         public void Configuration(IAppBuilder app)
         {
-            var options = new StuntmanOptions()
+            StuntmanOptions
                 .AddUser(new StuntmanUser("user-1", "User 1")
                     .AddClaim("given_name", "John")
                     .AddClaim("family_name", "Doe"));
 
             if (System.Web.HttpContext.Current.IsDebuggingEnabled)
             {
-                app.UseStuntman(options);
+                app.UseStuntman(StuntmanOptions);
             }
         }
     }
