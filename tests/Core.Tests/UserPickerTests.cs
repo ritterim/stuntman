@@ -13,7 +13,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ThrowsForNullCurrentPrincipal()
             {
-                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
+                var options = new StuntmanOptions();
 
                 Assert.Throws<ArgumentNullException>(
                     () => new UserPicker(options)
@@ -23,7 +23,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ThrowsForNullReturnUrl()
             {
-                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
+                var options = new StuntmanOptions();
 
                 Assert.Throws<ArgumentNullException>(
                     () => new UserPicker(options)
@@ -33,7 +33,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsExpectedItemFormat()
             {
-                var options = StuntmanOptionsFactory.GetDefaultTestOptions()
+                var options = new StuntmanOptions()
                     .AddUser(new StuntmanUser("user-1", "User 1"));
 
                 var returnUrl = "https://return-url";
@@ -48,7 +48,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsUsers()
             {
-                var options = StuntmanOptionsFactory.GetDefaultTestOptions()
+                var options = new StuntmanOptions()
                     .AddUser(new StuntmanUser("user-1", "User 1"))
                     .AddUser(new StuntmanUser("user-2", "User 2"));
 
@@ -64,7 +64,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsLogout()
             {
-                var options = StuntmanOptionsFactory.GetDefaultTestOptions();
+                var options = new StuntmanOptions();
 
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
@@ -74,7 +74,7 @@ namespace RimDev.Stuntman.Core.Tests
             [Fact]
             public void ReturnsExpectedNumberOfTotalItems()
             {
-                var options = StuntmanOptionsFactory.GetDefaultTestOptions()
+                var options = new StuntmanOptions()
                     .AddUser(new StuntmanUser("user-1", "User 1"));
 
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
