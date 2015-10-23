@@ -88,7 +88,6 @@
     <Compile Include="..\..\common\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="StuntmanOptionsFactory.cs" />
     <Compile Include="StuntmanOptionsTests.cs" />
     <Compile Include="StuntmanUserTests.cs" />
     <Compile Include="UserPickerTests.cs" />
