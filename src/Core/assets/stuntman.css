@@ -41,7 +41,6 @@
   color: white;
 }
 
-/* Starting point for .stuntman-widget: http://codepen.io/andytran/pen/OPxVmq */
 .stuntman-widget {
   position: fixed;
   bottom: 0;
@@ -136,6 +135,7 @@
   display: block;
   width: 100%;
   box-sizing: border-box;
+  padding: 10px;
 }
 .stuntman-widget .stuntman-body ul li:before,
 .stuntman-widget .stuntman-body ul li:after {
@@ -149,8 +149,10 @@
 .stuntman-widget .stuntman-body ul li:nth-child(odd) {
   background: ivory;
 }
-.stuntman-widget .stuntman-body ul li a:hover {
+.stuntman-widget .stuntman-body ul li:hover {
   background: tomato;
+}
+.stuntman-widget .stuntman-body ul li a:hover {
   color: white;
 }
 .stuntman-widget .stuntman-body ul li.stuntman-logout a:hover {
@@ -159,7 +161,6 @@
 }
 .stuntman-widget .stuntman-body ul li a {
   color: #17607d;
-  padding: 10px;
   width: 100%;
   -webkit-transition: all, 0.3s;
      -moz-transition: all, 0.3s;
@@ -182,16 +183,18 @@
 .stuntman-widget .stuntman-body ul li.stuntman-active .stuntman-item h3:after {
   color: limegreen;
   content: "\25CF";
-  font-size: 36px;
   position: absolute;
-  top: -12px;
-  right: 15px;
+  font-size: 200%;
+  line-height: .5em;
+  top: 50%;
+  transform: translateY(-50%);
+  right: -23;
 }
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:after {
   color: tomato;
   content: "\2715";
   position: absolute;
-  right: 23px;
+  right: -20;
 }
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:hover:after {
   color: white;
