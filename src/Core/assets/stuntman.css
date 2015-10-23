@@ -188,13 +188,13 @@
   line-height: .5em;
   top: 50%;
   transform: translateY(-50%);
-  right: -23;
+  right: -23px;
 }
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:after {
   color: tomato;
   content: "\2715";
   position: absolute;
-  right: -20;
+  right: -20px;
 }
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:hover:after {
   color: white;
