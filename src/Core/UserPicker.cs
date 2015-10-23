@@ -22,8 +22,6 @@ namespace RimDev.Stuntman.Core
             if (currentPrincipal == null) throw new ArgumentNullException(nameof(currentPrincipal));
             if (returnUrl == null) throw new ArgumentNullException(nameof(returnUrl));
 
-            _options.VerifyUsageIsPermitted();
-
             var css = Resources.GetCss();
 
             var currentUser = currentPrincipal.Identity.Name;

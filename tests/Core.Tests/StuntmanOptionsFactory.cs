@@ -4,8 +4,7 @@
     {
         public static StuntmanOptions GetDefaultTestOptions()
         {
-            var options = new StuntmanOptions()
-                .AllowNonDebugUsage();
+            var options = new StuntmanOptions();
 
             return options;
         }
