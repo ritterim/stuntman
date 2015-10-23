@@ -152,7 +152,8 @@
 .stuntman-widget .stuntman-body ul li:hover {
   background: tomato;
 }
-.stuntman-widget .stuntman-body ul li a:hover {
+.stuntman-widget .stuntman-body ul li a:hover,
+.stuntman-widget .stuntman-body ul li:hover a {
   color: white;
 }
 .stuntman-widget .stuntman-body ul li.stuntman-logout a:hover {
@@ -180,7 +181,7 @@
   position: relative;
   width: 100%;
 }
-.stuntman-widget .stuntman-body ul li.stuntman-active .stuntman-item h3:after {
+.stuntman-widget .stuntman-body ul li.stuntman-active:after {
   color: limegreen;
   content: "\25CF";
   position: absolute;
@@ -188,13 +189,13 @@
   line-height: .5em;
   top: 50%;
   transform: translateY(-50%);
-  right: -23px;
+  right: 7px;
 }
-.stuntman-widget .stuntman-body ul li .stuntman-logout h3:after {
+.stuntman-widget .stuntman-body ul li .stuntman-logout:after {
   color: tomato;
   content: "\2715";
   position: absolute;
-  right: -20px;
+  right: 10px;
 }
 .stuntman-widget .stuntman-body ul li .stuntman-logout h3:hover:after {
   color: white;
