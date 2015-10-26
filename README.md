@@ -7,7 +7,7 @@
 
 **Stuntman** is a library for impersonating users during development leveraging .NET Claims Identity. Used primarily in web environments like ASP.NET MVC, ASP.NET Web Forms, and OWIN applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.
 
-![Stuntman demo](https://cloud.githubusercontent.com/assets/1012917/10677260/3e313db0-78d9-11e5-8d3f-f84ef25665a1.gif)
+![Stuntman demo](https://cloud.githubusercontent.com/assets/1012917/10737939/5154bbdc-7beb-11e5-87dd-979c4e8cb3c0.gif)
 
 ## Installation
 
