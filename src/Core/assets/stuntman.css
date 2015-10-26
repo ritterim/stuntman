@@ -67,6 +67,7 @@
   padding: 10px;
   color: #f6f6f6;
   opacity: .9;
+  position: relative;
   -webkit-border-top-left-radius: 3px;
      -moz-border-top-left-radius: 3px;
        -o-border-top-left-radius: 3px;
@@ -94,7 +95,12 @@
   height: 30px;
   width: 30px;
   padding-right: 7px;
-  vertical-align: middle;
+  position: absolute;
+  font-size: 200%;
+  line-height: .5em;
+  top: 50%;
+  transform: translateY(-50%);
+  left: 7px;
 }
 
 .stuntman-widget .stuntman-header h2,
@@ -106,8 +112,10 @@
 }
 .stuntman-widget .stuntman-header h2 a {
   color: white;
+  display: block;
   font-weight: bold;
   text-decoration: none;
+  margin-left: 35px;
 }
 .stuntman-widget .stuntman-header .stuntman-helmet {
   padding-right: 10px;
