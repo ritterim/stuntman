@@ -13,7 +13,7 @@ namespace RimDev.Stuntman.Core.Tests
             {
                 var sut = new StuntmanOptions();
 
-                Assert.StartsWith(StuntmanOptions.DefaultStuntmanRootPath, sut.SignInUri);
+                Assert.StartsWith(Constants.StuntmanOptions.DefaultStuntmanRootPath, sut.SignInUri);
             }
 
             [Fact]
@@ -37,7 +37,7 @@ namespace RimDev.Stuntman.Core.Tests
             {
                 var sut = new StuntmanOptions();
 
-                Assert.EndsWith(StuntmanOptions.SignInEndpoint, sut.SignInUri);
+                Assert.EndsWith(Constants.StuntmanOptions.SignInEndpoint, sut.SignInUri);
             }
         }
 
@@ -48,7 +48,7 @@ namespace RimDev.Stuntman.Core.Tests
             {
                 var sut = new StuntmanOptions();
 
-                Assert.StartsWith(StuntmanOptions.DefaultStuntmanRootPath, sut.SignOutUri);
+                Assert.StartsWith(Constants.StuntmanOptions.DefaultStuntmanRootPath, sut.SignOutUri);
             }
 
             [Fact]
@@ -72,7 +72,7 @@ namespace RimDev.Stuntman.Core.Tests
             {
                 var sut = new StuntmanOptions();
 
-                Assert.EndsWith(StuntmanOptions.SignOutEndpoint, sut.SignOutUri);
+                Assert.EndsWith(Constants.StuntmanOptions.SignOutEndpoint, sut.SignOutUri);
             }
         }
 

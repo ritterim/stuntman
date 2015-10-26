@@ -39,16 +39,16 @@ namespace RimDev.Stuntman.Core
                     ? "stuntman-active"
                     : string.Empty,
                 _options.SignInUri,
-                StuntmanOptions.OverrideQueryStringKey,
+                Constants.StuntmanOptions.OverrideQueryStringKey,
                 WebUtility.UrlEncode(x.Id),
-                StuntmanOptions.ReturnUrlQueryStringKey,
+                Constants.StuntmanOptions.ReturnUrlQueryStringKey,
                 WebUtility.UrlEncode(returnUrl),
                 x.Name))
                 .ToList();
 
             items.Add($@"
 <li>
-    <a href=""{_options.SignOutUri}?{StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(returnUrl)}"" class=""stuntman-item stuntman-logout"">
+    <a href=""{_options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(returnUrl)}"" class=""stuntman-item stuntman-logout"">
         <h3>Logout</h3>
     </a>
 </li>");
