@@ -50,7 +50,11 @@ public class Startup
         // - StuntmanAlignment.Right
         StuntmanOptions.SetUserPickerAlignment(StuntmanAlignment.Right);
 
-        app.UseStuntman(StuntmanOptions);
+        // Only show when debug is true in Web.config.
+        if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+        {
+            app.UseStuntman(StuntmanOptions);
+        }
     }
 }
 ```
@@ -60,7 +64,11 @@ public class Startup
 Here's how to use Stuntman in a **Razor** view to show the user picker *(assuming the application `Startup` class has `StuntmanOptions` that can be used)*.
 
 ```
-@Html.Raw(new UserPicker(YourApplicationNamespace.Startup.StuntmanOptions).GetHtml(User, Request.RawUrl));
+@* Only show when debug is true in Web.config. *@
+@if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+{
+    @Html.Raw(new UserPicker(YourApplicationNamespace.Startup.StuntmanOptions).GetHtml(User, Request.RawUrl));
+}
 ```
 
 ### Bearer-token
