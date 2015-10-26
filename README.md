@@ -27,43 +27,40 @@ Stuntman uses OWIN and is registered as middleware, and allows for programmatica
 // OWIN Startup class
 public class Startup
 {
+    public readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
     public void Configuration(IAppBuilder app)
     {
-      var options = new StuntmanOptions()
-          .AddUser(new StuntmanUser("user-1", "User 1")
-              .AddClaim("given_name", "John")
-              .AddClaim("family_name", "Doe"));
+        StuntmanOptions
+            .AddUser(new StuntmanUser("user-1", "User 1")
+                .AddClaim("given_name", "John")
+                .AddClaim("family_name", "Doe"));
 
         // Optionally assign a user an access token.
-        options
-          .AddUser(new StuntmanUser("user-2", "User 2")
-              .SetAccessToken("123")
-              .AddClaim("given_name", "Mary")
-              .AddClaim("family_name", "Smith"));
+        StuntmanOptions
+            .AddUser(new StuntmanUser("user-2", "User 2")
+                .SetAccessToken("123")
+                .AddClaim("given_name", "Mary")
+                .AddClaim("family_name", "Smith"));
 
         // Optional alignment of user picker
         // Supported options are:
         // - StuntmanAlignment.Left (default)
         // - StuntmanAlignment.Center
         // - StuntmanAlignment.Right
-        options.SetUserPickerAlignment(StuntmanAlignment.Right);
+        StuntmanOptions.SetUserPickerAlignment(StuntmanAlignment.Right);
 
-        app.UseStuntman(options);
+        app.UseStuntman(StuntmanOptions);
     }
 }
 ```
 
 ### View
 
-The below example shows how to use Stuntman in a **Razor** view to get the user picker during development.
+Here's how to use Stuntman in a **Razor** view to show the user picker *(assuming the application `Startup` class has `StuntmanOptions` that can be used)*.
 
 ```
-@{
-    var stuntmanOptions = new StuntmanOptions()
-        .AddUser(new StuntmanUser("user-1", "User 1"));
-}
-
-@Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
+@Html.Raw(new UserPicker(YourApplicationNamespace.Startup.StuntmanOptions).GetHtml(User, Request.RawUrl));
 ```
 
 ### Bearer-token
