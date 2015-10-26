@@ -15,7 +15,7 @@ namespace RimDev.Stuntman.Core
 
         private readonly string _stuntmanRootPath;
 
-        public StuntmanOptions(string stuntmanRootPath = DefaultStuntmanRootPath, Func<bool> isDebug = null)
+        public StuntmanOptions(string stuntmanRootPath = DefaultStuntmanRootPath)
         {
             Users = new List<StuntmanUser>();
 
