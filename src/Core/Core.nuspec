@@ -2,6 +2,7 @@
 <package >
   <metadata>
     <id>RimDev.Stuntman</id>
+    <title>Stuntman</title>
     <version>0.0.0</version>
     <authors>Ritter Insurance Marketing</authors>
     <licenseUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE</licenseUrl>
