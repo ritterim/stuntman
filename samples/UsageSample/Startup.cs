@@ -6,9 +6,11 @@ namespace RimDev.Stuntman.UsageSample
 {
     public class Startup
     {
+        public readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
         public void Configuration(IAppBuilder app)
         {
-            var options = new StuntmanOptions()
+            StuntmanOptions
                 .AddUser(new StuntmanUser("user-1", "User 1")
                     .SetAccessToken("user-1-token")
                     .AddClaim("given_name", "John")
@@ -22,10 +24,10 @@ namespace RimDev.Stuntman.UsageSample
 
             if (System.Web.HttpContext.Current.IsDebuggingEnabled)
             {
-                app.UseStuntman(options);
+                app.UseStuntman(StuntmanOptions);
             }
 
-            var userPicker = new UserPicker(options);
+            var userPicker = new UserPicker(StuntmanOptions);
 
             app.Map("/secure", secure =>
             {
