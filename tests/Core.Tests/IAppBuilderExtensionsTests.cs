@@ -56,7 +56,7 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = $"{options.SignInUri}?{StuntmanOptions.OverrideQueryStringKey}=user-1";
+                    var url = $"{options.SignInUri}?{Constants.StuntmanOptions.OverrideQueryStringKey}=user-1";
 
                     var response = await server.HttpClient.GetAsync(url);
 
@@ -75,13 +75,13 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = $"{options.SignInUri}?{StuntmanOptions.OverrideQueryStringKey}=user-1";
+                    var url = $"{options.SignInUri}?{Constants.StuntmanOptions.OverrideQueryStringKey}=user-1";
 
                     var response = await server.HttpClient.GetAsync(url);
                     var setCookie = response.Headers.GetValues("Set-Cookie").SingleOrDefault();
 
                     Assert.StartsWith(
-                        $".AspNet.{IAppBuilderExtensions.StuntmanAuthenticationType}=",
+                        $".AspNet.{Constants.StuntmanAuthenticationType}=",
                         setCookie);
                 }
             }
@@ -213,7 +213,7 @@ namespace RimDev.Stuntman.Core.Tests
                     var setCookie = response.Headers.GetValues("Set-Cookie").SingleOrDefault();
 
                     Assert.Equal(
-                        $".AspNet.{IAppBuilderExtensions.StuntmanAuthenticationType}=; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT",
+                        $".AspNet.{Constants.StuntmanAuthenticationType}=; path=/; expires=Thu, 01-Jan-1970 00:00:00 GMT",
                         setCookie);
                 }
             }
@@ -228,7 +228,7 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = $"{options.SignOutUri}?{StuntmanOptions.ReturnUrlQueryStringKey}=https://redirect-uri/";
+                    var url = $"{options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://redirect-uri/";
 
                     var response = await server.HttpClient.GetAsync(url);
 

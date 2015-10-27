@@ -15,23 +15,23 @@ namespace RimDev.Stuntman.Core
 {
     public static class IAppBuilderExtensions
     {
-        public const string StuntmanAuthenticationType = "StuntmanAuthentication";
+
 
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
             {
-                AuthenticationType = StuntmanAuthenticationType,
+                AuthenticationType = Constants.StuntmanAuthenticationType,
                 Provider = new StuntmanOAuthBearerProvider(options),
                 AccessTokenFormat = new StuntmanOAuthAccessTokenFormat()
             });
 
             app.UseCookieAuthentication(new CookieAuthenticationOptions
             {
-                AuthenticationType = StuntmanAuthenticationType,
+                AuthenticationType = Constants.StuntmanAuthenticationType,
                 LoginPath = new PathString(options.SignInUri),
                 LogoutPath = new PathString(options.SignOutUri),
-                ReturnUrlParameter = StuntmanOptions.ReturnUrlQueryStringKey,
+                ReturnUrlParameter = Constants.StuntmanOptions.ReturnUrlQueryStringKey,
             });
 
             app.Map(options.SignInUri, signin =>
@@ -40,7 +40,7 @@ namespace RimDev.Stuntman.Core
                 {
                     var claims = new List<Claim>();
 
-                    var overrideUserId = context.Request.Query[StuntmanOptions.OverrideQueryStringKey];
+                    var overrideUserId = context.Request.Query[Constants.StuntmanOptions.OverrideQueryStringKey];
 
                     if (string.IsNullOrWhiteSpace(overrideUserId))
                     {
@@ -66,7 +66,7 @@ namespace RimDev.Stuntman.Core
                         claims.Add(new Claim(ClaimTypes.Name, user.Name));
                         claims.AddRange(user.Claims);
 
-                        var identity = new ClaimsIdentity(claims, StuntmanAuthenticationType);
+                        var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
 
                         var authManager = context.Authentication;
 
@@ -84,7 +84,7 @@ namespace RimDev.Stuntman.Core
                 signout.Use((context, next) =>
                 {
                     var authManager = context.Authentication;
-                    authManager.SignOut(StuntmanAuthenticationType);
+                    authManager.SignOut(Constants.StuntmanAuthenticationType);
 
                     return next.Invoke();
                 });
@@ -101,7 +101,7 @@ namespace RimDev.Stuntman.Core
 
             foreach (var user in options.Users)
             {
-                var href = $"{options.SignInUri}?OverrideUserId={user.Id}&{StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(context.Request.Query[StuntmanOptions.ReturnUrlQueryStringKey])}";
+                var href = $"{options.SignInUri}?OverrideUserId={user.Id}&{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey])}";
 
                 usersHtml.Append($@"<li><a href=""{href}"">{user.Name}</a></li>");
             }
@@ -115,7 +115,7 @@ namespace RimDev.Stuntman.Core
             {
                 context.Response.Headers.Add("Location", new[]
                 {
-                    context.Request.Query[StuntmanOptions.ReturnUrlQueryStringKey]
+                    context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey]
                 });
 
                 context.Response.StatusCode = 302;
@@ -221,7 +221,7 @@ namespace RimDev.Stuntman.Core
                     claims.Add(new Claim(ClaimTypes.Name, user.Name));
                     claims.AddRange(user.Claims);
 
-                    var identity = new ClaimsIdentity(claims, StuntmanAuthenticationType);
+                    var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
 
                     context.Validated(identity);
 

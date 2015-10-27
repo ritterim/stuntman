@@ -7,15 +7,9 @@ namespace RimDev.Stuntman.Core
 {
     public class StuntmanOptions
     {
-        public const string DefaultStuntmanRootPath = "/stuntman/";
-        public const string SignInEndpoint = "sign-in";
-        public const string SignOutEndpoint = "sign-out";
-        public const string OverrideQueryStringKey = "OverrideUserId";
-        public const string ReturnUrlQueryStringKey = "ReturnUrl";
-
         private readonly string _stuntmanRootPath;
 
-        public StuntmanOptions(string stuntmanRootPath = DefaultStuntmanRootPath)
+        public StuntmanOptions(string stuntmanRootPath = Constants.StuntmanOptions.DefaultStuntmanRootPath)
         {
             Users = new List<StuntmanUser>();
 
@@ -38,12 +32,12 @@ namespace RimDev.Stuntman.Core
 
         public string SignInUri
         {
-            get { return _stuntmanRootPath + SignInEndpoint; }
+            get { return _stuntmanRootPath + Constants.StuntmanOptions.SignInEndpoint; }
         }
 
         public string SignOutUri
         {
-            get { return _stuntmanRootPath + SignOutEndpoint; }
+            get { return _stuntmanRootPath + Constants.StuntmanOptions.SignOutEndpoint; }
         }
 
         public StuntmanOptions AddUser(StuntmanUser user)
