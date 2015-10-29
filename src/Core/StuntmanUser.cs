@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Security.Claims;
 
@@ -6,6 +7,7 @@ namespace RimDev.Stuntman.Core
 {
     public class StuntmanUser
     {
+        [JsonConstructor]
         public StuntmanUser(string id, string name)
         {
             if (id == null) throw new ArgumentNullException(nameof(id));

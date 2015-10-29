@@ -1,5 +1,8 @@
 ﻿using Owin;
 using RimDev.Stuntman.Core;
+using System;
+using System.IO;
+using System.Reflection;
 using System.Threading.Tasks;
 
 namespace RimDev.Stuntman.UsageSample
@@ -20,7 +23,9 @@ namespace RimDev.Stuntman.UsageSample
                     .AddClaim("family_name", "Doe"))
                 .AddUser(new StuntmanUser("user-3", "User 3")
                     .AddClaim("given_name", "Sam")
-                    .AddClaim("family_name", "Smith"));
+                    .AddClaim("family_name", "Smith"))
+                .AddUsersFromJson("https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample/test-users-1.json") // Tried this using OWIN locally, didn't get it working.
+                .AddUsersFromJson(Path.Combine(GetBinPath(), "test-users-2.json"));
 
             if (System.Web.HttpContext.Current.IsDebuggingEnabled)
             {
@@ -118,6 +123,21 @@ namespace RimDev.Stuntman.UsageSample
                     return Task.Delay(0);
                 }
             });
+        }
+
+        private static string GetBinPath()
+        {
+            const string FilePrefix = @"file:\";
+
+            // http://stackoverflow.com/a/3461871/941536
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+
+            if (!path.StartsWith(FilePrefix, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new ApplicationException($"Expected path to begin with {FilePrefix}.");
+            }
+
+            return path.Substring(FilePrefix.Length);
         }
     }
 }

@@ -69,7 +69,9 @@
     </Compile>
     <Compile Include="Resources.cs" />
     <Compile Include="StuntmanAlignment.cs" />
+    <Compile Include="StuntmanClaimConverter.cs" />
     <Compile Include="StuntmanOptions.cs" />
+    <Compile Include="StuntmanOptionsRetriever.cs" />
     <Compile Include="StuntmanUser.cs" />
     <Compile Include="UserPicker.cs" />
   </ItemGroup>
