@@ -97,6 +97,12 @@ HTTP/1.1 403 options provided does not include the requested 'not-real' user.
 HTTP/1.1 400 Authorization header is not in correct format.
 ```
 
+## Contributing
+
+Have an idea? Let's talk about it in an issue!
+
+Find a bug? Open an issue or submit a pull request!
+
 ## License
 
 MIT License
