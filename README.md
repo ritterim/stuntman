@@ -1,6 +1,6 @@
 ![Stuntman logo](https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png)
 
-> "Sometimes, you need a stand-in."
+> "Sometimes you need a Stuntman before you send in real, unsuspecting users!"
 
 ![NuGet Version](https://img.shields.io/nuget/v/RimDev.Stuntman.svg)
 ![NuGet Download Count](https://img.shields.io/nuget/dt/RimDev.Stuntman.svg)
