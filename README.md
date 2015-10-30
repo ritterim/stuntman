@@ -14,7 +14,7 @@
 Install the [RimDev.Stuntman](https://www.nuget.org/packages/RimDev.Stuntman/) NuGet package.
 
 ```
-Install-Package RimDev.Stuntman
+PM> Install-Package RimDev.Stuntman
 ```
 
 ## Usage
