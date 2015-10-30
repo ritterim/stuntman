@@ -1,6 +1,6 @@
 ![Stuntman logo](https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png)
 
-> "Sometimes, you need a stand-in."
+> "Sometimes you need a Stuntman before you send in real, unsuspecting users!"
 
 ![NuGet Version](https://img.shields.io/nuget/v/RimDev.Stuntman.svg)
 ![NuGet Download Count](https://img.shields.io/nuget/dt/RimDev.Stuntman.svg)
@@ -14,7 +14,7 @@
 Install the [RimDev.Stuntman](https://www.nuget.org/packages/RimDev.Stuntman/) NuGet package.
 
 ```
-Install-Package RimDev.Stuntman
+PM> Install-Package RimDev.Stuntman
 ```
 
 ## Usage
@@ -96,6 +96,12 @@ HTTP/1.1 403 options provided does not include the requested 'not-real' user.
 > curl -i -H "Authorization: Bearer abc 123" http://localhost:54917/secure
 HTTP/1.1 400 Authorization header is not in correct format.
 ```
+
+## Contributing
+
+Have an idea? Let's talk about it in an issue!
+
+Find a bug? Open an issue or submit a pull request!
 
 ## License
 
