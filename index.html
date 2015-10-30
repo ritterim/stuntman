@@ -41,21 +41,39 @@ layout: default
   // OWIN Startup class
   public class Startup
   {
+      public readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
       public void Configuration(IAppBuilder app)
       {
-          var options = new StuntmanOptions()
+          StuntmanOptions
               .AddUser(new StuntmanUser("user-1", "User 1")
                   .AddClaim("given_name", "John")
                   .AddClaim("family_name", "Doe"));
 
           // Optionally assign a user an access token.
-          options
+          StuntmanOptions
               .AddUser(new StuntmanUser("user-2", "User 2")
                   .SetAccessToken("123")
                   .AddClaim("given_name", "Mary")
                   .AddClaim("family_name", "Smith"));
 
-          app.UseStuntman(options);
+          // You can also add users using HTTP/HTTPS or the file system!
+          StuntmanOptions
+              .AddUsersFromJson("https://example.com/web-test-users.json")
+              .AddUsersFromJson(@"C:\local-test-users.json");
+
+          // Optional alignment of user picker
+          // Supported options are:
+          // - StuntmanAlignment.Left (default)
+          // - StuntmanAlignment.Center
+          // - StuntmanAlignment.Right
+          StuntmanOptions.SetUserPickerAlignment(StuntmanAlignment.Right);
+
+          // Only show when debug is true in Web.config.
+          if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+          {
+              app.UseStuntman(StuntmanOptions);
+          }
       }
   }
 </pre>
@@ -63,7 +81,7 @@ layout: default
 
       <div class="block">
         <h4>View</h4>
-        <p>The below example shows how to use Stuntman in a Razor view to get the user picker during development.</p>
+        <p>Here's how to use Stuntman in a Razor view to show the user picker <em>(assuming the application Startup class has StuntmanOptions that can be used)</em>.</p>
 <pre class="prettyprint lang-vb">
   @using RimDev.Stuntman.Core;
   @{
