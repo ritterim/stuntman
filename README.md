@@ -43,6 +43,11 @@ public class Startup
                 .AddClaim("given_name", "Mary")
                 .AddClaim("family_name", "Smith"));
 
+        // You can also add users using HTTP/HTTPS or the file system!
+        StuntmanOptions
+            .AddUsersFromJson("https://example.com/web-test-users.json")
+            .AddUsersFromJson(@"C:\local-test-users.json");
+
         // Optional alignment of user picker
         // Supported options are:
         // - StuntmanAlignment.Left (default)

@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -8,12 +9,16 @@ namespace RimDev.Stuntman.Core
     public class StuntmanOptions
     {
         private readonly string _stuntmanRootPath;
+        private readonly StuntmanOptionsRetriever _stuntmanOptionsRetriever;
 
-        public StuntmanOptions(string stuntmanRootPath = Constants.StuntmanOptions.DefaultStuntmanRootPath)
+        public StuntmanOptions(
+            string stuntmanRootPath = Constants.StuntmanOptions.DefaultStuntmanRootPath,
+            StuntmanOptionsRetriever stuntmanOptionsRetriever = null)
         {
             Users = new List<StuntmanUser>();
 
             _stuntmanRootPath = stuntmanRootPath;
+            _stuntmanOptionsRetriever = stuntmanOptionsRetriever ?? new StuntmanOptionsRetriever();
 
             if (!_stuntmanRootPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
                 _stuntmanRootPath += "/";
@@ -51,6 +56,31 @@ namespace RimDev.Stuntman.Core
             else
             {
                 Users.Add(user);
+            }
+
+            return this;
+        }
+
+        /// <summary>
+        /// Add users from JSON at the file system path or URL specified.
+        /// </summary>
+        public StuntmanOptions AddUsersFromJson(string pathOrUrl)
+        {
+            if (pathOrUrl == null) throw new ArgumentNullException(nameof(pathOrUrl));
+
+            var uri = new Uri(pathOrUrl);
+
+            var json = uri.IsFile
+                ? _stuntmanOptionsRetriever.GetStringFromLocalFile(uri)
+                : _stuntmanOptionsRetriever.GetStringUsingWebClient(uri);
+
+            var users = JsonConvert.DeserializeObject<IEnumerable<StuntmanUser>>(
+                json,
+                new StuntmanClaimConverter());
+
+            foreach (var user in users)
+            {
+                AddUser(user);
             }
 
             return this;
