@@ -52,7 +52,7 @@ namespace RimDev.Stuntman.UsageSample
                     if (System.Web.HttpContext.Current.IsDebuggingEnabled)
                     {
                         context.Response.WriteAsync(
-                            userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                            userPicker.GetHtml(context.Request.User));
                     }
 
                     return Task.FromResult(true);

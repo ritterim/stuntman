@@ -17,11 +17,23 @@ namespace RimDev.Stuntman.Core
             _options = options;
         }
 
+        public string GetHtml(IPrincipal currentPrincipal)
+        {
+            if (currentPrincipal == null) throw new ArgumentNullException(nameof(currentPrincipal));
+
+            return GetHtmlInternal(currentPrincipal, null);
+        }
+
         public string GetHtml(IPrincipal currentPrincipal, string returnUrl)
         {
             if (currentPrincipal == null) throw new ArgumentNullException(nameof(currentPrincipal));
             if (returnUrl == null) throw new ArgumentNullException(nameof(returnUrl));
 
+            return GetHtmlInternal(currentPrincipal, returnUrl);
+        }
+
+        private string GetHtmlInternal(IPrincipal currentPrincipal, string returnUrl)
+        {
             var css = Resources.GetCss();
 
             var currentUser = currentPrincipal.Identity.Name;
@@ -31,8 +43,8 @@ namespace RimDev.Stuntman.Core
 
             var items = _options.Users.Select(x => string.Format(@"
 <li class=""{0}"">
-    <a href=""{1}?{2}={3}&{4}={5}"" class=""stuntman-item"">
-        <h3>{6}</h3>
+    <a href=""{1}?{2}={3}{4}"" class=""stuntman-item"">
+        <h3>{5}</h3>
     </a>
 </li>",
                 string.Equals(currentUser, x.Name, StringComparison.OrdinalIgnoreCase)
@@ -41,8 +53,9 @@ namespace RimDev.Stuntman.Core
                 _options.SignInUri,
                 Constants.StuntmanOptions.OverrideQueryStringKey,
                 WebUtility.UrlEncode(x.Id),
-                Constants.StuntmanOptions.ReturnUrlQueryStringKey,
-                WebUtility.UrlEncode(returnUrl),
+                returnUrl == null
+                    ? null
+                    : $"&{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(returnUrl)}",
                 x.Name))
                 .ToList();
 

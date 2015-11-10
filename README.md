@@ -72,7 +72,7 @@ Here's how to use Stuntman in a **Razor** view to show the user picker *(assumin
 @* Only show when debug is true in Web.config. *@
 @if (System.Web.HttpContext.Current.IsDebuggingEnabled)
 {
-    @Html.Raw(new UserPicker(YourApplicationNamespace.Startup.StuntmanOptions).GetHtml(User, Request.RawUrl));
+    @Html.Raw(new UserPicker(YourApplicationNamespace.Startup.StuntmanOptions).GetHtml(User));
 }
 ```
 

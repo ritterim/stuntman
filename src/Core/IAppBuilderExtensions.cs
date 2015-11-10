@@ -15,8 +15,6 @@ namespace RimDev.Stuntman.Core
 {
     public static class IAppBuilderExtensions
     {
-
-
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
@@ -113,10 +111,20 @@ namespace RimDev.Stuntman.Core
         {
             app.Run(context =>
             {
-                context.Response.Headers.Add("Location", new[]
+                var returnUrl = context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey];
+
+                if (string.IsNullOrWhiteSpace(returnUrl))
                 {
-                    context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey]
-                });
+                    returnUrl = context.Request.Headers["Referer"];
+                }
+
+                if (string.IsNullOrWhiteSpace(returnUrl))
+                {
+                    throw new InvalidOperationException(
+                        "ReturnUrl was not specified via query string or Referer header.");
+                }
+
+                context.Response.Headers.Add("Location", new[] { returnUrl });
 
                 context.Response.StatusCode = 302;
 
