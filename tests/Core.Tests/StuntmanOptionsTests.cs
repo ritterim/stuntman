@@ -256,6 +256,16 @@ namespace RimDev.Stuntman.Core.Tests
             }
         }
 
+        public class UserPickerMethod_IPrincipal
+        {
+            // Rely on tests in UserPickerTests
+        }
+
+        public class UserPickerMethod_IPrincipal_String
+        {
+            // Rely on tests in UserPickerTests
+        }
+
         private class TestStuntmanOptionsRetriever : StuntmanOptionsRetriever
         {
             private readonly string _localFileStringToReturn;

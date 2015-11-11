@@ -32,8 +32,6 @@ namespace RimDev.Stuntman.UsageSample
                 app.UseStuntman(StuntmanOptions);
             }
 
-            var userPicker = new UserPicker(StuntmanOptions);
-
             app.Map("/secure", secure =>
             {
                 AuthenticateAllRequests(secure, new[] { "StuntmanAuthentication" });
@@ -52,7 +50,7 @@ namespace RimDev.Stuntman.UsageSample
                     if (System.Web.HttpContext.Current.IsDebuggingEnabled)
                     {
                         context.Response.WriteAsync(
-                            userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                            StuntmanOptions.UserPicker(context.Request.User));
                     }
 
                     return Task.FromResult(true);
@@ -94,7 +92,7 @@ namespace RimDev.Stuntman.UsageSample
                     if (System.Web.HttpContext.Current.IsDebuggingEnabled)
                     {
                         context.Response.WriteAsync(
-                            userPicker.GetHtml(context.Request.User, context.Request.Uri.AbsoluteUri));
+                            StuntmanOptions.UserPicker(context.Request.User));
                     }
 
                     context.Response.WriteAsync(

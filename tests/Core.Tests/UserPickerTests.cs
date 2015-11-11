@@ -8,7 +8,20 @@ namespace RimDev.Stuntman.Core.Tests
 {
     public class UserPickerTests
     {
-        public class GetHtmlMethod
+        public class GetHtmlMethod_IPrincipal
+        {
+            [Fact]
+            public void ThrowsForNullCurrentPrincipal()
+            {
+                var options = new StuntmanOptions();
+
+                Assert.Throws<ArgumentNullException>(
+                    () => new UserPicker(options)
+                        .GetHtml(null));
+            }
+        }
+
+        public class GetHtmlMethod_IPrincipal_String
         {
             [Fact]
             public void ThrowsForNullCurrentPrincipal()

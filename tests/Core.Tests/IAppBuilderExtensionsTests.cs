@@ -1,8 +1,10 @@
 ﻿using Microsoft.Owin.Testing;
 using Owin;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Net;
+using System.Net.Http;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
@@ -23,7 +25,9 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var response = await server.HttpClient.GetAsync(options.SignInUri);
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignInUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://app");
+
                     Assert.Equal(HttpStatusCode.OK, response.StatusCode);
                 }
             }
@@ -38,7 +42,8 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var response = await server.HttpClient.GetAsync(options.SignInUri);
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignInUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://app");
 
                     Assert.Contains(
                         "Please select a user to continue authentication.",
@@ -56,9 +61,8 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = $"{options.SignInUri}?{Constants.StuntmanOptions.OverrideQueryStringKey}=user-1";
-
-                    var response = await server.HttpClient.GetAsync(url);
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignInUri}?{Constants.StuntmanOptions.OverrideQueryStringKey}=user-1");
 
                     Assert.False(response.IsSuccessStatusCode);
                 }
@@ -75,14 +79,59 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = $"{options.SignInUri}?{Constants.StuntmanOptions.OverrideQueryStringKey}=user-1";
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignInUri}?{Constants.StuntmanOptions.OverrideQueryStringKey}=user-1&{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://app");
 
-                    var response = await server.HttpClient.GetAsync(url);
                     var setCookie = response.Headers.GetValues("Set-Cookie").SingleOrDefault();
 
                     Assert.StartsWith(
                         $".AspNet.{Constants.StuntmanAuthenticationType}=",
                         setCookie);
+                }
+            }
+
+            [Fact]
+            public async Task SignInUri_ReturnsExpectedLocationHeader_UsingReferer()
+            {
+                const string RedirectUri = "https://redirect-uri/";
+
+                var options = new StuntmanOptions();
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var request = new HttpRequestMessage
+                    {
+                        RequestUri = new Uri(new Uri("https://app"), $"{options.SignInUri}"),
+                        Method = HttpMethod.Get
+                    };
+
+                    request.Headers.Referrer = new Uri(RedirectUri);
+
+                    var response = await server.HttpClient.SendAsync(request);
+
+                    Assert.Equal(RedirectUri, response.Headers.Location.AbsoluteUri);
+                }
+            }
+
+            [Fact]
+            public async Task SignInUri_ReturnsExpectedLocationHeader_WhenQueryStringUsed()
+            {
+                const string RedirectUri = "https://redirect-uri/";
+
+                var options = new StuntmanOptions();
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignInUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={RedirectUri}");
+
+                    Assert.Equal(RedirectUri, response.Headers.Location.AbsoluteUri);
                 }
             }
 
@@ -193,7 +242,8 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var response = await server.HttpClient.GetAsync(options.SignOutUri);
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://app");
 
                     Assert.Equal(HttpStatusCode.Redirect, response.StatusCode);
                 }
@@ -209,7 +259,9 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var response = await server.HttpClient.GetAsync(options.SignOutUri);
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://app");
+
                     var setCookie = response.Headers.GetValues("Set-Cookie").SingleOrDefault();
 
                     Assert.Equal(
@@ -219,8 +271,10 @@ namespace RimDev.Stuntman.Core.Tests
             }
 
             [Fact]
-            public async Task SignOutUri_ReturnsExpectedLocationHeader()
+            public async Task SignOutUri_ReturnsExpectedLocationHeader_UsingReferer()
             {
+                const string RedirectUri = "https://redirect-uri/";
+
                 var options = new StuntmanOptions();
 
                 using (var server = TestServer.Create(app =>
@@ -228,11 +282,36 @@ namespace RimDev.Stuntman.Core.Tests
                     app.UseStuntman(options);
                 }))
                 {
-                    var url = $"{options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}=https://redirect-uri/";
+                    var request = new HttpRequestMessage
+                    {
+                        RequestUri = new Uri(new Uri("https://app"), $"{options.SignOutUri}"),
+                        Method = HttpMethod.Get
+                    };
 
-                    var response = await server.HttpClient.GetAsync(url);
+                    request.Headers.Referrer = new Uri(RedirectUri);
 
-                    Assert.Equal("https://redirect-uri/", response.Headers.Location.AbsoluteUri);
+                    var response = await server.HttpClient.SendAsync(request);
+
+                    Assert.Equal(RedirectUri, response.Headers.Location.AbsoluteUri);
+                }
+            }
+
+            [Fact]
+            public async Task SignOutUri_ReturnsExpectedLocationHeader_WhenQueryStringUsed()
+            {
+                const string RedirectUri = "https://redirect-uri/";
+
+                var options = new StuntmanOptions();
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(
+                        $"{options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={RedirectUri}");
+
+                    Assert.Equal(RedirectUri, response.Headers.Location.AbsoluteUri);
                 }
             }
         }

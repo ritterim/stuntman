@@ -36,7 +36,7 @@
         </footer>
         @if (HttpContext.Current.IsDebuggingEnabled)
         {
-            @Html.Raw(new UserPicker(RimDev.Stuntman.UsageSampleMvc.Startup.StuntmanOptions).GetHtml(User, Request.RawUrl))
+            @Html.Raw(RimDev.Stuntman.UsageSampleMvc.Startup.StuntmanOptions.UserPicker(User))
         }
     </div>
 
