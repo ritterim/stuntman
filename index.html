@@ -87,13 +87,11 @@ layout: default
         <h4>View</h4>
         <p>Here's how to use Stuntman in a Razor view to show the user picker <em>(assuming the application Startup class has StuntmanOptions that can be used)</em>.</p>
 <pre class="prettyprint lang-vb">
-  @using RimDev.Stuntman.Core;
-  @{
-      var stuntmanOptions = new StuntmanOptions()
-          .AddUser(new StuntmanUser("user-1", "User 1"));
+  @* Only show when debug is true in Web.config. *@
+  @if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+  {
+      @Html.Raw(YourApplicationNamespace.Startup.StuntmanOptions.UserPicker(User));
   }
-
-  @Html.Raw(new UserPicker(stuntmanOptions).GetHtml(User, Request.RawUrl));
 </pre>
       </div><!-- /.block-->
 
