@@ -52,12 +52,10 @@ namespace RimDev.Stuntman.Core
 
             if (!IsUniqueUser(user))
             {
-                throw new ApplicationException("user must have unique Id.");
+                throw new ApplicationException($"{nameof(user)} must have unique Id.");
             }
-            else
-            {
-                Users.Add(user);
-            }
+
+            Users.Add(user);
 
             return this;
         }
