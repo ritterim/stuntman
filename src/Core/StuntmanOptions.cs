@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 
 namespace RimDev.Stuntman.Core
 {
@@ -91,6 +92,16 @@ namespace RimDev.Stuntman.Core
             UserPickerAlignment = alignment;
 
             return this;
+        }
+
+        public string UserPicker(IPrincipal principal)
+        {
+            return new UserPicker(this).GetHtml(principal);
+        }
+
+        public string UserPicker(IPrincipal principal, string returnUrl)
+        {
+            return new UserPicker(this).GetHtml(principal, returnUrl);
         }
 
         /// <summary>
