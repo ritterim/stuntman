@@ -2,8 +2,8 @@
 <Project xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <PropertyGroup>
     <MajorVersion>0</MajorVersion>
-    <MinorVersion>3</MinorVersion>
-    <PatchVersion>3</PatchVersion>
+    <MinorVersion>4</MinorVersion>
+    <PatchVersion>0</PatchVersion>
   </PropertyGroup>
 
   <PropertyGroup>
