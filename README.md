@@ -27,7 +27,7 @@ Stuntman uses OWIN and is registered as middleware, and allows for programmatica
 // OWIN Startup class
 public class Startup
 {
-    public readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+    public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
 
     public void Configuration(IAppBuilder app)
     {
