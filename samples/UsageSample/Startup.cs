@@ -57,6 +57,25 @@ namespace RimDev.Stuntman.UsageSample
                 });
             });
 
+            app.Map("/secure-json", secure =>
+            {
+                AuthenticateAllRequests(secure, new[] { "StuntmanAuthentication" });
+
+                secure.Run(context =>
+                {
+                    var userName = context.Request.User.Identity.Name;
+
+                    if (string.IsNullOrEmpty(userName))
+                        userName = "Anonymous / Unknown";
+
+                    context.Response.ContentType = "application/json";
+                    context.Response.WriteAsync(
+                        $@"{{""message"":""Hello, {userName}. This is the /secure-json endpoint.""}}");
+
+                    return Task.FromResult(true);
+                });
+            });
+
             app.Map("/logout", logout =>
             {
                 logout.Run(context =>
