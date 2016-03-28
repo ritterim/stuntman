@@ -14,6 +14,7 @@ namespace RimDev.Stuntman.UsageSample
         public void Configuration(IAppBuilder app)
         {
             StuntmanOptions
+                .EnableServer()
                 .AddUser(new StuntmanUser("user-1", "User 1")
                     .SetAccessToken("user-1-token")
                     .AddClaim("given_name", "John")
