@@ -240,6 +240,122 @@ namespace RimDev.Stuntman.Core.Tests
             }
         }
 
+        public class AddConfigurationFromServer
+        {
+            [Fact]
+            public void ThrowsForNullServerBaseUrl()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    "serverBaseUrl",
+                    () => new StuntmanOptions().AddConfigurationFromServer(null));
+            }
+
+            [Theory,
+                InlineData(""),
+                InlineData(" "),
+                InlineData("file.json")
+            ]
+            public void ThrowsForInvalidUri(string serverBaseUrl)
+            {
+                Assert.Throws<UriFormatException>(
+                    () => new StuntmanOptions().AddConfigurationFromServer(serverBaseUrl));
+            }
+
+            [Fact]
+            public void ThrowsForUnexpectedResponse()
+            {
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: "some_error"));
+
+                Assert.Throws<JsonReaderException>(
+                    () => options.AddConfigurationFromServer("https://example.com"));
+            }
+
+            [Fact]
+            public void AddsStuntmanServerResponseUsers()
+            {
+                const string Id1 = "user-1";
+
+                var stuntmanServerResponse = new StuntmanServerResponse
+                {
+                    Users = new[]
+                    {
+                        new StuntmanUser(Id1, "User 1")
+                    }
+                };
+
+                var json = JsonConvert.SerializeObject(stuntmanServerResponse);
+
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: json));
+
+                options.AddConfigurationFromServer("https://example.com");
+
+                Assert.Equal(Id1, options.Users.Single().Id);
+            }
+        }
+
+        public class TryAddConfigurationFromServer
+        {
+            [Fact]
+            public void ThrowsForNullServerBaseUrl()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    "serverBaseUrl",
+                    () => new StuntmanOptions().TryAddConfigurationFromServer(null));
+            }
+
+            [Fact]
+            public void DoesNotThrowForUnexpectedResponse()
+            {
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: "some_error"));
+
+                options.TryAddConfigurationFromServer("https://example.com");
+            }
+
+            [Fact]
+            public void ProcessesStuntmanServerResponse()
+            {
+                const string Id1 = "user-1";
+
+                var stuntmanServerResponse = new StuntmanServerResponse
+                {
+                    Users = new[]
+                    {
+                        new StuntmanUser(Id1, "User 1")
+                    }
+                };
+
+                var json = JsonConvert.SerializeObject(stuntmanServerResponse);
+
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: json));
+
+                options.TryAddConfigurationFromServer("https://example.com");
+
+                Assert.Equal(Id1, options.Users.Single().Id);
+            }
+
+            [Fact]
+            public void InvokesonExceptionWhenExceptionThrown()
+            {
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: "error"));
+
+                Exception actualException = null;
+
+                options.TryAddConfigurationFromServer(
+                    "https://example.com", (ex) => { actualException = ex; });
+
+                Assert.NotNull(actualException);
+                Assert.Equal(
+                    "Unexpected character encountered while parsing value: "
+                        + "e. Path '', line 0, position 0.",
+                    actualException.Message);
+            }
+        }
+
         public class SetUserPickerAlignmentMethod
         {
             [Theory,

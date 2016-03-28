@@ -72,6 +72,7 @@
     <Compile Include="StuntmanClaimConverter.cs" />
     <Compile Include="StuntmanOptions.cs" />
     <Compile Include="StuntmanOptionsRetriever.cs" />
+    <Compile Include="StuntmanServerResponse.cs" />
     <Compile Include="StuntmanUser.cs" />
     <Compile Include="UserPicker.cs" />
   </ItemGroup>

@@ -11,6 +11,7 @@
             public const string SignOutEndpoint = "sign-out";
             public const string OverrideQueryStringKey = "OverrideUserId";
             public const string ReturnUrlQueryStringKey = "ReturnUrl";
+            public const string ServerEndpoint = "server";
         }
     }
 }
