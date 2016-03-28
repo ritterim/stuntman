@@ -9,7 +9,7 @@
     <projectUrl>https://github.com/ritterim/stuntman</projectUrl>
     <iconUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png</iconUrl>
     <description>Library for impersonating users during development leveraging ASP.NET Identity.</description>
-    <copyright>Copyright 2015 Ritter Insurance Marketing</copyright>
+    <copyright>Copyright 2016 Ritter Insurance Marketing</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <tags>rimdev stuntman aspnet identity impersonation</tags>
     <dependencies>
