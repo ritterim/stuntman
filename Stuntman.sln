@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSampleMvc", "samples\U
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.BearerTokenTester", "samples\UsageSample.BearerTokenTester\UsageSample.BearerTokenTester.csproj", "{CF8863AC-C37A-4E89-86FE-9B365818D9F2}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.ServerTester", "samples\UsageSample.ServerTester\UsageSample.ServerTester.csproj", "{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -43,6 +45,10 @@ Global
 		{CF8863AC-C37A-4E89-86FE-9B365818D9F2}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{CF8863AC-C37A-4E89-86FE-9B365818D9F2}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{CF8863AC-C37A-4E89-86FE-9B365818D9F2}.Release|Any CPU.Build.0 = Release|Any CPU
+		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -52,5 +58,6 @@ Global
 		{6CCC791E-78A8-415F-8D9C-4A9F11449A19} = {418B6F96-6578-4B18-823C-0FC7A712F0BE}
 		{0CB0CB75-7BF7-44BD-A003-E4176AFD4EBC} = {418B6F96-6578-4B18-823C-0FC7A712F0BE}
 		{CF8863AC-C37A-4E89-86FE-9B365818D9F2} = {418B6F96-6578-4B18-823C-0FC7A712F0BE}
+		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34} = {418B6F96-6578-4B18-823C-0FC7A712F0BE}
 	EndGlobalSection
 EndGlobal
