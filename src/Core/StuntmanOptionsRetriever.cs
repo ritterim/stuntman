@@ -13,7 +13,10 @@ namespace RimDev.Stuntman.Core
 
         public virtual string GetStringUsingWebClient(Uri uri)
         {
-            return new WebClient().DownloadString(uri);
+            using (var webClient = new WebClient())
+            {
+                return webClient.DownloadString(uri);
+            }
         }
     }
 }
