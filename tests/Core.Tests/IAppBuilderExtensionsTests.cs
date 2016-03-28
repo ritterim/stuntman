@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Testing;
+using Newtonsoft.Json;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -312,6 +313,74 @@ namespace RimDev.Stuntman.Core.Tests
                         $"{options.SignOutUri}?{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={RedirectUri}");
 
                     Assert.Equal(RedirectUri, response.Headers.Location.AbsoluteUri);
+                }
+            }
+
+            [Fact]
+            public async Task ServerEndpoint_ReturnsExpectedResponse_WhenEnabled()
+            {
+                var options = new StuntmanOptions()
+                    .EnableServer();
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(
+                        options.ServerUri);
+
+                    response.EnsureSuccessStatusCode();
+
+                    var stuntmanServerResponse = JsonConvert.DeserializeObject<StuntmanServerResponse>(
+                        await response.Content.ReadAsStringAsync());
+
+                    Assert.NotNull(stuntmanServerResponse);
+                }
+            }
+
+            [Fact]
+            public async Task ServerEndpoint_ReturnsExpectedResponse_WhenEnabledWithUsers()
+            {
+                const string UserId = "user-1";
+
+                var options = new StuntmanOptions()
+                    .AddUser(new StuntmanUser(UserId, "User 1"))
+                    .EnableServer();
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(
+                        options.ServerUri);
+
+                    response.EnsureSuccessStatusCode();
+
+                    var stuntmanServerResponse = JsonConvert.DeserializeObject<StuntmanServerResponse>(
+                        await response.Content.ReadAsStringAsync());
+
+                    Assert.Equal(UserId, stuntmanServerResponse.Users.Single().Id);
+                }
+            }
+
+            [Fact]
+            public async Task ServerEndpoint_Returns404_WhenNotEnabled()
+            {
+                var options = new StuntmanOptions();
+
+                Assert.False(options.ServerEnabled);
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(
+                        options.ServerUri);
+
+                    Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
                 }
             }
         }

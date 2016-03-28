@@ -2,6 +2,7 @@
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
+using Newtonsoft.Json;
 using Owin;
 using System;
 using System.Collections.Generic;
@@ -89,6 +90,21 @@ namespace RimDev.Stuntman.Core
 
                 RedirectToReturnUrl(signout);
             });
+
+            if (options.ServerEnabled)
+            {
+                app.Map(options.ServerUri, server =>
+                {
+                    server.Use(async (context, next) =>
+                    {
+                        var response = new StuntmanServerResponse { Users = options.Users };
+                        var json = JsonConvert.SerializeObject(response);
+
+                        context.Response.ContentType = "application/json";
+                        await context.Response.WriteAsync(json);
+                    });
+                });
+            }
         }
 
         private static string GetUsersLoginUI(

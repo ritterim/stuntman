@@ -36,6 +36,13 @@ namespace RimDev.Stuntman.Core
 
         public ICollection<StuntmanUser> Users { get; private set; }
 
+        public bool ServerEnabled { get; private set; }
+
+        public string ServerUri
+        {
+            get { return _stuntmanRootPath + Constants.StuntmanOptions.ServerEndpoint; }
+        }
+
         public string SignInUri
         {
             get { return _stuntmanRootPath + Constants.StuntmanOptions.SignInEndpoint; }
@@ -85,6 +92,51 @@ namespace RimDev.Stuntman.Core
             return this;
         }
 
+        public StuntmanOptions AddConfigurationFromServer(string serverBaseUrl)
+        {
+            if (serverBaseUrl == null) throw new ArgumentNullException(nameof(serverBaseUrl));
+
+            var response = _stuntmanOptionsRetriever.GetStringUsingWebClient(
+                new Uri(
+                    new Uri(serverBaseUrl),
+                    Constants.StuntmanOptions.DefaultStuntmanRootPath
+                        + Constants.StuntmanOptions.ServerEndpoint));
+
+            var stuntmanServerResponse = JsonConvert.DeserializeObject<StuntmanServerResponse>(
+                response,
+                new StuntmanClaimConverter());
+
+            ProcessStuntmanServerResponse(stuntmanServerResponse);
+
+            return this;
+        }
+
+        public StuntmanOptions TryAddConfigurationFromServer(string serverBaseUrl, Action<Exception> onException = null)
+        {
+            if (serverBaseUrl == null) throw new ArgumentNullException(nameof(serverBaseUrl));
+
+            try
+            {
+                AddConfigurationFromServer(serverBaseUrl);
+            }
+            catch (Exception ex)
+            {
+                if (onException != null)
+                {
+                    onException(ex);
+                }
+            }
+
+            return this;
+        }
+
+        public StuntmanOptions EnableServer()
+        {
+            ServerEnabled = true;
+
+            return this;
+        }
+
         public StuntmanOptions SetUserPickerAlignment(StuntmanAlignment alignment)
         {
             UserPickerAlignment = alignment;
@@ -112,6 +164,14 @@ namespace RimDev.Stuntman.Core
             return Users
                 .Select(x => x.Id)
                 .Contains(user.Id) == false;
+        }
+
+        private void ProcessStuntmanServerResponse(StuntmanServerResponse stuntmanServerResponse)
+        {
+            foreach (var user in stuntmanServerResponse.Users)
+            {
+                AddUser(user);
+            }
         }
     }
 }
