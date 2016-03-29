@@ -39,6 +39,8 @@ namespace RimDev.Stuntman.Core
 
         public ICollection<Claim> Claims { get; private set; }
 
+        public string Source { get; private set; }
+
         public StuntmanUser AddClaim(string type, string value)
         {
             if (type == null) throw new ArgumentNullException(nameof(type));
@@ -58,6 +60,17 @@ namespace RimDev.Stuntman.Core
             if (string.IsNullOrWhiteSpace(accessToken)) throw new ArgumentException("accessToken must not be empty or whitespace.");
 
             AccessToken = accessToken;
+
+            return this;
+        }
+
+        public StuntmanUser SetSource(string source)
+        {
+            if (source == null) throw new ArgumentNullException(nameof(source));
+
+            if (string.IsNullOrWhiteSpace(source)) throw new ArgumentException("source must not be empty or whitespace.");
+
+            Source = source;
 
             return this;
         }

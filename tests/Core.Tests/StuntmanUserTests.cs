@@ -137,5 +137,39 @@ namespace RimDev.Stuntman.Core.Tests
                 Assert.Equal("accessToken must not be empty or whitespace.", exception.Message);
             }
         }
+
+        public class SetSource
+        {
+            [Fact]
+            public void ThrowsForNullArgument()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetSource(null));
+            }
+
+            [Theory,
+            InlineData(""),
+            InlineData(" ")]
+            public void ThrowsForEmptyValue(string source)
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetSource(source));
+
+                Assert.Equal("source must not be empty or whitespace.", exception.Message);
+            }
+
+            [Fact]
+            public void SetsExpectedSource()
+            {
+                const string Source = "test-source";
+
+                var user = new StuntmanUser("user-1", "User 1")
+                    .SetSource(Source);
+
+                Assert.Equal(Source, user.Source);
+            }
+        }
     }
 }

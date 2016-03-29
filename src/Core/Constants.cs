@@ -7,6 +7,7 @@
         public static class StuntmanOptions
         {
             public const string DefaultStuntmanRootPath = "/stuntman/";
+            public const string LocalSource = "Local";
             public const string SignInEndpoint = "sign-in";
             public const string SignOutEndpoint = "sign-out";
             public const string OverrideQueryStringKey = "OverrideUserId";
