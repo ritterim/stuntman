@@ -16,6 +16,9 @@ namespace RimDev.Stuntman.Core
 {
     public static class IAppBuilderExtensions
     {
+        /// <summary>
+        /// Enable Stuntman on this application.
+        /// </summary>
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
             app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()

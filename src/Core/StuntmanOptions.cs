@@ -32,10 +32,20 @@ namespace RimDev.Stuntman.Core
         /// </summary>
         public Action<OAuthValidateIdentityContext> AfterBearerValidateIdentity { get; set; }
 
+        /// <summary>
+        /// The current alignment of the on-screen user picker.
+        /// </summary>
         public StuntmanAlignment UserPickerAlignment { get; private set; }
 
+        /// <summary>
+        /// Users available for the on-screen user picker and the login UI.
+        /// </summary>
         public ICollection<StuntmanUser> Users { get; private set; }
 
+        /// <summary>
+        /// The current state of the Stuntman server.
+        /// Note: This server endpoint is public (does not require authentication).
+        /// </summary>
         public bool ServerEnabled { get; private set; }
 
         public string ServerUri
@@ -53,6 +63,9 @@ namespace RimDev.Stuntman.Core
             get { return _stuntmanRootPath + Constants.StuntmanOptions.SignOutEndpoint; }
         }
 
+        /// <summary>
+        /// Add a new Stuntman user.
+        /// </summary>
         public StuntmanOptions AddUser(StuntmanUser user)
         {
             return AddUser(user, Constants.StuntmanOptions.LocalSource);
@@ -82,6 +95,7 @@ namespace RimDev.Stuntman.Core
 
         /// <summary>
         /// Add users from JSON at the file system path or URL specified.
+        /// The expected JSON format is [{"Id":"user-1","Name":"User 1"}]
         /// </summary>
         public StuntmanOptions AddUsersFromJson(string pathOrUrl)
         {
@@ -105,6 +119,16 @@ namespace RimDev.Stuntman.Core
             return this;
         }
 
+        /// <summary>
+        /// Add configuration from another Stuntman enabled application that has server mode enabled.
+        /// This request is made via HTTP or HTTPS (the 'server' application must be running).
+        /// Any exceptions will be thrown as expected.
+        /// </summary>
+        /// <param name="serverBaseUrl">
+        /// The HTTP or HTTPS root url to a Stuntman enabled application
+        /// with server mode enabled.
+        /// Example: https://my-application.example.com/
+        /// </param>
         public StuntmanOptions AddConfigurationFromServer(string serverBaseUrl)
         {
             if (serverBaseUrl == null) throw new ArgumentNullException(nameof(serverBaseUrl));
@@ -124,6 +148,17 @@ namespace RimDev.Stuntman.Core
             return this;
         }
 
+        /// <summary>
+        /// Add configuration from another Stuntman enabled application that has server mode enabled.
+        /// This request is made via HTTP or HTTPS (the 'server' application must be running).
+        /// Any exceptions while attempting to add the configuration will be silently ignored,
+        /// which could result in missing configuration from the 'server'.
+        /// </summary>
+        /// <param name="serverBaseUrl">
+        /// The HTTP or HTTPS root url to a Stuntman enabled application
+        /// with server mode enabled.
+        /// Example: https://my-application.example.com/
+        /// </param>
         public StuntmanOptions TryAddConfigurationFromServer(string serverBaseUrl, Action<Exception> onException = null)
         {
             if (serverBaseUrl == null) throw new ArgumentNullException(nameof(serverBaseUrl));
@@ -143,6 +178,10 @@ namespace RimDev.Stuntman.Core
             return this;
         }
 
+        /// <summary>
+        /// Enable the 'server' endpoint on this application.
+        /// Note: This server endpoint is public (does not require authentication).
+        /// </summary>
         public StuntmanOptions EnableServer()
         {
             ServerEnabled = true;
@@ -150,6 +189,9 @@ namespace RimDev.Stuntman.Core
             return this;
         }
 
+        /// <summary>
+        /// Set the alignment of the on-screen user picker.
+        /// </summary>
         public StuntmanOptions SetUserPickerAlignment(StuntmanAlignment alignment)
         {
             UserPickerAlignment = alignment;
@@ -157,11 +199,17 @@ namespace RimDev.Stuntman.Core
             return this;
         }
 
+        /// <summary>
+        /// Returns on-screen user picker assets for usage in a view or similar.
+        /// </summary>
         public string UserPicker(IPrincipal principal)
         {
             return new UserPicker(this).GetHtml(principal);
         }
 
+        /// <summary>
+        /// Returns on-screen user picker assets for usage in a view or similar.
+        /// </summary>
         public string UserPicker(IPrincipal principal, string returnUrl)
         {
             return new UserPicker(this).GetHtml(principal, returnUrl);
