@@ -9,7 +9,7 @@ namespace RimDev.Stuntman.UsageSample
 {
     public class Startup
     {
-        public readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+        public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
 
         public void Configuration(IAppBuilder app)
         {
