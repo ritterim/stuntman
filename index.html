@@ -96,7 +96,7 @@ layout: default
       </div><!-- /.block-->
 
       <div class="block">
-        <h3 class="sub-title text-center">More Options</h3>
+        <h3 class="sub-title text-center">More Information</h3>
         <h4>Bearer-token</h4>
         <p>Stuntman supports bearer-tokens based on a user's access-token (<code>StuntmanUser.SetAccessToken</code>). There is nothing special about the value and no additional encoding/decoding is necessary. Upon successful authentication, the value is added as a claim. Leveraging the previous Startup code, you could construct an HTTP-request to utilize User 2's access-token:</p>
 <pre class="prettyprint lang-vb">
@@ -114,7 +114,42 @@ layout: default
   HTTP/1.1 400 Authorization header is not in correct format.
 </pre>
 
+        <h4>Remote users</h4>
+        <p>Users can be populated from remote locations using one or more of the following:</p>
+        <p>From the file system<p>
+<pre class="prettyprint lang-vb">
+  StuntmanOptions.AddUsersFromJson("C:\\path\\to\\users.json");
+</pre>
+        <p>From a web url to a JSON file</p>
+<pre class="prettyprint lang-vb">
+  StuntmanOptions.AddUsersFromJson("https://example.com/users.json");
+</pre>
+        <p>From a web url to a Stuntman instance with a running server</p>
+<pre class="prettyprint lang-vb">
+  //
+  // On the server
+  //
+  StuntmanOptions.EnableServer();
 
+  //
+  // On the client
+  //
+  StuntmanOptions.AddConfigurationFromServer(
+      "https://some-stuntman-enabled-app.example.com/");
+  // or, if you prefer to not throw an exception
+  // and have the users silently not added
+  // if the server is unavailable:
+  StuntmanOptions.TryAddConfigurationFromServer(
+      "https://some-stuntman-enabled-app.example.com/");
+</pre>
+        <h4>Example users JSON</h4>
+        <p>Here's an example users JSON that can be consumed by<br /><code>StuntmanOptions.AddUsersFromJson(string pathOrUrl)</code>:</p>
+<pre class="prettyprint">
+[
+  { "Id": "user-1", "Name": "User 1" },
+  { "Id": "user-2", "Name": "User 2" }
+]
+</pre>
       </div><!-- /.block-->
 
     </div><!-- /.docs-inner-->
