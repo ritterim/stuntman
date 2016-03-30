@@ -97,6 +97,49 @@ HTTP/1.1 403 options provided does not include the requested 'not-real' user.
 HTTP/1.1 400 Authorization header is not in correct format.
 ```
 
+### Remote users
+
+Users can be populated from remote locations using one or more of the following:
+
+- From the file system
+
+```csharp
+StuntmanOptions.AddUsersFromJson("C:\\path\\to\\users.json");
+```
+- From a web url to a JSON file
+
+```csharp
+StuntmanOptions.AddUsersFromJson("https://example.com/users.json");
+```
+- From a web url to a Stuntman instance with a running server
+
+```csharp
+//
+// On the server
+//
+StuntmanOptions.EnableServer();
+
+//
+// On the client
+//
+StuntmanOptions.AddConfigurationFromServer("https://some-stuntman-enabled-app.example.com/");
+// or, if you prefer to not throw an exception
+// and have the users silently not added
+// if the server is unavailable:
+StuntmanOptions.TryAddConfigurationFromServer("https://some-stuntman-enabled-app.example.com/");
+```
+
+### Example users JSON
+
+Here's an example users JSON that can be consumed by `StuntmanOptions.AddUsersFromJson(string pathOrUrl)`:
+
+```json
+[
+  { "Id": "user-1", "Name": "User 1" },
+  { "Id": "user-2", "Name": "User 2" }
+]
+```
+
 ## Contributing
 
 Have an idea? Let's talk about it in an issue!
