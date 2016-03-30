@@ -55,11 +55,24 @@ namespace RimDev.Stuntman.Core
 
         public StuntmanOptions AddUser(StuntmanUser user)
         {
+            return AddUser(user, Constants.StuntmanOptions.LocalSource);
+        }
+
+        /// <remarks>
+        /// This method is private to avoid exposing it as part of the public API.
+        /// </remarks>
+        private StuntmanOptions AddUser(StuntmanUser user, string source)
+        {
             if (user == null) throw new ArgumentNullException(nameof(user));
 
             if (!IsUniqueUser(user))
             {
                 throw new ApplicationException($"{nameof(user)} must have unique Id.");
+            }
+
+            if (source != null)
+            {
+                user.SetSource(source);
             }
 
             Users.Add(user);
@@ -86,7 +99,7 @@ namespace RimDev.Stuntman.Core
 
             foreach (var user in users)
             {
-                AddUser(user);
+                AddUser(user, pathOrUrl);
             }
 
             return this;
@@ -106,7 +119,7 @@ namespace RimDev.Stuntman.Core
                 response,
                 new StuntmanClaimConverter());
 
-            ProcessStuntmanServerResponse(stuntmanServerResponse);
+            ProcessStuntmanServerResponse(stuntmanServerResponse, serverBaseUrl);
 
             return this;
         }
@@ -166,11 +179,13 @@ namespace RimDev.Stuntman.Core
                 .Contains(user.Id) == false;
         }
 
-        private void ProcessStuntmanServerResponse(StuntmanServerResponse stuntmanServerResponse)
+        private void ProcessStuntmanServerResponse(
+            StuntmanServerResponse stuntmanServerResponse,
+            string source)
         {
             foreach (var user in stuntmanServerResponse.Users)
             {
-                AddUser(user);
+                AddUser(user, source);
             }
         }
     }

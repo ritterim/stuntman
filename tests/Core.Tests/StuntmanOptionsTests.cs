@@ -126,6 +126,18 @@ namespace RimDev.Stuntman.Core.Tests
 
                 Assert.Equal("user must have unique Id.", exception.Message);
             }
+
+            [Fact]
+            public void SetsSourceToLocalSource()
+            {
+                var sut = new StuntmanOptions();
+
+                sut.AddUser(new StuntmanUser("user-1", "User 1"));
+
+                var user = sut.Users.Single();
+
+                Assert.Equal(Constants.StuntmanOptions.LocalSource, user.Source);
+            }
         }
 
         public class AddUsersFromJsonMethod
@@ -293,6 +305,29 @@ namespace RimDev.Stuntman.Core.Tests
 
                 Assert.Equal(Id1, options.Users.Single().Id);
             }
+
+            [Fact]
+            public void SetsSourceToserverBaseUrl()
+            {
+                const string ServerBaseUrl = "https://example.com";
+
+                var stuntmanServerResponse = new StuntmanServerResponse
+                {
+                    Users = new[]
+                    {
+                        new StuntmanUser("user-1", "User 1")
+                    }
+                };
+
+                var json = JsonConvert.SerializeObject(stuntmanServerResponse);
+
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: json));
+
+                options.AddConfigurationFromServer(ServerBaseUrl);
+
+                Assert.Equal(ServerBaseUrl, options.Users.Single().Source);
+            }
         }
 
         public class TryAddConfigurationFromServer
@@ -335,6 +370,29 @@ namespace RimDev.Stuntman.Core.Tests
                 options.TryAddConfigurationFromServer("https://example.com");
 
                 Assert.Equal(Id1, options.Users.Single().Id);
+            }
+
+            [Fact]
+            public void SetsSourceToserverBaseUrl()
+            {
+                const string ServerBaseUrl = "https://example.com";
+
+                var stuntmanServerResponse = new StuntmanServerResponse
+                {
+                    Users = new[]
+                    {
+                        new StuntmanUser("user-1", "User 1")
+                    }
+                };
+
+                var json = JsonConvert.SerializeObject(stuntmanServerResponse);
+
+                var options = new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(
+                    webClientStringToReturn: json));
+
+                options.TryAddConfigurationFromServer(ServerBaseUrl);
+
+                Assert.Equal(ServerBaseUrl, options.Users.Single().Source);
             }
 
             [Fact]
