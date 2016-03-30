@@ -112,7 +112,7 @@ $@"<style>
         }}, false);
     }})();
 </script>".Replace(Environment.NewLine, null) + Environment.NewLine +
-"<!-- End Stuntman -->";
+"<!-- End Stuntman -->" + Environment.NewLine;
         }
     }
 }
