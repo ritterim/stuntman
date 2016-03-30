@@ -17,6 +17,9 @@ namespace RimDev.Stuntman.Core
             _options = options;
         }
 
+        /// <summary>
+        /// Returns the self-contained assets for the on-screen user picker.
+        /// </summary>
         public string GetHtml(IPrincipal currentPrincipal)
         {
             if (currentPrincipal == null) throw new ArgumentNullException(nameof(currentPrincipal));
@@ -24,6 +27,9 @@ namespace RimDev.Stuntman.Core
             return GetHtmlInternal(currentPrincipal, null);
         }
 
+        /// <summary>
+        /// Returns the self-contained assets for the on-screen user picker.
+        /// </summary>
         public string GetHtml(IPrincipal currentPrincipal, string returnUrl)
         {
             if (currentPrincipal == null) throw new ArgumentNullException(nameof(currentPrincipal));
