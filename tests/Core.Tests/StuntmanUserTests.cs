@@ -136,6 +136,17 @@ namespace RimDev.Stuntman.Core.Tests
 
                 Assert.Equal("accessToken must not be empty or whitespace.", exception.Message);
             }
+
+            [Fact]
+            public void SetsExpectedAccessToken()
+            {
+                const string AccessToken = "test-access-token";
+
+                var user = new StuntmanUser("user-1", "User 1")
+                    .SetAccessToken(AccessToken);
+
+                Assert.Equal(AccessToken, user.AccessToken);
+            }
         }
 
         public class SetSource
