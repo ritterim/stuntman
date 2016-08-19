@@ -159,6 +159,7 @@ namespace RimDev.Stuntman.Core
             context.Response.StatusCode = 200;
 
             var css = Resources.GetCss();
+            var logoForInlining = Resources.GetLogoForInlining();
             var usersHtml = GetUsersLoginUI(context, options);
 
             context.Response.Write($@"
@@ -173,7 +174,7 @@ namespace RimDev.Stuntman.Core
     </head>
     <body>
         <div class=""stuntman-login-ui-container"">
-            <h2><img src=""https://raw.githubusercontent.com/ritterim/stuntman/gh-pages/images/stuntman-logo.png"" alt=""Welcome to Stuntman"" /></h2>
+            <h2><img src=""{logoForInlining}"" alt=""Welcome to Stuntman"" /></h2>
             <h2>Please select a user to continue authentication.</h2>
             <ul>
                 {usersHtml}

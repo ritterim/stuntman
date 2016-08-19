@@ -83,5 +83,8 @@
   <ItemGroup>
     <EmbeddedResource Include="assets\stuntman.css" />
   </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="assets\stuntman-logo.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
