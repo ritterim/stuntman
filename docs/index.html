@@ -1,0 +1,168 @@
+---
+layout: default
+---
+
+<section id="promo" class="promo section offset-header">
+  <div class="container text-center">
+    <h2 class="logo"><img class="img-responsive center-block"src="images/stuntman-logo.png" alt="Stuntman by RIMdev" /></h2>
+    <p class="intro">Sometimes you need a Stuntman before you send in real, unsuspecting users!</p>
+      <div class="btn-group">
+        <a class="btn btn-primary btn-lg btn-stuntman" href="https://www.nuget.org/packages/RimDev.Stuntman/" rel="external"><i class="fa fa-download fa-lg"></i> Get Stuntman</a>
+        <a class="btn btn-danger btn-lg btn-stuntman" href="https://github.com/ritterim/stuntman" rel="external"><i class="fa fa-github fa-lg"></i> View on GitHub</a>
+      </div>
+    </div><!-- /.container-->
+</section><!-- /.promo-->
+
+<section id="about" class="about section">
+  <div class="container">
+    <h2 class="title text-center">So what is Stuntman?</h2>
+    <p class="intro text-center">Stuntman is a library for impersonating users during development leveraging .NET Claims Identity. Used primarily in web environments like ASP.NET MVC, ASP.NET Web Forms, and OWIN applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.</p>
+  </div><!-- /.container-->
+</section><!-- /.about-->
+
+<section id="get-started" class="docs section">
+  <div class="container">
+    <div class="docs-inner">
+      <h2 class="title text-center">Get Started</h2>
+      <div class="block">
+        <h3 class="sub-title text-center">In Action</h3>
+        <p class="text-center"><img src="https://cloud.githubusercontent.com/assets/1012917/10737939/5154bbdc-7beb-11e5-87dd-979c4e8cb3c0.gif" /></p>
+      </div>
+      <div class="block">
+        <h3 class="sub-title text-center">Install</h3>
+        <p>Install the <a href="https://www.nuget.org/packages/RimDev.Stuntman/"><code>RimDev.Stuntman</code></a> NuGet package.</p>
+
+<pre class="prettyprint">
+  PM> Install-Package RimDev.Stuntman
+</pre>
+      </div><!-- /.block-->
+
+      <div class="block">
+        <h3 class="sub-title text-center">Usage</h3>
+        <h4>Startup / Middleware registration</h4>
+        <p>Stuntman uses OWIN and is registered as middleware, and allows for programmatically preset user scenarios, in the form of claims identities. These presets can be utilized by you or other team members working on the same code base.</p>
+<pre class="prettyprint lang-vb">
+  // OWIN Startup class
+  public class Startup
+  {
+      public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
+      public void Configuration(IAppBuilder app)
+      {
+          StuntmanOptions
+              .AddUser(new StuntmanUser("user-1", "User 1")
+                  .AddClaim("given_name", "John")
+                  .AddClaim("family_name", "Doe"));
+
+          // Optionally assign a user an access token.
+          StuntmanOptions
+              .AddUser(new StuntmanUser("user-2", "User 2")
+                  .SetAccessToken("123")
+                  .AddClaim("given_name", "Mary")
+                  .AddClaim("family_name", "Smith"));
+
+          // You can also add users using HTTP/HTTPS or the file system!
+          StuntmanOptions
+              .AddUsersFromJson("https://example.com/web-test-users.json")
+              .AddUsersFromJson(@"C:\local-test-users.json");
+
+          // Optional alignment of user picker
+          // Supported options are:
+          // - StuntmanAlignment.Left (default)
+          // - StuntmanAlignment.Center
+          // - StuntmanAlignment.Right
+          StuntmanOptions.SetUserPickerAlignment(StuntmanAlignment.Right);
+
+          // Only show when debug is true in Web.config.
+          if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+          {
+              app.UseStuntman(StuntmanOptions);
+          }
+      }
+  }
+</pre>
+      </div><!-- /.block-->
+
+      <div class="block">
+        <h4>View</h4>
+        <p>Here's how to use Stuntman in a Razor view to show the user picker <em>(assuming the application Startup class has StuntmanOptions that can be used)</em>.</p>
+<pre class="prettyprint lang-vb">
+  @* Only show when debug is true in Web.config. *@
+  @if (System.Web.HttpContext.Current.IsDebuggingEnabled)
+  {
+      @Html.Raw(YourApplicationNamespace.Startup.StuntmanOptions.UserPicker(User));
+  }
+</pre>
+      </div><!-- /.block-->
+
+      <div class="block">
+        <h3 class="sub-title text-center">More Information</h3>
+        <h4>Bearer-token</h4>
+        <p>Stuntman supports bearer-tokens based on a user's access-token (<code>StuntmanUser.SetAccessToken</code>). There is nothing special about the value and no additional encoding/decoding is necessary. Upon successful authentication, the value is added as a claim. Leveraging the previous Startup code, you could construct an HTTP-request to utilize User 2's access-token:</p>
+<pre class="prettyprint lang-vb">
+  > curl -i -H "Authorization: Bearer 123" http://localhost:54917/secure
+  HTTP/1.1 200 OK
+</pre>
+        <p>Basic format-checking is done on the value:</p>
+
+<pre class="prettyprint lang-vb">
+  > curl -i -H "Authorization: Bearer not-real" http://localhost:54917/secure
+  HTTP/1.1 403 options provided does not include the requested 'not-real' user.
+</pre>
+<pre class="prettyprint lang-vb">
+  > curl -i -H "Authorization: Bearer abc 123" http://localhost:54917/secure
+  HTTP/1.1 400 Authorization header is not in correct format.
+</pre>
+
+        <h4>Remote users</h4>
+        <p>Users can be populated from remote locations using one or more of the following:</p>
+        <p>From the file system<p>
+<pre class="prettyprint lang-vb">
+  StuntmanOptions.AddUsersFromJson("C:\\path\\to\\users.json");
+</pre>
+        <p>From a web url to a JSON file</p>
+<pre class="prettyprint lang-vb">
+  StuntmanOptions.AddUsersFromJson("https://example.com/users.json");
+</pre>
+        <p>From a web url to a Stuntman instance with a running server</p>
+<pre class="prettyprint lang-vb">
+  //
+  // On the server
+  //
+  StuntmanOptions.EnableServer();
+
+  //
+  // On the client
+  //
+  StuntmanOptions.AddConfigurationFromServer(
+      "https://some-stuntman-enabled-app.example.com/");
+  // or, if you prefer to not throw an exception
+  // and have the users silently not added
+  // if the server is unavailable:
+  StuntmanOptions.TryAddConfigurationFromServer(
+      "https://some-stuntman-enabled-app.example.com/");
+</pre>
+        <h4>Example users JSON</h4>
+        <p>Here's an example users JSON that can be consumed by<br /><code>StuntmanOptions.AddUsersFromJson(string pathOrUrl)</code>:</p>
+<pre class="prettyprint">
+[
+  { "Id": "user-1", "Name": "User 1" },
+  { "Id": "user-2", "Name": "User 2" }
+]
+</pre>
+      </div><!-- /.block-->
+
+    </div><!-- /.docs-inner-->
+  </div><!-- /.container-->
+</section><!-- /.features-->
+
+<section id="license" class="license section">
+  <div class="container">
+    <div class="license-inner">
+      <h2 class="title text-center">License</h2>
+      <div class="info text-center">
+        <p>Stuntman is provided under the Opensource <a href="http://opensource.org/licenses/MIT" target="_blank">MIT license (MIT)</a></p>
+      </div><!-- /.info-->
+    </div><!-- /.license-inner-->
+  </div><!-- /.container-->
+</section><!-- /.how-->
