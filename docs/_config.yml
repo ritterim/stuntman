@@ -1,0 +1,14 @@
+# Site settings
+title: Sometimes you need a Stuntman | by RIMdev {a Ritter Insurance Marketing development}
+description: > # this means to ignore newlines until "baseurl:"
+  Stuntman is a library for impersonating users during
+  development leveraging .NET Claims Identity.
+  Used primarily in web environments like ASP.NET MVC,
+  ASP.NET Web Forms, and OWIN applications that serve HTML.
+baseurl: "" # the subpath of your site, e.g. /blog/
+url: "http://stuntman.github.io"
+twitter_username: RIMdev
+github_username:  ritterim
+
+# Build settings
+markdown: kramdown
