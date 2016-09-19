@@ -120,7 +120,7 @@ namespace RimDev.Stuntman.Core
             {
                 var href = $"{options.SignInUri}?OverrideUserId={user.Id}&{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey])}";
 
-                usersHtml.Append($@"<li><a href=""{href}"" title=""Source: {user.Source}"">{user.Name}</a></li>");
+                usersHtml.Append($@"<li><a href=""{href}"" title=""{(string.IsNullOrEmpty(user.Description) ? null : WebUtility.HtmlEncode(user.Description) + " ")}Source: {user.Source}"">{user.Name}</a></li>");
             }
 
             return usersHtml.ToString();

@@ -49,8 +49,8 @@ namespace RimDev.Stuntman.Core
 
             var items = _options.Users.Select(x => string.Format(@"
 <li class=""{0}"">
-    <a href=""{1}?{2}={3}{4}"" class=""stuntman-item"" title=""Source: {5}"">
-        <h3>{6}</h3>
+    <a href=""{1}?{2}={3}{4}"" class=""stuntman-item"" title=""{5}Source: {6}"">
+        <h3>{7}</h3>
     </a>
 </li>",
                 string.Equals(currentUser, x.Name, StringComparison.OrdinalIgnoreCase)
@@ -62,6 +62,9 @@ namespace RimDev.Stuntman.Core
                 returnUrl == null
                     ? null
                     : $"&{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(returnUrl)}",
+                string.IsNullOrWhiteSpace(x.Description)
+                    ? null
+                    : WebUtility.HtmlEncode(x.Description) + " ",
                 x.Source,
                 x.Name))
                 .ToList();

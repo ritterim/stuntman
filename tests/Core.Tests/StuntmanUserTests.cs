@@ -149,6 +149,40 @@ namespace RimDev.Stuntman.Core.Tests
             }
         }
 
+        public class SetDescription
+        {
+            [Fact]
+            public void ThrowsForNullArguments()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetDescription(null));
+            }
+
+            [Theory,
+            InlineData(""),
+            InlineData(" ")]
+            public void ThrowsForEmptyValue(string description)
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .SetDescription(description));
+
+                Assert.Equal("description must not be empty or whitespace.", exception.Message);
+            }
+
+            [Fact]
+            public void SetsExpectedAccessToken()
+            {
+                const string Description = "Test Description";
+
+                var user = new StuntmanUser("user-1", "User 1")
+                    .SetDescription(Description);
+
+                Assert.Equal(Description, user.Description);
+            }
+        }
+
         public class SetSource
         {
             [Fact]
