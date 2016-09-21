@@ -7,7 +7,7 @@ namespace RimDev.Stuntman.Core
 {
     public class Resources
     {
-        private const string StuntmanEmbeddedAssetsPrefix = "RimDev.Stuntman.Core.assets.";
+        private const string StuntmanEmbeddedAssetsPrefix = "Core.assets.";
 
         public static string GetCss()
         {

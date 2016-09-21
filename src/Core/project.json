@@ -1,0 +1,26 @@
+﻿{
+    "version": "1.0.0-*",
+
+    "dependencies": {
+        "Newtonsoft.Json": "9.0.1"
+    },
+
+    "buildOptions": {
+        "embed": {
+            "include": "assets/*"
+        }
+    },
+
+    "frameworks": {
+        "net45": {
+            "dependencies": {
+                "Microsoft.Owin": "3.0.1",
+                "Microsoft.Owin.Security.OAuth": "3.0.1",
+                "Microsoft.Owin.Security.Cookies": "3.0.1"
+            },
+            "frameworkAssemblies": {
+                "System": ""
+            }
+        }
+    }
+}
