@@ -1,0 +1,17 @@
+﻿{
+  "version": "1.0.0-*",
+
+    "dependencies": {
+        "Core": {
+            "target": "project"
+        }
+    },
+
+  "frameworks": {
+    "net45": {
+        "frameworkAssemblies": {
+            "System.Web": "" 
+        }
+    } 
+  }
+}
