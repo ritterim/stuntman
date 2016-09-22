@@ -418,7 +418,7 @@ namespace RimDev.Stuntman.Core.Tests
         {
             [Theory,
                 InlineData(StuntmanAlignment.Left),
-                InlineData(StuntmanAlignment.Center)
+                InlineData(StuntmanAlignment.Center),
                 InlineData(StuntmanAlignment.Right)]
             public void SetsUserPickerAlignment(StuntmanAlignment alignment)
             {
