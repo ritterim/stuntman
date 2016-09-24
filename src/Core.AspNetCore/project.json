@@ -1,0 +1,28 @@
+﻿{
+    "version": "1.0.0-*",
+    "name": "RimDev.Stuntman.Core.AspNetCore",
+
+    "dependencies": {
+        "Newtonsoft.Json": "9.0.1"
+    },
+
+    "buildOptions": {
+        "outputName": "RimDev.Stuntman.Core.AspNetCore",
+        "compile": {
+            "include": [
+                "../../common/SolutionInfo.cs"
+            ]
+        }
+    },
+
+    "frameworks": {
+        "net45": {
+            "dependencies": {
+
+            },
+            "frameworkAssemblies": {
+
+            }
+        }
+    }
+}

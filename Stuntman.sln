@@ -1,7 +1,7 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 14
-VisualStudioVersion = 14.0.24720.0
+VisualStudioVersion = 14.0.25420.1
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{A3951ED6-0AD3-424C-B5BC-8008C80EEA02}"
 EndProject
@@ -18,6 +18,8 @@ EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.BearerTokenTester", "samples\UsageSample.BearerTokenTester\UsageSample.BearerTokenTester.csproj", "{CF8863AC-C37A-4E89-86FE-9B365818D9F2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.ServerTester", "samples\UsageSample.ServerTester\UsageSample.ServerTester.csproj", "{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}"
+EndProject
+Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Core.AspNetCore", "src\Core.AspNetCore\Core.AspNetCore.xproj", "{2822BCC5-31B2-45F3-A298-908643CA39BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -49,6 +51,10 @@ Global
 		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2822BCC5-31B2-45F3-A298-908643CA39BA}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2822BCC5-31B2-45F3-A298-908643CA39BA}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2822BCC5-31B2-45F3-A298-908643CA39BA}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2822BCC5-31B2-45F3-A298-908643CA39BA}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
