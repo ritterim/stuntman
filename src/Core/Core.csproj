@@ -94,6 +94,7 @@
     <Compile Include="..\..\common\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
+    <Compile Include="Resources.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Core.nuspec" />

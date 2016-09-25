@@ -5,10 +5,8 @@ using System.Text;
 
 namespace RimDev.Stuntman.Core
 {
-    public class Resources
+    public partial class Resources
     {
-        private const string StuntmanEmbeddedAssetsPrefix = "RimDev.Stuntman.Core.assets.";
-
         public static string GetCss()
         {
             var css = GetStuntmanResource("stuntman.css");
