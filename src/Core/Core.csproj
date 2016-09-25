@@ -89,6 +89,7 @@
       <Link>common\UserPicker.cs</Link>
     </Compile>
     <Compile Include="IAppBuilderExtensions.cs" />
+    <Compile Include="OwinStuntmanOptions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\common\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
