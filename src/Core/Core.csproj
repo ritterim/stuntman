@@ -61,30 +61,51 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Constants.cs" />
+    <Compile Include="..\Core.AspNetCore\common\Constants.cs">
+      <Link>common\Constants.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\Resources.cs">
+      <Link>common\Resources.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\StuntmanAlignment.cs">
+      <Link>common\StuntmanAlignment.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\StuntmanClaimConverter.cs">
+      <Link>common\StuntmanClaimConverter.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\StuntmanOptions.cs">
+      <Link>common\StuntmanOptions.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\StuntmanOptionsRetriever.cs">
+      <Link>common\StuntmanOptionsRetriever.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\StuntmanServerResponse.cs">
+      <Link>common\StuntmanServerResponse.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\StuntmanUser.cs">
+      <Link>common\StuntmanUser.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore\common\UserPicker.cs">
+      <Link>common\UserPicker.cs</Link>
+    </Compile>
     <Compile Include="IAppBuilderExtensions.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\common\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="Resources.cs" />
-    <Compile Include="StuntmanAlignment.cs" />
-    <Compile Include="StuntmanClaimConverter.cs" />
-    <Compile Include="StuntmanOptions.cs" />
-    <Compile Include="StuntmanOptionsRetriever.cs" />
-    <Compile Include="StuntmanServerResponse.cs" />
-    <Compile Include="StuntmanUser.cs" />
-    <Compile Include="UserPicker.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Core.nuspec" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="assets\stuntman.css" />
+    <EmbeddedResource Include="..\Core.AspNetCore\assets\stuntman-logo.png">
+      <Link>assets\stuntman-logo.png</Link>
+    </EmbeddedResource>
+    <EmbeddedResource Include="..\Core.AspNetCore\assets\stuntman.css">
+      <Link>assets\stuntman.css</Link>
+    </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="assets\stuntman-logo.png" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
