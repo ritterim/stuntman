@@ -119,7 +119,7 @@ namespace RimDev.Stuntman.Core.Tests
 
                 sut.AddUser(user);
 
-                var exception = Assert.Throws<ApplicationException>(() =>
+                var exception = Assert.Throws<Exception>(() =>
                     {
                         sut.AddUser(user);
                     });
