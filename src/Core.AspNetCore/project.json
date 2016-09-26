@@ -2,7 +2,10 @@
     "version": "1.0.0-*",
 
     "dependencies": {
-        "Newtonsoft.Json": "9.0.1"
+        "Newtonsoft.Json": "9.0.1",
+        "Microsoft.AspNetCore.Http.Abstractions": "1.0.0",
+        "Microsoft.AspNetCore.Authentication.Cookies": "1.0.0",
+        "Microsoft.AspNetCore.Authentication.JwtBearer": "1.0.0"
     },
 
     "buildOptions": {
@@ -21,20 +24,21 @@
     },
 
     "frameworks": {
-        "net45": {
+        "net451": {
             "dependencies": {
-
             },
             "frameworkAssemblies": {
                 "System.IdentityModel": "",
-                "System.Net.Http": "" 
+                "System.Net.Http": "",
+                "System.Runtime": "" 
             }
         },
-        "netstandard1.3": {
+        "netstandard1.4": {
             "dependencies": {
                 "System.Security.Claims": "4.0.1",
                 "System.IO.FileSystem": "4.0.1",
-                "System.Net.Http": "4.1.0" 
+                "System.Net.Http": "4.1.0",
+                "System.Runtime.Extensions": "4.1.0"
             }
         } 
     }
