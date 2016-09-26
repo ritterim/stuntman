@@ -72,7 +72,7 @@ namespace RimDev.Stuntman.Core
 
             if (!IsUniqueUser(user))
             {
-                throw new ApplicationException($"{nameof(user)} must have unique Id.");
+                throw new Exception($"{nameof(user)} must have unique Id.");
             }
 
             if (source != null)

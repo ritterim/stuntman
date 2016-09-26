@@ -25,9 +25,9 @@ namespace RimDev.Stuntman.Core
         {
             var resource = string.Empty;
 
-            using (var stream = Assembly
-                .GetExecutingAssembly()
-                .GetManifestResourceStream(StuntmanEmbeddedAssetsPrefix + resourceName))
+            var assembly = typeof(Resources).GetTypeInfo().Assembly;
+            using (var stream = assembly.GetManifestResourceStream(
+                StuntmanEmbeddedAssetsPrefix + resourceName))
             {
                 using (var streamReader = new StreamReader(stream))
                 {
@@ -40,9 +40,9 @@ namespace RimDev.Stuntman.Core
 
         public static byte[] GetStuntmanResourceBytes(string resourceName)
         {
-            using (var stream = Assembly
-                .GetExecutingAssembly()
-                .GetManifestResourceStream(StuntmanEmbeddedAssetsPrefix + resourceName))
+            var assembly = typeof(Resources).GetTypeInfo().Assembly;
+            using (var stream = assembly.GetManifestResourceStream(
+                StuntmanEmbeddedAssetsPrefix + resourceName))
             {
                 // http://stackoverflow.com/a/7073124 via http://stackoverflow.com/questions/1080442/how-to-convert-an-stream-into-a-byte-in-c
                 using (var memoryStream = new MemoryStream())

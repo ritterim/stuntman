@@ -13,7 +13,10 @@
             ]
         },
 
-        "embed": [ "assets/stuntman.css" ]
+        "embed": [
+            "assets/stuntman.css",
+            "assets/stuntman-logo.png"
+        ]
 
     },
 
@@ -23,8 +26,16 @@
 
             },
             "frameworkAssemblies": {
-
+                "System.IdentityModel": "",
+                "System.Net.Http": "" 
             }
-        }
+        },
+        "netstandard1.3": {
+            "dependencies": {
+                "System.Security.Claims": "4.0.1",
+                "System.IO.FileSystem": "4.0.1",
+                "System.Net.Http": "4.1.0" 
+            }
+        } 
     }
 }
