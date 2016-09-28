@@ -25,6 +25,12 @@ if not exist %MSBUILD% @set MSBUILD="%PROGRAMFILES%\MSBuild\12.0\Bin\MSBuild.exe
 if not exist %MSBUILD% @set MSBUILD="%SYSTEMROOT%\Microsoft.NET\Framework\v4.0.30319\MSBuild.exe"
 
 %MSBUILD% build\Build.msbuild /nologo /m /v:m /fl /flp:LogFile=msbuild.log;Verbosity=Detailed /nr:false %*
+if %ERRORLEVEL% neq 0 goto BuildFail
+
+dotnet test .\tests\Core.AspNetCore.Tests -c Release 
+if %ERRORLEVEL% neq 0 goto BuildFail
+
+dotnet pack .\src\Core.AspNetCore -c Release -o .\artifacts
 
 if %ERRORLEVEL% neq 0 goto BuildFail
 goto BuildSuccess

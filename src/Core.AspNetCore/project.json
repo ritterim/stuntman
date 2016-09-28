@@ -1,5 +1,20 @@
 ﻿{
     "version": "1.0.0-*",
+    "authors": [ "Ritter Insurance Marketing" ],
+    "copyright": "Copyright 2016 Ritter Insurance Marketing",
+
+    "packOptions": {
+        "licenseUrl": "https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE",
+        "projectUrl": "https://github.com/ritterim/stuntman",
+        "iconUrl": "https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png",
+        "summary": "Library for impersonating users during development leveraging ASP.NET Identity.",
+        "tags": [ "rimdev", "stuntman", "aspnet", "identity", "impersonation" ],
+        "requireLicenseAcceptance": false,
+        "repository": {
+            "type": "git",
+            "url": "https://github.com/ritterim/stuntman.git"
+        }
+    },
 
     "dependencies": {
         "Newtonsoft.Json": "9.0.1",
@@ -30,7 +45,7 @@
             "frameworkAssemblies": {
                 "System.IdentityModel": "",
                 "System.Net.Http": "",
-                "System.Runtime": "" 
+                "System.Runtime": ""
             }
         },
         "netstandard1.4": {
@@ -40,6 +55,6 @@
                 "System.Net.Http": "4.1.0",
                 "System.Runtime.Extensions": "4.1.0"
             }
-        } 
+        }
     }
 }
