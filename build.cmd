@@ -16,6 +16,12 @@ if not exist .nuget @mkdir .nuget
 
 :Build
 
+dotnet restore
+if %ERRORLEVEL% neq 0 goto BuildFail
+
+dotnet build .\**\project.json  -c Release 
+if %ERRORLEVEL% neq 0 goto BuildFail
+
 :: Find the most recent 32bit MSBuild.exe on the system. Also handle x86 operating systems, where %PROGRAMFILES(X86)%
 :: is not defined. Always quote the %MSBUILD% value when setting the variable and never quote %MSBUILD% references.
 set MSBUILD="%PROGRAMFILES(X86)%\MSBuild\14.0\Bin\MSBuild.exe"
