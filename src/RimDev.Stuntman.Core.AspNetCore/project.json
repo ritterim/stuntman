@@ -24,7 +24,6 @@
     },
 
     "buildOptions": {
-        "outputName": "RimDev.Stuntman.Core.AspNetCore",
         "compile": {
             "include": [
                 "../../common/SolutionInfo.cs"

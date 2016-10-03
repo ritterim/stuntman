@@ -62,31 +62,31 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\Core.AspNetCore\common\Constants.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\Constants.cs">
       <Link>common\Constants.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\Resources.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\Resources.cs">
       <Link>common\Resources.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\StuntmanAlignment.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\StuntmanAlignment.cs">
       <Link>common\StuntmanAlignment.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\StuntmanClaimConverter.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\StuntmanClaimConverter.cs">
       <Link>common\StuntmanClaimConverter.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\StuntmanOptions.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\StuntmanOptions.cs">
       <Link>common\StuntmanOptions.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\StuntmanOptionsRetriever.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\StuntmanOptionsRetriever.cs">
       <Link>common\StuntmanOptionsRetriever.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\StuntmanServerResponse.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\StuntmanServerResponse.cs">
       <Link>common\StuntmanServerResponse.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\StuntmanUser.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\StuntmanUser.cs">
       <Link>common\StuntmanUser.cs</Link>
     </Compile>
-    <Compile Include="..\Core.AspNetCore\common\UserPicker.cs">
+    <Compile Include="..\RimDev.Stuntman.Core.AspNetCore\common\UserPicker.cs">
       <Link>common\UserPicker.cs</Link>
     </Compile>
     <Compile Include="IAppBuilderExtensions.cs" />
@@ -102,13 +102,12 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="..\Core.AspNetCore\assets\stuntman-logo.png">
+    <EmbeddedResource Include="..\RimDev.Stuntman.Core.AspNetCore\assets\stuntman-logo.png">
       <Link>assets\stuntman-logo.png</Link>
     </EmbeddedResource>
-    <EmbeddedResource Include="..\Core.AspNetCore\assets\stuntman.css">
+    <EmbeddedResource Include="..\RimDev.Stuntman.Core.AspNetCore\assets\stuntman.css">
       <Link>assets\stuntman.css</Link>
     </EmbeddedResource>
   </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

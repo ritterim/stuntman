@@ -7,6 +7,6 @@ namespace RimDev.Stuntman.Core
 {
     public partial class Resources
     {
-        private const string StuntmanEmbeddedAssetsPrefix = "Core.AspNetCore.assets.";
+        private const string StuntmanEmbeddedAssetsPrefix = "RimDev.Stuntman.Core.AspNetCore.assets.";
     }
 }
