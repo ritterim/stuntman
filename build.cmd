@@ -36,7 +36,7 @@ if %ERRORLEVEL% neq 0 goto BuildFail
 dotnet test .\tests\Core.AspNetCore.Tests -c Release 
 if %ERRORLEVEL% neq 0 goto BuildFail
 
-dotnet pack .\src\Core.AspNetCore -c Release -o .\artifacts
+dotnet pack .\src\RimDev.Stuntman.Core.AspNetCore -c Release -o .\artifacts
 
 if %ERRORLEVEL% neq 0 goto BuildFail
 goto BuildSuccess
