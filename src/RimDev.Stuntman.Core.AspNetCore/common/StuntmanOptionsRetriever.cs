@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.Net;
+using System.Net.Http;
 
 namespace RimDev.Stuntman.Core
 {
@@ -13,9 +13,9 @@ namespace RimDev.Stuntman.Core
 
         public virtual string GetStringUsingWebClient(Uri uri)
         {
-            using (var webClient = new WebClient())
+            using (var httpClient = new HttpClient())
             {
-                return webClient.DownloadString(uri);
+                return httpClient.GetStringAsync(uri).Result;
             }
         }
     }

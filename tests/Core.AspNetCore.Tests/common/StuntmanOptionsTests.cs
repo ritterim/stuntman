@@ -119,7 +119,7 @@ namespace RimDev.Stuntman.Core.Tests
 
                 sut.AddUser(user);
 
-                var exception = Assert.Throws<ApplicationException>(() =>
+                var exception = Assert.Throws<Exception>(() =>
                     {
                         sut.AddUser(user);
                     });
@@ -418,7 +418,7 @@ namespace RimDev.Stuntman.Core.Tests
         {
             [Theory,
                 InlineData(StuntmanAlignment.Left),
-                InlineData(StuntmanAlignment.Center)
+                InlineData(StuntmanAlignment.Center),
                 InlineData(StuntmanAlignment.Right)]
             public void SetsUserPickerAlignment(StuntmanAlignment alignment)
             {

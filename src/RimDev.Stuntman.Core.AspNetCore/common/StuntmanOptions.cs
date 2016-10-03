@@ -1,5 +1,4 @@
-﻿using Microsoft.Owin.Security.OAuth;
-using Newtonsoft.Json;
+﻿using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,7 +6,7 @@ using System.Security.Principal;
 
 namespace RimDev.Stuntman.Core
 {
-    public class StuntmanOptions
+    public partial class StuntmanOptions
     {
         private readonly string _stuntmanRootPath;
         private readonly StuntmanOptionsRetriever _stuntmanOptionsRetriever;
@@ -24,13 +23,6 @@ namespace RimDev.Stuntman.Core
             if (!_stuntmanRootPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
                 _stuntmanRootPath += "/";
         }
-
-        /// <summary>
-        /// Useful for testing state of IOwinContext post sign-in since the
-        /// request is redirected. Therefore, you cannot just add additional OWIN
-        /// middleware to check the state.
-        /// </summary>
-        public Action<OAuthValidateIdentityContext> AfterBearerValidateIdentity { get; set; }
 
         /// <summary>
         /// The current alignment of the on-screen user picker.
@@ -80,7 +72,7 @@ namespace RimDev.Stuntman.Core
 
             if (!IsUniqueUser(user))
             {
-                throw new ApplicationException($"{nameof(user)} must have unique Id.");
+                throw new Exception($"{nameof(user)} must have unique Id.");
             }
 
             if (source != null)
@@ -159,6 +151,7 @@ namespace RimDev.Stuntman.Core
         /// with server mode enabled.
         /// Example: https://my-application.example.com/
         /// </param>
+        /// <param name="onException">Called if an error occurs during configuration</param>
         public StuntmanOptions TryAddConfigurationFromServer(string serverBaseUrl, Action<Exception> onException = null)
         {
             if (serverBaseUrl == null) throw new ArgumentNullException(nameof(serverBaseUrl));

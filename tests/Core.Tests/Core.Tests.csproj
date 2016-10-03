@@ -87,15 +87,23 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="..\Core.AspNetCore.Tests\common\StuntmanClaimConverterTests.cs">
+      <Link>common\StuntmanClaimConverterTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore.Tests\common\StuntmanOptionsTests.cs">
+      <Link>common\StuntmanOptionsTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore.Tests\common\StuntmanUserTests.cs">
+      <Link>common\StuntmanUserTests.cs</Link>
+    </Compile>
+    <Compile Include="..\Core.AspNetCore.Tests\common\UserPickerTests.cs">
+      <Link>common\UserPickerTests.cs</Link>
+    </Compile>
     <Compile Include="IAppBuilderExtensionsTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="..\..\common\SolutionInfo.cs">
       <Link>Properties\SolutionInfo.cs</Link>
     </Compile>
-    <Compile Include="StuntmanClaimConverterTests.cs" />
-    <Compile Include="StuntmanOptionsTests.cs" />
-    <Compile Include="StuntmanUserTests.cs" />
-    <Compile Include="UserPickerTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\src\Core\Core.csproj">
