@@ -1,3 +1,3 @@
 ﻿using System.Reflection;
 
-[assembly: AssemblyTitle("RimDev.Stuntman.Core.AspNetCore.Tests")]
+[assembly: AssemblyTitle("RimDev.Stuntman.AspNetCore.Tests")]
