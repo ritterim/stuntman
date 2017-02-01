@@ -25,6 +25,19 @@ namespace RimDev.Stuntman.Core
         }
 
         /// <summary>
+        /// Determines whether bearer token authentication is enabled
+        /// when calling `UseStuntman`.
+        /// </summary>
+        public bool AllowBearerTokenAuthentication { get; set; } = true;
+
+        /// <summary>
+        /// Determines whether the UI-driven authentication is enabled
+        /// when calling `UseStuntman`. This also determines whether cookie authentication is enabled
+        /// since the two are related.
+        /// </summary>
+        public bool AllowCookieAuthentication { get; set; } = true;
+
+        /// <summary>
         /// The current alignment of the on-screen user picker.
         /// </summary>
         public StuntmanAlignment UserPickerAlignment { get; private set; }

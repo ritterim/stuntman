@@ -21,78 +21,84 @@ namespace RimDev.Stuntman.Core
         /// </summary>
         public static void UseStuntman(this IAppBuilder app, StuntmanOptions options)
         {
-            app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
+            if (options.AllowBearerTokenAuthentication)
             {
-                AuthenticationType = Constants.StuntmanAuthenticationType,
-                Provider = new StuntmanOAuthBearerProvider(options),
-                AccessTokenFormat = new StuntmanOAuthAccessTokenFormat()
-            });
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationType = Constants.StuntmanAuthenticationType,
-                LoginPath = new PathString(options.SignInUri),
-                LogoutPath = new PathString(options.SignOutUri),
-                ReturnUrlParameter = Constants.StuntmanOptions.ReturnUrlQueryStringKey,
-            });
-
-            app.Map(options.SignInUri, signin =>
-            {
-                signin.Use(async (context, next) =>
+                app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
                 {
-                    var claims = new List<Claim>();
+                    AuthenticationType = Constants.StuntmanAuthenticationType,
+                    Provider = new StuntmanOAuthBearerProvider(options),
+                    AccessTokenFormat = new StuntmanOAuthAccessTokenFormat()
+                });
+            }
 
-                    var overrideUserId = context.Request.Query[Constants.StuntmanOptions.OverrideQueryStringKey];
+            if (options.AllowCookieAuthentication)
+            {
+                app.UseCookieAuthentication(new CookieAuthenticationOptions
+                {
+                    AuthenticationType = Constants.StuntmanAuthenticationType,
+                    LoginPath = new PathString(options.SignInUri),
+                    LogoutPath = new PathString(options.SignOutUri),
+                    ReturnUrlParameter = Constants.StuntmanOptions.ReturnUrlQueryStringKey,
+                });
 
-                    if (string.IsNullOrWhiteSpace(overrideUserId))
+                app.Map(options.SignInUri, signin =>
+                {
+                    signin.Use(async (context, next) =>
                     {
-                        await next.Invoke();
+                        var claims = new List<Claim>();
 
-                        ShowLoginUI(context, options);
-                    }
-                    else
-                    {
-                        var user = options.Users
-                            .Where(x => x.Id == overrideUserId)
-                            .FirstOrDefault();
+                        var overrideUserId = context.Request.Query[Constants.StuntmanOptions.OverrideQueryStringKey];
 
-                        if (user == null)
+                        if (string.IsNullOrWhiteSpace(overrideUserId))
                         {
-                            context.Response.StatusCode = 404;
-                            await context.Response.WriteAsync(
-                                $"options provided does not include the requested '{overrideUserId}' user.");
+                            await next.Invoke();
 
-                            return;
+                            ShowLoginUI(context, options);
                         }
+                        else
+                        {
+                            var user = options.Users
+                                .Where(x => x.Id == overrideUserId)
+                                .FirstOrDefault();
 
-                        claims.Add(new Claim(ClaimTypes.Name, user.Name));
-                        claims.AddRange(user.Claims);
+                            if (user == null)
+                            {
+                                context.Response.StatusCode = 404;
+                                await context.Response.WriteAsync(
+                                    $"options provided does not include the requested '{overrideUserId}' user.");
 
-                        var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
+                                return;
+                            }
 
-                        var authManager = context.Authentication;
+                            claims.Add(new Claim(ClaimTypes.Name, user.Name));
+                            claims.AddRange(user.Claims);
 
-                        authManager.SignIn(identity);
+                            var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
 
-                        await next.Invoke();
-                    }
+                            var authManager = context.Authentication;
+
+                            authManager.SignIn(identity);
+
+                            await next.Invoke();
+                        }
+                    });
+
+                    RedirectToReturnUrl(signin);
                 });
 
-                RedirectToReturnUrl(signin);
-            });
-
-            app.Map(options.SignOutUri, signout =>
-            {
-                signout.Use((context, next) =>
+                app.Map(options.SignOutUri, signout =>
                 {
-                    var authManager = context.Authentication;
-                    authManager.SignOut(Constants.StuntmanAuthenticationType);
+                    signout.Use((context, next) =>
+                    {
+                        var authManager = context.Authentication;
+                        authManager.SignOut(Constants.StuntmanAuthenticationType);
 
-                    return next.Invoke();
+                        return next.Invoke();
+                    });
+
+                    RedirectToReturnUrl(signout);
                 });
-
-                RedirectToReturnUrl(signout);
-            });
+            }
 
             if (options.ServerEnabled)
             {
