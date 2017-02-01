@@ -18,81 +18,87 @@ namespace RimDev.Stuntman.Core
     {
         public static void UseStuntman(this IApplicationBuilder app, StuntmanOptions options)
         {
-            app.UseJwtBearerAuthentication(new JwtBearerOptions
+            if (options.AllowBearerTokenAuthentication)
             {
-                AuthenticationScheme = Constants.StuntmanAuthenticationType,
-                Events = new JwtBearerEvents()
+                app.UseJwtBearerAuthentication(new JwtBearerOptions
                 {
-                    OnMessageReceived = context => StuntmanOnMessageReceived(options, context),
-                }
-            });
-
-            app.UseCookieAuthentication(new CookieAuthenticationOptions
-            {
-                AuthenticationScheme = Constants.StuntmanAuthenticationType,
-                LoginPath = new PathString(options.SignInUri),
-                LogoutPath = new PathString(options.SignOutUri),
-                ReturnUrlParameter = Constants.StuntmanOptions.ReturnUrlQueryStringKey,
-            });
-
-            app.Map(options.SignInUri, signin =>
-            {
-                signin.Use(async (context, next) =>
-                {
-                    var claims = new List<Claim>();
-
-                    var overrideUserId = context.Request.Query[Constants.StuntmanOptions.OverrideQueryStringKey];
-
-                    if (string.IsNullOrWhiteSpace(overrideUserId))
+                    AuthenticationScheme = Constants.StuntmanAuthenticationType,
+                    Events = new JwtBearerEvents()
                     {
-                        await next.Invoke();
-
-                        ShowLoginUI(context, options);
+                        OnMessageReceived = context => StuntmanOnMessageReceived(options, context),
                     }
-                    else
-                    {
-                        var user = options.Users
-                            .Where(x => x.Id == overrideUserId)
-                            .FirstOrDefault();
+                });
+            }
 
-                        if (user == null)
+            if (options.AllowCookieAuthentication)
+            {
+                app.UseCookieAuthentication(new CookieAuthenticationOptions
+                {
+                    AuthenticationScheme = Constants.StuntmanAuthenticationType,
+                    LoginPath = new PathString(options.SignInUri),
+                    LogoutPath = new PathString(options.SignOutUri),
+                    ReturnUrlParameter = Constants.StuntmanOptions.ReturnUrlQueryStringKey,
+                });
+
+                app.Map(options.SignInUri, signin =>
+                {
+                    signin.Use(async (context, next) =>
+                    {
+                        var claims = new List<Claim>();
+
+                        var overrideUserId = context.Request.Query[Constants.StuntmanOptions.OverrideQueryStringKey];
+
+                        if (string.IsNullOrWhiteSpace(overrideUserId))
                         {
-                            context.Response.StatusCode = 404;
-                            await context.Response.WriteAsync(
-                                $"options provided does not include the requested '{overrideUserId}' user.");
+                            await next.Invoke();
 
-                            return;
+                            ShowLoginUI(context, options);
                         }
+                        else
+                        {
+                            var user = options.Users
+                                .Where(x => x.Id == overrideUserId)
+                                .FirstOrDefault();
 
-                        claims.Add(new Claim(ClaimTypes.Name, user.Name));
-                        claims.AddRange(user.Claims);
+                            if (user == null)
+                            {
+                                context.Response.StatusCode = 404;
+                                await context.Response.WriteAsync(
+                                    $"options provided does not include the requested '{overrideUserId}' user.");
 
-                        var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
-                        var principal = new ClaimsPrincipal(identity);
+                                return;
+                            }
 
+                            claims.Add(new Claim(ClaimTypes.Name, user.Name));
+                            claims.AddRange(user.Claims);
+
+                            var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
+                            var principal = new ClaimsPrincipal(identity);
+
+                            var authManager = context.Authentication;
+
+                            await authManager.SignInAsync(Constants.StuntmanAuthenticationType, principal);
+
+                            await next.Invoke();
+                        }
+                    });
+
+                    RedirectToReturnUrl(signin);
+                });
+
+                app.Map(options.SignOutUri, signout =>
+                {
+                    signout.Use(async (context, next) =>
+                    {
                         var authManager = context.Authentication;
-
-                        await authManager.SignInAsync(Constants.StuntmanAuthenticationType, principal);
+                        await authManager.SignOutAsync(Constants.StuntmanAuthenticationType);
 
                         await next.Invoke();
-                    }
+                    });
+
+                    RedirectToReturnUrl(signout);
                 });
-
-                RedirectToReturnUrl(signin);
-            });
-
-            app.Map(options.SignOutUri, signout =>
-            {
-                signout.Use(async (context, next) =>
-                {
-                    var authManager = context.Authentication;
-                    await authManager.SignOutAsync(Constants.StuntmanAuthenticationType);
-
-                    await next.Invoke();
-                });
-
-                RedirectToReturnUrl(signout);
-            });
+            }
 
             if (options.ServerEnabled)
             {
@@ -226,9 +232,12 @@ namespace RimDev.Stuntman.Core
 
                     if (user == null)
                     {
-                        context.Response.StatusCode = 403;
-                        await context.HttpContext.Response.WriteAsync(
-                            $"options provided does not include the requested '{accessToken}' user.");
+                        if (!options.AllowBearerTokenPassthrough)
+                        {
+                            context.Response.StatusCode = 403;
+                            await context.HttpContext.Response.WriteAsync(
+                                $"options provided does not include the requested '{accessToken}' user.");
+                        }
 
                         context.Ticket = null;
                         context.SkipToNextMiddleware();
