@@ -1,4 +1,5 @@
 ﻿using Microsoft.Owin.Security;
+using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using Owin;
@@ -473,6 +474,63 @@ namespace RimDev.Stuntman.Core.Tests
                     var response = await request.GetAsync();
 
                     Assert.Null(authenticateResult);
+                }
+            }
+
+            [Fact]
+            public async Task DoesNotImmediatelyIssue403_WhenBearerTokenPassthroughIsEnabled()
+            {
+                var options = new StuntmanOptions()
+                    .AddUser(
+                    new StuntmanUser("user-1", "User 1")
+                    .SetAccessToken("123"));
+
+                options.AllowBearerTokenPassthrough = true;
+                options.AllowCookieAuthentication = false;
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                    app.UseOAuthBearerAuthentication(new OAuthBearerAuthenticationOptions()
+                    {
+                        Challenge = "Bearer StuntmanTest",
+                        AuthenticationMode = AuthenticationMode.Active,
+                        AuthenticationType = Constants.StuntmanAuthenticationType
+                    });
+
+                    app.Use((context, next) =>
+                    {
+                        if (context.Authentication.User != null &&
+                            context.Authentication.User.Identity != null &&
+                            context.Authentication.User.Identity.IsAuthenticated)
+                        {
+                            return next();
+                        }
+                        else
+                        {
+                            context.Authentication.Challenge(Constants.StuntmanAuthenticationType);
+
+                            return Task.FromResult(false);
+                        }
+                    });
+
+                    app.Map("/test", root =>
+                    {
+                        root.Run(context =>
+                        {
+                            return Task.FromResult(true);
+                        });
+                    });
+                }))
+                {
+                    var request = server.CreateRequest("test");
+
+                    request.AddHeader("Authorization", "Bearer 1234");
+
+                    var response = await request.GetAsync();
+
+                    Assert.Equal(401, (int)response.StatusCode);
+                    Assert.Contains("StuntmanTest", response.Headers.WwwAuthenticate.Select(x => x.Parameter));
                 }
             }
         }

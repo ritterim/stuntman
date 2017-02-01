@@ -238,11 +238,14 @@ namespace RimDev.Stuntman.Core
 
                         if (user == null)
                         {
-                            context.Response.StatusCode = 403;
-                            context.Response.ReasonPhrase =
-                                $"options provided does not include the requested '{accessToken}' user.";
+                            if (!options.AllowBearerTokenPassthrough)
+                            {
+                                context.Response.StatusCode = 403;
+                                context.Response.ReasonPhrase =
+                                    $"options provided does not include the requested '{accessToken}' user.";
 
-                            context.Rejected();
+                                context.Rejected();
+                            }
 
                             return Task.FromResult(false);
                         }
