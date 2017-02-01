@@ -31,6 +31,13 @@ namespace RimDev.Stuntman.Core
         public bool AllowBearerTokenAuthentication { get; set; } = true;
 
         /// <summary>
+        /// Allows multiple bearer token providers to be used.
+        /// When `true`, a bearer token not matching a Stuntman user
+        /// does not result in an immediate `403`.
+        /// </summary>
+        public bool AllowBearerTokenPassthrough { get; set; }
+
+        /// <summary>
         /// Determines whether the UI-driven authentication is enabled
         /// when calling `UseStuntman`. This also determines whether cookie authentication is enabled
         /// since the two are related.
