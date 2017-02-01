@@ -1,4 +1,5 @@
-﻿using Microsoft.Owin.Testing;
+﻿using Microsoft.Owin.Security;
+using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
 using Owin;
 using System;
@@ -381,6 +382,97 @@ namespace RimDev.Stuntman.Core.Tests
                         options.ServerUri);
 
                     Assert.Equal(HttpStatusCode.NotFound, response.StatusCode);
+                }
+            }
+
+            [Fact]
+            public async Task DoesNotMapSignInUri_WhenCookieAuthenticationIsDiabled()
+            {
+                var options = new StuntmanOptions();
+
+                options.AllowCookieAuthentication = false;
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(options.SignInUri);
+
+                    Assert.Equal(404, (int)response.StatusCode);
+                }
+            }
+
+            [Fact]
+            public async Task DoesNotRedirectChallenge_WhenCookieAuthenticationIsDiabled()
+            {
+                var options = new StuntmanOptions();
+
+                options.AllowCookieAuthentication = false;
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+
+                    app.Map("/test", root =>
+                    {
+                        root.Run(context =>
+                        {
+                            /**
+                             * Issuing a challenge for a non-existent authentication type
+                             * will result in a 401.
+                             *
+                             * Normal behavior results in a 302 to redirect to the login UI.
+                             */
+                            context.Authentication.Challenge(Constants.StuntmanAuthenticationType);
+
+                            return Task.FromResult(true);
+                        });
+                    });
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync("test");
+
+                    Assert.Equal(401, (int)response.StatusCode);
+                }
+            }
+
+            [Fact]
+            public async Task DoesNotHydrateIdentity_WhenBearerTokenAuthenticationIsDiabled()
+            {
+                var options = new StuntmanOptions()
+                    .AddUser(
+                    new StuntmanUser("user-1", "User 1")
+                    .SetAccessToken("123"));
+
+                options.AllowBearerTokenAuthentication = false;
+
+                var authenticateResult = new AuthenticateResult(null, new AuthenticationProperties(), new AuthenticationDescription());
+
+                using (var server = TestServer.Create(app =>
+                {
+                    app.UseStuntman(options);
+
+                    app.Map("/test", root =>
+                    {
+                        root.Run(async context =>
+                        {
+                            /**
+                             * This result of `AuthenticateAsync` should be `null` since
+                             * nothing is handling the `Authorization` header during the request.
+                             */
+                            authenticateResult = await context.Authentication.AuthenticateAsync(Constants.StuntmanAuthenticationType);
+                        });
+                    });
+                }))
+                {
+                    var request = server.CreateRequest("test");
+
+                    request.AddHeader("Authorization", "Bearer 123");
+
+                    var response = await request.GetAsync();
+
+                    Assert.Null(authenticateResult);
                 }
             }
         }
