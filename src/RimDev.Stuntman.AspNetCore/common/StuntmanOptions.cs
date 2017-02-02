@@ -119,11 +119,11 @@ namespace RimDev.Stuntman.Core
                 ? _stuntmanOptionsRetriever.GetStringFromLocalFile(uri)
                 : _stuntmanOptionsRetriever.GetStringUsingWebClient(uri);
 
-            var users = JsonConvert.DeserializeObject<IEnumerable<StuntmanUser>>(
+            var users = JsonConvert.DeserializeObject<StuntmanServerResponse>(
                 json,
                 new StuntmanClaimConverter());
 
-            foreach (var user in users)
+            foreach (var user in users.Users)
             {
                 AddUser(user, pathOrUrl);
             }

@@ -6,7 +6,7 @@ using Xunit;
 
 namespace RimDev.Stuntman.Core.Tests
 {
-    public class StuntmanOptionsTests
+    public partial class StuntmanOptionsTests
     {
         public class SignInUriProperty
         {
@@ -140,7 +140,7 @@ namespace RimDev.Stuntman.Core.Tests
             }
         }
 
-        public class AddUsersFromJsonMethod
+        public partial class AddUsersFromJsonMethod
         {
             [Fact]
             public void ThrowsForNullPathOrUrl()
@@ -169,86 +169,6 @@ namespace RimDev.Stuntman.Core.Tests
                 Assert.Throws<JsonReaderException>(
                     () => new StuntmanOptions(stuntmanOptionsRetriever: new TestStuntmanOptionsRetriever(json))
                         .AddUsersFromJson("C:\\test.json"));
-            }
-
-            [Fact]
-            public void AddsUsersFromFileSystem()
-            {
-                const string Id1 = "user-1";
-                const string Name1 = "Test Name 1";
-
-                const string Id2 = "user-2";
-                const string Name2 = "Test Name 2";
-
-                var json = $@"[{{""Id"":""{Id1}"",""Name"":""{Name1}""}},{{""Id"":""{Id2}"",""Name"":""{Name2}""}}]";
-
-                var options = new StuntmanOptions(
-                    stuntmanOptionsRetriever:
-                        new TestStuntmanOptionsRetriever(localFileStringToReturn: json))
-                    .AddUsersFromJson("C:\\test.json");
-
-                Assert.Equal(2, options.Users.Count);
-
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Id == Id1));
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Name == Name1));
-
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Id == Id2));
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Name == Name2));
-            }
-
-            [Fact]
-            public void AddsUsersFromWebClientRequest()
-            {
-                const string Id1 = "user-1";
-                const string Name1 = "Test Name 1";
-
-                const string Id2 = "user-2";
-                const string Name2 = "Test Name 2";
-
-                var json = $@"[{{""Id"":""{Id1}"",""Name"":""{Name1}""}},{{""Id"":""{Id2}"",""Name"":""{Name2}""}}]";
-
-                var options = new StuntmanOptions(
-                    stuntmanOptionsRetriever:
-                        new TestStuntmanOptionsRetriever(webClientStringToReturn: json))
-                    .AddUsersFromJson("https://example.com");
-
-                Assert.Equal(2, options.Users.Count);
-
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Id == Id1));
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Name == Name1));
-
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Id == Id2));
-                Assert.NotNull(options.Users.SingleOrDefault(x => x.Name == Name2));
-            }
-
-            [Fact]
-            public void AddsUserClaims()
-            {
-                const string ClaimType = "TestClaim";
-                const string ClaimValue = "TestClaimValue";
-
-                var users = new List<StuntmanUser>
-                {
-                    new StuntmanUser("user-1", "Test Name 1")
-                        .AddClaim(ClaimType, ClaimValue),
-                    new StuntmanUser("user-2", "Test Name 2")
-                };
-
-                var json = JsonConvert.SerializeObject(users);
-
-                var options = new StuntmanOptions(
-                    stuntmanOptionsRetriever:
-                        new TestStuntmanOptionsRetriever(localFileStringToReturn: json))
-                    .AddUsersFromJson("C:\\test.json");
-
-                var user1 = options.Users.SingleOrDefault(x => x.Claims.Any());
-
-                Assert.NotNull(user1);
-
-                var testClaim = user1.Claims.Single();
-
-                Assert.Equal(ClaimType, testClaim.Type);
-                Assert.Equal(ClaimValue, testClaim.Value);
             }
         }
 
