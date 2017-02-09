@@ -1,8 +1,6 @@
 ﻿using Microsoft.Owin.Testing;
-using System;
-using System.Collections.Generic;
 using System.Linq;
-using System.Text;
+using System.Security.Claims;
 using System.Threading.Tasks;
 using Xunit;
 
@@ -132,6 +130,42 @@ namespace RimDev.Stuntman.Core.Tests
 
                 Assert.Equal(ClaimType, testClaim.Type);
                 Assert.Equal(ClaimValue, testClaim.Value);
+            }
+
+            [Fact]
+            public async Task AllowsOptionalConfigurationOfUsers()
+            {
+                const string TestClaim = "test-claim";
+                const string TestClaimValue = "test-claim-value";
+
+                var json = string.Empty;
+
+                var stuntmanOptions = new StuntmanOptions()
+                    .AddUser(new StuntmanUser("user-1", "Test Name 1"))
+                    .AddUser(new StuntmanUser("user-2", "Test Name 2"));
+
+                using (var server = TestServer.Create(app =>
+                {
+                    stuntmanOptions.EnableServer();
+
+                    app.UseStuntman(stuntmanOptions);
+                }))
+                {
+                    var response = await server.HttpClient.GetAsync(stuntmanOptions.ServerUri);
+
+                    json = await response.Content.ReadAsStringAsync();
+                }
+
+                var options = new StuntmanOptions(
+                    stuntmanOptionsRetriever:
+                        new TestStuntmanOptionsRetriever(localFileStringToReturn: json))
+                    .AddUsersFromJson(
+                        "C:\\test.json",
+                        user => user.Claims.Add(new Claim(TestClaim, TestClaimValue)));
+
+                Assert.True(options.Users.Any());
+                Assert.True(options.Users.All(
+                    x => x.Claims.Count(y => y.Type == TestClaim && y.Value == TestClaimValue) == 1));
             }
         }
     }
