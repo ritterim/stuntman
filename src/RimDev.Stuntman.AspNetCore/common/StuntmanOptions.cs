@@ -109,7 +109,9 @@ namespace RimDev.Stuntman.Core
         /// Add users from JSON at the file system path or URL specified.
         /// The expected JSON format is [{"Id":"user-1","Name":"User 1"}]
         /// </summary>
-        public StuntmanOptions AddUsersFromJson(string pathOrUrl)
+        /// <param name="pathOrUrl">The path or url to the JSON file.</param>
+        /// <param name="configureUsers">Optionally configure all users prior to being added.</param>
+        public StuntmanOptions AddUsersFromJson(string pathOrUrl, Action<StuntmanUser> configureUsers = null)
         {
             if (pathOrUrl == null) throw new ArgumentNullException(nameof(pathOrUrl));
 
@@ -125,6 +127,8 @@ namespace RimDev.Stuntman.Core
 
             foreach (var user in users.Users)
             {
+                configureUsers?.Invoke(user);
+
                 AddUser(user, pathOrUrl);
             }
 
