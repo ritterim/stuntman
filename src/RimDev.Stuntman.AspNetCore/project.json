@@ -1,7 +1,7 @@
 ﻿{
     "version": "1.1.1-*",
     "authors": [ "Ritter Insurance Marketing" ],
-    "copyright": "Copyright 2016 Ritter Insurance Marketing",
+    "copyright": "Copyright 2017 Ritter Insurance Marketing",
 
     "packOptions": {
         "licenseUrl": "https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE",
