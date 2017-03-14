@@ -83,6 +83,16 @@ namespace RimDev.Stuntman.Core
             return AddUser(user, Constants.StuntmanOptions.LocalSource);
         }
 
+        public StuntmanOptions AddUsers(IEnumerable<StuntmanUser> users) 
+        {
+            if (users == null) throw new ArgumentNullException(nameof(users));
+
+            foreach(var user in users)
+                AddUser(user);
+
+            return this;
+        }
+
         /// <remarks>
         /// This method is private to avoid exposing it as part of the public API.
         /// </remarks>
