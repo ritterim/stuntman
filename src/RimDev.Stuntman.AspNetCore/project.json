@@ -6,7 +6,7 @@
     "packOptions": {
         "licenseUrl": "https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE",
         "projectUrl": "https://github.com/ritterim/stuntman",
-        "iconUrl": "https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png",
+        "iconUrl": "https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman_helmet.128.png",
         "summary": "Library for impersonating users during development leveraging ASP.NET Identity.",
         "tags": [ "rimdev", "stuntman", "aspnet", "identity", "impersonation" ],
         "requireLicenseAcceptance": false,
