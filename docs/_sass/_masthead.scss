@@ -1,0 +1,32 @@
+.masthead {
+	&.segment {
+		min-height: 700px;
+		padding: 1em 0;
+    &.ui.inverted {
+      background: rgba($background-masthead, 0.9);
+    }
+	}
+	.logo.item img {
+		margin-right: 1em;
+	}
+	.ui.menu .ui.button {
+		margin-left: 0.5em;
+	}
+	h1.ui.header {
+		margin-bottom: .5em;
+    font-family: $headline-font;
+		font-size: 4em;
+		font-weight: normal;
+	}
+  video.background {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    min-width: 100%;
+    min-height: 100%;
+    width: auto;
+    height: auto;
+    z-index: -100;
+    transform: translate(-50%, -50%);
+  }
+}

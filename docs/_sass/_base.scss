@@ -1,250 +1,87 @@
-// HTML5
-header, section, footer, aside, nav, article, figure {
-  display: block;
+.ui {
+	.code {
+		background: cornsilk;
+		font-family: monospace;
+		font-size: 120%;
+	}
+	.border {
+		border: .7em solid lighten($text-color, 55%);
+	}
+	&h3 {
+		color: lighten($text-color, 20%);
+	}
+	&.stripe.segment {
+		background: $background-color;
+		&.quote {
+			padding: 0em;
+			.grid {
+				.column {
+					padding: 4em 0;
+				}
+			}
+		}
+	}
+	&.vertical.stripe {
+		padding: 8em 0;
+		h3 {
+			font-size: 2em;
+		}
+		p {
+			color: $text-color;
+			font-family: $body-font;
+			font-size: 1.33em;
+			line-height: 1.7em;
+			mark {
+				background: transparent;
+				color: $mark-color;
+			}
+			+ h3 {
+				margin-top: 3em;
+			}
+		}
+		.button + h3 {
+			margin-top: 3em;
+		}
+		.floated.image {
+			clear: both;
+		}
+		.horizontal.divider {
+			margin: 3em 0;
+		}
+	}
+	&.footer.segment {
+		background: darken($mark-color, 30%);
+		color: lighten($mark-color, 20%);
+		line-height: 1.7em;
+		font-family: $body-font;
+		padding: 5em 0em;
+	}
+	&.hidden.menu,
+	&.secondary.pointing.menu .toc.item {
+		display: none;
+	}
+	&.top.inverted.fixed.menu {
+		background: rgba($background-masthead, 0.9);
+	}
 }
 
-menu { list-style: none; }
-
-::-moz-selection,
-::selection {
-  background: $blue;
-  color: $text-color;
-  text-shadow: none;
-}
-
-html, body {height: 100%;}
-
-html { -webkit-font-smoothing: antialiased; }
-
-body {
-  font-family: $body-font, arial, sans-serif;
-  color: $text-color;
-  font-size: 1.8em;
-  line-height: 2em;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
-
-h1, h2, h3, h4, h5, h6  {
-  font-family: $headline-font, sans-serif;
-  color: $text-secondary;
-  margin: 1em auto;
-}
-h2 {font-size: 1.9em;}
-h3 {
-  font-size: 1.5em;
-  color: $blue;
-  text-transform: uppercase;
-}
-h4 {font-size: 1.3em;}
-
-a {
-  color: $color;
-  @include transition (all 0.4s ease-in-out);
-  &:hover {color: darken($color, 10%);}
-}
-
-.btn, a.btn {
-  @include transition (all 0.4s ease-in-out);
-  font-family: $body-font, arial, sans-serif;
-  .fa {margin-right: 0.3em;}
-  &:focus {color: #fff;}
-}
-
-.offset-header {
-  padding-top: 9em;
-}
-
-pre {
-  @include border-radius(0);
-  font-size: 0.9em;
-  line-height: 1.5em;
-  overflow-y: scroll;
-  padding: 1.5em !important;
-  word-wrap: normal;
-}
-
-pre.prettyprint {border: none !important;}
-
-header {
-  padding: 0.5em 0;
-  background: $color;
-  color: $white;
-  position: fixed;
-  width: 100%;
-  .logo {margin: 0;}
-
-  &.navbar-fixed-top {
-    background: $white;
-    @include opacity(0.9);
-    z-index: 1000;
-    @include box-shadow (0 0 4px rgba(0,0,0,0.4));
-    .logo-title {color: crimson;}
-    .logo {
-      margin: 0;
-      a {
-        color: $white;
-        &:hover {
-          text-decoration: none;
-        }
-      }
-    }
-    .main-nav .nav .nav-item a {
-      color: $text-secondary;
-    }
-  }
-  .logo-title {
-    font-family: $logo-font, $headline-font, sans-serif;
-    color: $white;
-    font-style: italic;
-    font-size: 1.3em;
-  }
-  .logo-title img {
-    vertical-align: top;
-  }
-  .main-nav {
-    button {
-      background: darken($color, 30%);
-      color: $white !important;
-      @include border-radius(4px);
-      &:focus {
-        outline: none;
-      }
-      .icon-bar {
-        background-color: $white;
-      }
-    }
-    .navbar-collapse {
-      padding: 0;
-    }
-    .nav {
-      .nav-item {
-        font-weight: normal;
-        margin-right: 30px;
-        font-family: $body-font, sans-serif;
-        &.active {
-          a {
-            color: $white;
-            background: none;
-          }
-        }
-        a {
-          color: darken($white, 20%);
-          @include transition (none);
-          padding: 15px 10px;
-          &:hover {
-            color: darken($color, 30%);
-            background: none;
-          }
-          &:focus, &:active {
-            outline: none;
-            background: none;
-          }
-        }
-        &.active {
-          color: $color;
-        }
-        &.last {
-          margin-right: 0;
-        }
-      }
-    }
-  }
-}
-
-.promo {
-  background: $color;
-  color: $white;
-  padding-top: 8.5em;
-  padding-bottom: 4em;
-  .title {
-    color: darken($color, 30%);
-    margin-top: 0;
-    .highlight {
-      color: $color-2;
-    }
-  }
-
-  .intro {
-    max-width: 80%;
-    font-size: 2.5em;
-    line-height: 1.3em;
-    margin: 0 auto;
-    margin: 1em auto;
-  }
-
-  .btn-stuntman {
-    border-radius: 0;
-    margin-right: 0.7em;
-    font-size: 1.2em;
-    padding: 0.5em 2em;
-  }
-}
-
-.about {
-  padding: 80px 0;
-  background: $gainsboro;
-  .title {
-    margin-top: 1em;
-  }
-  .intro {
-    margin: 0 auto;
-  }
-}
-
-.docs {
-  background: $gainsboro;
-  .title {
-    margin-top: 2em;
-  }
-  .docs-inner {
-    max-width: 80%;
-    background: $white;
-    padding: 1.5em;
-    @include border-radius(4px);
-    margin: 0 auto;
-  }
-  .block {
-    margin-bottom: 3em;
-  }
-}
-
-.license {
-  background: $gainsboro;
-
-  .title {
-    margin-top: 2em;
-  }
-  .license-inner {
-    @extend .docs-inner;
-    background: none;
-  }
-  .info {
-    max-width: 80%;
-    margin: 0 auto;
-    padding-bottom: 3em;
-  }
-}
-
-.footer {
-  padding: 4em 0;
-  background: darken($color, 40%);
-  a {color: $darker-grey;}
-  img {
-    @include opacity(0.8);
-  }
-}
-
-.logo {display: block;}
-
-button#top {
-  background: $black;
-  display: none;
-  @include opacity(0.8);
-  border: none;
-  @include border-radius(5px);
-  color: white;
-  position: fixed;
-  bottom: 3em;
-  right: 3em;
+@media (max-width: 700px) {
+	.ui.fixed.menu {
+		display: none !important;
+	}
+	.secondary.pointing.menu {
+		.item {
+			display: none;
+			&.toc {
+				display: block !important;
+			}
+		}
+	}
+	.masthead.segment {
+		min-height: 350px;
+	}
+	.masthead h1.ui.header {
+		font-size: 2em;
+		margin-top: 1.5em;
+	}
 }

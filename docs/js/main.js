@@ -1,37 +1,31 @@
-$(document).ready(function() {
-  $('[rel="external"]').attr("target","_blank");
-  
-  $(window).bind('scroll', function() {
-    ($(window).scrollTop() > 50) ?
-      $('#header').addClass('navbar-fixed-top'):
-      $('#header').removeClass('navbar-fixed-top');
+$(function() {
+  // catch anchors in url
+  $('a[href^="#"]')
+  .on('click', function(e) {
+    var target = $(this.hash);
+
+    if (target.length) {
+      e.preventDefault();
+      $('html,body').animate({
+        scrollTop: (target.offset().top)
+      }, 'slow');
+      return false;
+    }
   });
 
-  $(window).scroll(function() {
-  ($(document).scrollTop() > 500) ?
-    $('#top').show():
-    $('#top').hide();
+  // fix menu when passed
+  $('.masthead')
+  .visibility({
+    once: false,
+    onBottomPassed: function() {
+      $('.fixed.menu').transition('fade in');
+    },
+    onBottomPassedReverse: function() {
+      $('.fixed.menu').transition('fade out');
+    }
   });
 
-  $('#top').on('click', function() {
-    $("html, body").animate({ scrollTop: 0 }, "fast");
-  });
-
-  // instead of jquery easing plugin
-  $(function() {
-  $('a[href*=#]:not([href=#])').click(function() {
-    if (location.pathname.replace(/^\//,'') == this.pathname.replace(/^\//,'') && location.hostname == this.hostname) {
-      var target = $(this.hash);
-      target = target.length ?
-        target :
-        $('[name=' + this.hash.slice(1) +']');
-      if (target.length) {
-        $('html,body').animate({
-          scrollTop: target.offset().top
-        }, 'slow');
-        return false;
-        }
-      }
-    });
-  });
+  // create sidebar and attach to menu open
+  $('.ui.sidebar')
+  .sidebar('attach events', '.toc.item');
 });

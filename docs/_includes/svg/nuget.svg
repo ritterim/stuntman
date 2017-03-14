@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="utf-8"?>
+<svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 63.6 64" style="enable-background:new 0 0 63.6 64;" xml:space="preserve"
+	 height="{{ include.height }}" width="{{ include.width}}">
+<style type="text/css">
+	.darkred{fill:#9a0303;}
+</style>
+<path class="darkred" d="M11.3,5.7c0,3.2-2.6,5.7-5.7,5.7S0,8.7,0,5.7S2.6,0,5.7,0S11.3,2.5,11.3,5.7z M63.6,47.6V27.7
+	c0-8.9-7.4-16.3-16.3-16.3h-20c-8.9,0-16.3,7.3-16.3,16.3v20C11,56.6,18.4,64,27.3,64h20C56.3,63.9,63.6,56.6,63.6,47.6z M25.3,17.9
+	c4.1,0,7.4,3.4,7.4,7.4s-3.4,7.4-7.4,7.4s-7.4-3.4-7.4-7.4S21.2,17.9,25.3,17.9z M46.5,34.3c6.7,0,12.2,5.4,12.2,12.2
+	s-5.4,12.2-12.2,12.2s-12.2-5.4-12.2-12.2S39.8,34.3,46.5,34.3z"/>
+</svg>

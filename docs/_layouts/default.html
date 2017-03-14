@@ -1,28 +1,58 @@
 <!DOCTYPE html>
-<!--[if IE 8]> <html lang="en" class="ie8"> <![endif]-->
-<!--[if IE 9]> <html lang="en" class="ie9"> <![endif]-->
-<!--[if !IE]><!--> <html lang="en"> <!--<![endif]-->
-<html>
+<html lang="en">
 
-  {% include head.html %}
+{% include head.html %}
+<body>
+  {% include menus.html %}
 
-  <body class="yaml">
+  <!-- Page Contents -->
+  <div class="pusher">
 
-    {% include header.html %}
+    {% include masthead.html %}
 
-    <div class="page-content">
-      <div class="wrapper">
-        {{ content }}
+    <div id="about" class="ui vertical stripe segment">
+      <div class="ui middle aligned stackable grid container">
+        <div class="row">
+          <div class="eight wide column">
+            <h3 class="ui header">So what is Stuntman?</h3>
+            <p>Stuntman is a library for impersonating users during development leveraging <mark>.NET</mark> Claims Identity. Used primarily in web environments like <mark>ASP.NET MVC</mark>, <mark>ASP.NET Web Forms</mark>, and <mark>OWIN</mark> applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.</p>
+          </div>
+          <div class="six wide right floated column">
+            <img class="border" src="https://cloud.githubusercontent.com/assets/1012917/10737939/5154bbdc-7beb-11e5-87dd-979c4e8cb3c0.gif" alt="">
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div id="get_started" class="ui vertical stripe quote segment">
+      <div class="ui equal width stackable internally celled grid">
+        <div class="center aligned row">
+          <div class="column">
+            <h3>Install</h3>
+          </div>
+          <div class="column code">
+            PM> Install-Package RimDev.Stuntman
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div class="ui vertical stripe segment">
+      <div class="ui text container">
+
+        {% capture get_started %}
+        {% include getting_started.md %}
+        {% endcapture %}
+        {{ get_started | markdownify }}
+
       </div>
     </div>
 
     {% include footer.html %}
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-    <script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>
-    <script type="text/javascript" src="{{ "js/main.js" | prepend: site.baseurl }}"></script>
-
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/semantic-ui/2.2.6/semantic.min.js" integrity="sha256-HcON65l89nxNl7vaRECVPe/zNDBzhCcJYBE7O+EcruU=" crossorigin="anonymous"></script>
+    <script src="{{ "/js/main.js" | prepend: site.baseurl }}?{{site.time | date: '%s%N'}}"></script>
   </body>
 
 </html>
