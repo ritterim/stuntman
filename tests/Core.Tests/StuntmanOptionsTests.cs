@@ -168,18 +168,5 @@ namespace RimDev.Stuntman.Core.Tests
                     x => x.Claims.Count(y => y.Type == TestClaim && y.Value == TestClaimValue) == 1));
             }
         }
-
-        [Fact]
-        public void AddUsersFromCollection() 
-        {
-            var users = Enumerable.Range(1, 10)
-                       .Select(i => new StuntmanUser(i.ToString(), $"user-{i}"))
-                       .ToList();
-
-            var options = new StuntmanOptions()
-                          .AddUsers(users);
-
-            Assert.Equal(10, options.Users.Count);
-        }
     }
 }
