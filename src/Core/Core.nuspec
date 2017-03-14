@@ -7,7 +7,7 @@
     <authors>Ritter Insurance Marketing</authors>
     <licenseUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE</licenseUrl>
     <projectUrl>https://github.com/ritterim/stuntman</projectUrl>
-    <iconUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman_helmet.128.png</iconUrl>
+    <iconUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png</iconUrl>
     <description>Library for impersonating users during development leveraging ASP.NET Identity.</description>
     <copyright>Copyright 2017 Ritter Insurance Marketing</copyright>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
