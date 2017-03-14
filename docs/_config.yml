@@ -8,6 +8,7 @@ description: > # this means to ignore newlines until "baseurl:"
 url: "http://stuntman.github.io"
 twitter_username: RIMdev
 github_username:  ritterim
+default_image: "/assets/stuntman_helmet.png"
 
 # Build settings
 markdown: kramdown
