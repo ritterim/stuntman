@@ -3,6 +3,7 @@
 		background: cornsilk;
 		font-family: monospace;
 		font-size: 120%;
+		line-height: 2em;
 	}
 	.border {
 		border: .7em solid lighten($text-color, 55%);
@@ -16,7 +17,7 @@
 			padding: 0em;
 			.grid {
 				.column {
-					padding: 4em 0;
+					padding: 3.5em 2em;
 				}
 			}
 		}
