@@ -140,6 +140,30 @@ namespace RimDev.Stuntman.Core.Tests
             }
         }
 
+        public class AddUsersMethod
+        {
+            [Fact]
+            public void ThrowsForNullUsers()
+            {
+                Assert.Throws<ArgumentNullException>(
+                    () => new StuntmanOptions().AddUsers(null));
+            }
+
+            [Fact]
+            public void AddsUsers()
+            {
+                var sut = new StuntmanOptions();
+
+                var users = Enumerable.Range(1, 10)
+                    .Select(i => new StuntmanUser(i.ToString(), $"user-{i}"))
+                    .ToList();
+
+                var options = sut.AddUsers(users);
+
+                Assert.Equal(10, options.Users.Count);
+            }
+        }
+
         public partial class AddUsersFromJsonMethod
         {
             [Fact]
