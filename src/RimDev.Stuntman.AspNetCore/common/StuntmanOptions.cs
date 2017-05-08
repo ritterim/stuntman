@@ -3,6 +3,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Security.Principal;
+using Newtonsoft.Json.Serialization;
+using System.Reflection;
 
 namespace RimDev.Stuntman.Core
 {
@@ -83,11 +85,11 @@ namespace RimDev.Stuntman.Core
             return AddUser(user, Constants.StuntmanOptions.LocalSource);
         }
 
-        public StuntmanOptions AddUsers(IEnumerable<StuntmanUser> users) 
+        public StuntmanOptions AddUsers(IEnumerable<StuntmanUser> users)
         {
             if (users == null) throw new ArgumentNullException(nameof(users));
 
-            foreach(var user in users)
+            foreach (var user in users)
                 AddUser(user);
 
             return this;
@@ -131,9 +133,15 @@ namespace RimDev.Stuntman.Core
                 ? _stuntmanOptionsRetriever.GetStringFromLocalFile(uri)
                 : _stuntmanOptionsRetriever.GetStringUsingWebClient(uri);
 
+            var settings = new JsonSerializerSettings
+            {
+                ContractResolver = new PrivateSetterContractResolver(),
+                Converters = new [] { new StuntmanClaimConverter() }
+            };
+
             var users = JsonConvert.DeserializeObject<StuntmanServerResponse>(
                 json,
-                new StuntmanClaimConverter());
+                settings);
 
             foreach (var user in users.Users)
             {
@@ -261,6 +269,27 @@ namespace RimDev.Stuntman.Core
             foreach (var user in stuntmanServerResponse.Users)
             {
                 AddUser(user, source);
+            }
+        }
+
+        private class PrivateSetterContractResolver : DefaultContractResolver
+        {
+            protected override JsonProperty CreateProperty(MemberInfo member, MemberSerialization memberSerialization)
+            {
+                var jProperty = base.CreateProperty(member, memberSerialization);
+                if (jProperty.Writable)
+                    return jProperty;
+
+                jProperty.Writable = IsPropertyWithSetter(member);
+
+                return jProperty;
+            }
+
+            private static bool IsPropertyWithSetter(MemberInfo member)
+            {
+                var property = member as PropertyInfo;
+
+                return property?.GetSetMethod(true) != null;
             }
         }
     }
