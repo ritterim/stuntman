@@ -99,7 +99,7 @@ HTTP/1.1 403 options provided does not include the requested 'not-real' user.
 ```
 
 ```shell
-> curl -i -H "Authorization: Bearer abc 123" http://localhost:54917/secure
+> curl -i -H "Authorization: Bearer 123" http://localhost:54917/secure
 HTTP/1.1 400 Authorization header is not in correct format.
 ```
 
