@@ -1,15 +1,15 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 12.00
-# Visual Studio 14
-VisualStudioVersion = 14.0.25420.1
+# Visual Studio 15
+VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{A3951ED6-0AD3-424C-B5BC-8008C80EEA02}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "tests", "tests", "{5243DBF7-7270-4460-9AC2-C343D653826E}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "tests\Core.Tests\Core.Tests.csproj", "{4E5816B2-5AFC-45FE-B7F2-B9B85B2F1967}"
-EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "samples", "samples", "{418B6F96-6578-4B18-823C-0FC7A712F0BE}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core", "src\Core\Core.csproj", "{A3951ED6-0AD3-424C-B5BC-8008C80EEA02}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Core.Tests", "tests\Core.Tests\Core.Tests.csproj", "{4E5816B2-5AFC-45FE-B7F2-B9B85B2F1967}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample", "samples\UsageSample\UsageSample.csproj", "{6CCC791E-78A8-415F-8D9C-4A9F11449A19}"
 EndProject
@@ -19,13 +19,13 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.BearerTokenTest
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "UsageSample.ServerTester", "samples\UsageSample.ServerTester\UsageSample.ServerTester.csproj", "{EE3E17BB-74F9-4314-A529-5DE79B9E7D34}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "Core.AspNetCore.Tests", "tests\Core.AspNetCore.Tests\Core.AspNetCore.Tests.xproj", "{162CDC91-8B1B-48AB-BD7E-A24014B039F6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Core.AspNetCore.Tests", "tests\Core.AspNetCore.Tests\Core.AspNetCore.Tests.csproj", "{162CDC91-8B1B-48AB-BD7E-A24014B039F6}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "UsageSample.AspNetCore", "samples\UsageSample.AspNetCore\UsageSample.AspNetCore.xproj", "{77130FF6-DFCC-4D30-B560-0E23A09A6726}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsageSample.AspNetCore", "samples\UsageSample.AspNetCore\UsageSample.AspNetCore.csproj", "{77130FF6-DFCC-4D30-B560-0E23A09A6726}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "UsageSampleMvc.AspNetCore", "samples\UsageSampleMvc.AspNetCore\UsageSampleMvc.AspNetCore.xproj", "{7BE101FC-EB16-43B4-A25B-9F590096F776}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "UsageSampleMvc.AspNetCore", "samples\UsageSampleMvc.AspNetCore\UsageSampleMvc.AspNetCore.csproj", "{7BE101FC-EB16-43B4-A25B-9F590096F776}"
 EndProject
-Project("{8BB2217D-0F2D-49D1-97BC-3654ED321F3B}") = "RimDev.Stuntman.AspNetCore", "src\RimDev.Stuntman.AspNetCore\RimDev.Stuntman.AspNetCore.xproj", "{2822BCC5-31B2-45F3-A298-908643CA39BA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "RimDev.Stuntman.AspNetCore", "src\RimDev.Stuntman.AspNetCore\RimDev.Stuntman.AspNetCore.csproj", "{2822BCC5-31B2-45F3-A298-908643CA39BA}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
