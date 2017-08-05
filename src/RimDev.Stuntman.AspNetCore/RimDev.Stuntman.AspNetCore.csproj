@@ -20,8 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\common\SolutionInfo.cs" Exclude="bin\**;obj\**;**\*.xproj;packages\**" />
-    <EmbeddedResource Include="assets\stuntman.css;assets\stuntman-logo.png" Exclude="bin\**;obj\**;**\*.xproj;packages\**;@(EmbeddedResource)" />
+    <Compile Include="..\..\common\SolutionInfo.cs" />
+    <EmbeddedResource Include="assets\stuntman.css" />
+    <EmbeddedResource Include="assets\stuntman-logo.png" />
   </ItemGroup>
 
   <ItemGroup>
