@@ -20,7 +20,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Include="..\..\common\SolutionInfo.cs" />
+    <Compile Include="..\..\common\SolutionInfo.cs">
+      <Link>Properties\SolutionInfo.cs</Link>
+    </Compile>
     <EmbeddedResource Include="assets\stuntman.css" />
     <EmbeddedResource Include="assets\stuntman-logo.png" />
   </ItemGroup>
