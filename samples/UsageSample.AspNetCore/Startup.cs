@@ -42,7 +42,7 @@ namespace UsageSample.AspNetCore
                         .AddClaim("given_name", "Sam")
                         .AddClaim("family_name", "Smith"))
                     .AddUsersFromJson(
-                        "https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample/test-users-1.json")
+                        "https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample.AspNetCore/test-users-1.json")
                     .AddUsersFromJson(Path.Combine(Environment.ContentRootPath, "test-users-2.json")));
 
         }
