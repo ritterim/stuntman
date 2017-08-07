@@ -26,7 +26,7 @@ namespace RimDev.Stuntman.UsageSample
                 .AddUser(new StuntmanUser("user-3", "User 3")
                     .AddClaim("given_name", "Sam")
                     .AddClaim("family_name", "Smith"))
-                .AddUsersFromJson("https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample/test-users-1.json") // Tried this using OWIN locally, didn't get it working.
+                .AddUsersFromJson("https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample.AspNetCore/test-users-1.json") // Tried this using OWIN locally, didn't get it working.
                 .AddUsersFromJson(Path.Combine(GetBinPath(), "test-users-2.json"));
 
             if (System.Web.HttpContext.Current.IsDebuggingEnabled)
