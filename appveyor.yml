@@ -1,0 +1,19 @@
+image: Visual Studio 2017
+
+cache:
+  - packages -> **\packages.config
+
+build_script:
+  - ./build.cmd /logger:"C:\Program Files\AppVeyor\BuildAgent\Appveyor.MSBuildLogger.dll"
+
+test: off
+
+artifacts:
+  - path: ./msbuild.log
+  - path: ./artifacts/*.nupkg
+
+deploy:
+  - provider: Environment
+    name: NuGet
+    on:
+      branch: master
