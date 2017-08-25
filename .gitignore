@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+appsettings.dev.json
 
 # Build results
 [Dd]ebug/

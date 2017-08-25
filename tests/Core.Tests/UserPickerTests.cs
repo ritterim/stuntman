@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Net;
 using System.Security.Principal;
 using System.Text.RegularExpressions;
@@ -82,6 +82,23 @@ namespace RimDev.Stuntman.Core.Tests
                 var html = new UserPicker(options).GetHtml(new TestPrincipal(), "https://return-url");
 
                 Assert.Contains("Logout", html);
+            }
+
+            [Fact]
+            public void ReturnsExpectedReturnUrls()
+            {
+                var options = new StuntmanOptions()
+                    .AddUser(new StuntmanUser("user-1", "User 1"))
+                    .AddUser(new StuntmanUser("user-2", "User 2"));
+
+                var returnUrl = "https://return-url/test";
+
+                var html = new UserPicker(options).GetHtml(new TestPrincipal(), returnUrl);
+
+                var matches = Regex.Matches(html, WebUtility.UrlEncode(Regex.Escape(returnUrl)));
+
+                // 2 Stuntman users + 1 logout = 3 total
+                Assert.Equal(3, matches.Count);
             }
 
             [Fact]

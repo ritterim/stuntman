@@ -1,0 +1,12 @@
+{
+  "Users": [
+    {
+      "Id": "test-server-response-2-user-1",
+      "Name": "Remote User 3"
+    },
+    {
+      "Id": "test-server-response-2-user-2",
+      "Name": "Remote User 4"
+    }
+  ]
+}

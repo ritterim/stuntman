@@ -2,6 +2,7 @@ var target = Argument("target", "Default");
 var configuration = Argument("configuration", "Release");
 
 var artifactsDir = Directory("./artifacts");
+var solution = "./Stuntman.sln";
 
 Task("Clean")
     .Does(() =>
@@ -13,14 +14,14 @@ Task("Restore-NuGet-Packages")
     .IsDependentOn("Clean")
     .Does(() =>
 {
-    DotNetCoreRestore("./Stuntman.sln");
+    DotNetCoreRestore(solution);
 });
 
 Task("Build")
     .IsDependentOn("Restore-NuGet-Packages")
     .Does(() =>
 {
-    DotNetCoreBuild("./Stuntman.sln", new DotNetCoreBuildSettings
+    DotNetCoreBuild(solution, new DotNetCoreBuildSettings
     {
         Configuration = configuration,
         MSBuildSettings = new DotNetCoreMSBuildSettings

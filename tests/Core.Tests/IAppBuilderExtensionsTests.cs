@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin.Security;
+#if NET461
+
+using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.OAuth;
 using Microsoft.Owin.Testing;
 using Newtonsoft.Json;
@@ -536,3 +538,5 @@ namespace RimDev.Stuntman.Core.Tests
         }
     }
 }
+
+#endif

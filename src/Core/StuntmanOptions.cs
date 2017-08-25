@@ -1,14 +1,26 @@
-﻿using Newtonsoft.Json;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Serialization;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Security.Principal;
-using Newtonsoft.Json.Serialization;
 using System.Reflection;
+using System.Security.Principal;
+
+#if NET461
+
+using Microsoft.Owin.Security.OAuth;
+
+#endif
+
+#if NETCOREAPP2_0
+
+using Microsoft.AspNetCore.Authentication.JwtBearer;
+
+#endif
 
 namespace RimDev.Stuntman.Core
 {
-    public partial class StuntmanOptions
+    public class StuntmanOptions
     {
         private readonly string _stuntmanRootPath;
         private readonly StuntmanOptionsRetriever _stuntmanOptionsRetriever;
@@ -25,6 +37,28 @@ namespace RimDev.Stuntman.Core
             if (!_stuntmanRootPath.EndsWith("/", StringComparison.OrdinalIgnoreCase))
                 _stuntmanRootPath += "/";
         }
+
+#if NET461
+
+        /// <summary>
+        /// Useful for testing state of IOwinContext post sign-in since the
+        /// request is redirected. Therefore, you cannot just add additional OWIN
+        /// middleware to check the state.
+        /// </summary>
+        public Action<OAuthValidateIdentityContext> AfterBearerValidateIdentity { get; set; }
+
+#endif
+
+#if NETCOREAPP2_0
+
+        /// <summary>
+        /// Useful for testing state of IOwinContext post sign-in since the
+        /// request is redirected. Therefore, you cannot just add additional
+        /// middleware to check the state.
+        /// </summary>
+        public Action<MessageReceivedContext> AfterBearerValidateIdentity { get; set; }
+
+#endif
 
         /// <summary>
         /// Determines whether bearer token authentication is enabled
@@ -119,7 +153,7 @@ namespace RimDev.Stuntman.Core
 
         /// <summary>
         /// Add users from JSON at the file system path or URL specified.
-        /// The expected JSON format is [{"Id":"user-1","Name":"User 1"}]
+        /// The expected JSON format is { "Users": [{"Id": "user-1", "Name": "User 1"}] }
         /// </summary>
         /// <param name="pathOrUrl">The path or url to the JSON file.</param>
         /// <param name="configureUsers">Optionally configure all users prior to being added.</param>
@@ -139,11 +173,11 @@ namespace RimDev.Stuntman.Core
                 Converters = new [] { new StuntmanClaimConverter() }
             };
 
-            var users = JsonConvert.DeserializeObject<StuntmanServerResponse>(
+            var stuntmanServerResponse = JsonConvert.DeserializeObject<StuntmanServerResponse>(
                 json,
                 settings);
 
-            foreach (var user in users.Users)
+            foreach (var user in stuntmanServerResponse.Users)
             {
                 configureUsers?.Invoke(user);
 
@@ -177,7 +211,10 @@ namespace RimDev.Stuntman.Core
                 response,
                 new StuntmanClaimConverter());
 
-            ProcessStuntmanServerResponse(stuntmanServerResponse, serverBaseUrl);
+            foreach (var user in stuntmanServerResponse.Users)
+            {
+                AddUser(user, serverBaseUrl);
+            }
 
             return this;
         }
@@ -260,16 +297,6 @@ namespace RimDev.Stuntman.Core
             return Users
                 .Select(x => x.Id)
                 .Contains(user.Id) == false;
-        }
-
-        private void ProcessStuntmanServerResponse(
-            StuntmanServerResponse stuntmanServerResponse,
-            string source)
-        {
-            foreach (var user in stuntmanServerResponse.Users)
-            {
-                AddUser(user, source);
-            }
         }
 
         private class PrivateSetterContractResolver : DefaultContractResolver

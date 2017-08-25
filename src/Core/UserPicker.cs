@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Linq;
 using System.Net;
 using System.Security.Principal;
@@ -42,7 +42,7 @@ namespace RimDev.Stuntman.Core
         {
             var css = Resources.GetCss();
 
-            var currentUser = currentPrincipal.Identity.Name;
+            var currentUser = currentPrincipal?.Identity?.Name;
 
             if (string.IsNullOrEmpty(currentUser))
                 currentUser = AnonymousUser;

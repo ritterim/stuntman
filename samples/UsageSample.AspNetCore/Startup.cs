@@ -1,63 +1,59 @@
-﻿using System.IO;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using RimDev.Stuntman.Core;
+using System;
+using System.IO;
+using System.Reflection;
+using System.Security.Claims;
+using System.Threading.Tasks;
 
 namespace UsageSample.AspNetCore
 {
     public class Startup
     {
-        public IHostingEnvironment Environment { get; set; }
+        public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
 
-        public Startup(IHostingEnvironment env)
+        public Startup()
         {
-            Environment = env;
+            StuntmanOptions
+                .EnableServer()
+                .AddUser(new StuntmanUser("user-1", "User 1")
+                    .SetAccessToken("user-1-token")
+                    .SetDescription("This is User 1.")
+                    .AddClaim("given_name", "John")
+                    .AddClaim("family_name", "Doe"))
+                .AddUser(new StuntmanUser("user-2", "User 2")
+                    .AddClaim("given_name", "Jane")
+                    .AddClaim("family_name", "Doe"))
+                .AddUser(new StuntmanUser("user-3", "User 3")
+                    .AddClaim("given_name", "Sam")
+                    .AddClaim("family_name", "Smith"))
+            //.AddUsersFromJson("https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample.AspNetCore/test-server-response-1.json")
+            .AddUsersFromJson(Path.Combine(GetBinPath(), "test-server-response-2.json"));
         }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
-        // For more information on how to configure your application, visit http://go.microsoft.com/fwlink/?LinkID=398940
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddAuthentication();
-
-            services.AddSingleton(
-                new StuntmanOptions()
-                    .EnableServer()
-                    .AddUser(new StuntmanUser("user-1", "User 1")
-                        .SetAccessToken("user-1-token")
-                        .SetDescription("This is User 1.")
-                        .AddClaim("given_name", "John")
-                        .AddClaim("family_name", "Doe"))
-                    .AddUser(new StuntmanUser("user-2", "User 2")
-                        .AddClaim("given_name", "Jane")
-                        .AddClaim("family_name", "Doe"))
-                    .AddUser(new StuntmanUser("user-3", "User 3")
-                        .AddClaim("given_name", "Sam")
-                        .AddClaim("family_name", "Smith"))
-                    .AddUsersFromJson(
-                        "https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample.AspNetCore/test-users-1.json")
-                    .AddUsersFromJson(Path.Combine(Environment.ContentRootPath, "test-users-2.json")));
-
+            services.AddStuntman(StuntmanOptions);
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-
-            var stuntmanOptions = app.ApplicationServices.GetService<StuntmanOptions>();
-
             if (env.IsDevelopment())
             {
-                app.UseStuntman(stuntmanOptions);
+                app.UseDeveloperExceptionPage();
             }
+
+            app.UseStuntman(StuntmanOptions);
 
             app.Map("/secure", secure =>
             {
-                AuthenticateAllRequests(secure, "StuntmanAuthentication");
+                AuthenticateAllRequests(secure, new[] { "StuntmanAuthentication" });
 
-                secure.Run(async context =>
+                secure.Run(context =>
                 {
                     var userName = context.User.Identity.Name;
 
@@ -65,22 +61,21 @@ namespace UsageSample.AspNetCore
                         userName = "Anonymous / Unknown";
 
                     context.Response.ContentType = "text/html";
-                    await context.Response.WriteAsync(
+                    context.Response.WriteAsync(
                         $"Hello, {userName}. This is the /secure endpoint.");
 
-                    if (env.IsDevelopment())
-                    {
-                        await context.Response.WriteAsync(
-                            stuntmanOptions.UserPicker(context.User));
-                    }
+                    context.Response.WriteAsync(
+                        StuntmanOptions.UserPicker(context.User));
+
+                    return Task.FromResult(true);
                 });
             });
 
             app.Map("/secure-json", secure =>
             {
-                AuthenticateAllRequests(secure, "StuntmanAuthentication");
+                AuthenticateAllRequests(secure, new[] { "StuntmanAuthentication" });
 
-                secure.Run(async context =>
+                secure.Run(context =>
                 {
                     var userName = context.User.Identity.Name;
 
@@ -88,9 +83,10 @@ namespace UsageSample.AspNetCore
                         userName = "Anonymous / Unknown";
 
                     context.Response.ContentType = "application/json";
-                    await context.Response.WriteAsync(
+                    context.Response.WriteAsync(
                         $@"{{""message"":""Hello, {userName}. This is the /secure-json endpoint.""}}");
 
+                    return Task.FromResult(true);
                 });
             });
 
@@ -98,48 +94,47 @@ namespace UsageSample.AspNetCore
             {
                 logout.Run(async context =>
                 {
-                    await context.Authentication.SignOutAsync("StuntmanAuthentication");
+                    await context.SignOutAsync("StuntmanAuthentication");
                 });
             });
 
             app.Map("", nonSecure =>
             {
-                nonSecure.Run(async context =>
+                nonSecure.Run(context =>
                 {
-                    var userName = context.User.Identity.Name;
+                    var userName = context.User?.Identity.Name;
 
                     if (string.IsNullOrEmpty(userName))
                         userName = "Anonymous / Unknown";
 
                     context.Response.ContentType = "text/html";
 
-                    await context.Response.WriteAsync(
+                    context.Response.WriteAsync(
 @"<!DOCTYPE html>
 <html>
     <head>
         <meta charset=""utf-8"">
-        <title>Stuntman - UsageSample</title>
+        <title>Stuntman - UsageSample.AspNetCore</title>
     </head>
 <body>");
 
-                    await context.Response.WriteAsync(
-                        $"Hello, {userName}.");
+                    context.Response.WriteAsync(
+                        $@"Hello, {userName}. <a href=""/secure"">Secure page</a>");
 
-                    if (env.IsDevelopment())
-                    {
-                        await context.Response.WriteAsync(
-                            stuntmanOptions.UserPicker(context.User));
-                    }
+                    context.Response.WriteAsync(
+                        StuntmanOptions.UserPicker(context.User ?? new ClaimsPrincipal()));
 
-                    await context.Response.WriteAsync(
+                    context.Response.WriteAsync(
 @"</body>
 </html>");
+
+                    return Task.FromResult(true);
                 });
             });
         }
 
-        // http://stackoverflow.com/a/26265757
-        private static void AuthenticateAllRequests(IApplicationBuilder app, string authenticationType)
+        // Adapted from https://stackoverflow.com/a/26265757
+        private static void AuthenticateAllRequests(IApplicationBuilder app, params string[] authenticationTypes)
         {
             app.Use(async (context, continuation) =>
             {
@@ -151,9 +146,24 @@ namespace UsageSample.AspNetCore
                 }
                 else
                 {
-                    await context.Authentication.ChallengeAsync(authenticationType);
+                    await context.ChallengeAsync(Constants.StuntmanAuthenticationType);
                 }
             });
+        }
+
+        private static string GetBinPath()
+        {
+            const string FilePrefix = @"file:\";
+
+            // https://stackoverflow.com/a/3461871/941536
+            var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
+
+            if (!path.StartsWith(FilePrefix, StringComparison.OrdinalIgnoreCase))
+            {
+                throw new ApplicationException($"Expected path to begin with {FilePrefix}.");
+            }
+
+            return path.Substring(FilePrefix.Length);
         }
     }
 }
