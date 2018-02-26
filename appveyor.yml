@@ -18,3 +18,8 @@ deploy:
     name: NuGet
     on:
       branch: master
+
+  - provider: Environment
+    name: NuGet
+    on:
+      branch: vnext
