@@ -7,7 +7,7 @@
     <Description>Library for impersonating users during development leveraging ASP.NET Identity.</Description>
     <Authors>Ritter Insurance Marketing</Authors>
     <Copyright>Copyright 2017 Ritter Insurance Marketing</Copyright>
-    <Version>2.0.0-alpha0</Version>
+    <Version>2.0.0-alpha1</Version>
     <PackageIconUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png</PackageIconUrl>
     <PackageId>RimDev.Stuntman</PackageId>
     <PackageLicenseUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE</PackageLicenseUrl>
