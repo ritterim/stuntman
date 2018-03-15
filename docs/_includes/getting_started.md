@@ -116,10 +116,18 @@ StuntmanOptions.TryAddConfigurationFromServer(
 Here's an example users JSON that can be consumed by `StuntmanOptions.AddUsersFromJson(string pathOrUrl)`:
 
 ```json
-[
-  { "Id": "user-1", "Name": "User 1" },
-  { "Id": "user-2", "Name": "User 2" }
-]
+{
+  "Users": [
+    {
+      "Id": "user-1",
+      "Name": "User 1"
+    },
+    {
+      "Id": "user-2",
+      "Name": "User 2"
+    }
+  ]
+}
 ```
 
 ### Support OSS &mdash; buy an official sticker

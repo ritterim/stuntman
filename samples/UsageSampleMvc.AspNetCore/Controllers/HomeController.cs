@@ -1,8 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using UsageSampleMvc.AspNetCore.Models;
 
 namespace UsageSampleMvc.AspNetCore.Controllers
 {
@@ -29,7 +31,7 @@ namespace UsageSampleMvc.AspNetCore.Controllers
 
         public IActionResult Error()
         {
-            return View();
+            return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
         }
     }
 }

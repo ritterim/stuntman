@@ -5,6 +5,7 @@
 *.suo
 *.user
 *.sln.docstates
+appsettings.dev.json
 
 # Build results
 [Dd]ebug/
@@ -17,6 +18,7 @@ bld/
 [Bb]in/
 [Oo]bj/
 App_Data/
+tools/
 
 # Roslyn cache directories
 *.ide/

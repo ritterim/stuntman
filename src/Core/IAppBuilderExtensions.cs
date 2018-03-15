@@ -1,4 +1,6 @@
-﻿using Microsoft.Owin;
+#if NET461
+
+using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using Microsoft.Owin.Security.Cookies;
 using Microsoft.Owin.Security.OAuth;
@@ -7,9 +9,7 @@ using Owin;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Net;
 using System.Security.Claims;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace RimDev.Stuntman.Core
@@ -53,7 +53,7 @@ namespace RimDev.Stuntman.Core
                         {
                             await next.Invoke();
 
-                            ShowLoginUI(context, options);
+                            IAppBuilderShared.ShowLoginUI(context, options);
                         }
                         else
                         {
@@ -83,7 +83,7 @@ namespace RimDev.Stuntman.Core
                         }
                     });
 
-                    RedirectToReturnUrl(signin);
+                    IAppBuilderShared.RedirectToReturnUrl(signin);
                 });
 
                 app.Map(options.SignOutUri, signout =>
@@ -96,7 +96,7 @@ namespace RimDev.Stuntman.Core
                         return next.Invoke();
                     });
 
-                    RedirectToReturnUrl(signout);
+                    IAppBuilderShared.RedirectToReturnUrl(signout);
                 });
             }
 
@@ -114,80 +114,6 @@ namespace RimDev.Stuntman.Core
                     });
                 });
             }
-        }
-
-        private static string GetUsersLoginUI(
-            IOwinContext context,
-            StuntmanOptions options)
-        {
-            var usersHtml = new StringBuilder();
-
-            foreach (var user in options.Users)
-            {
-                var href = $"{options.SignInUri}?OverrideUserId={user.Id}&{Constants.StuntmanOptions.ReturnUrlQueryStringKey}={WebUtility.UrlEncode(context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey])}";
-
-                usersHtml.Append($@"<li><a href=""{href}"" title=""{(string.IsNullOrEmpty(user.Description) ? null : WebUtility.HtmlEncode(user.Description) + " ")}Source: {user.Source}"">{user.Name}</a></li>");
-            }
-
-            return usersHtml.ToString();
-        }
-
-        private static void RedirectToReturnUrl(IAppBuilder app)
-        {
-            app.Run(context =>
-            {
-                var returnUrl = context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey];
-
-                if (string.IsNullOrWhiteSpace(returnUrl))
-                {
-                    returnUrl = context.Request.Headers["Referer"];
-                }
-
-                if (string.IsNullOrWhiteSpace(returnUrl))
-                {
-                    throw new InvalidOperationException(
-                        "ReturnUrl was not specified via query string or Referer header.");
-                }
-
-                context.Response.Headers.Add("Location", new[] { returnUrl });
-
-                context.Response.StatusCode = 302;
-
-                return Task.FromResult(true);
-            });
-        }
-
-        private static void ShowLoginUI(
-            IOwinContext context,
-            StuntmanOptions options)
-        {
-            context.Response.ContentType = "text/html";
-            context.Response.StatusCode = 200;
-
-            var css = Resources.GetCss();
-            var logoForInlining = Resources.GetLogoForInlining();
-            var usersHtml = GetUsersLoginUI(context, options);
-
-            context.Response.Write($@"
-<!DOCTYPE html>
-<html>
-    <head>
-        <meta charset=""UTF-8"">
-        <title>Select a user</title>
-        <style>
-            {css}
-        </style>
-    </head>
-    <body>
-        <div class=""stuntman-login-ui-container"">
-            <h2><img src=""{logoForInlining}"" alt=""Welcome to Stuntman"" /></h2>
-            <h2>Please select a user to continue authentication.</h2>
-            <ul>
-                {usersHtml}
-            </ul>
-        </div>
-    </body>
-</html>");
         }
 
         private class StuntmanOAuthBearerProvider : OAuthBearerAuthenticationProvider
@@ -293,3 +219,5 @@ namespace RimDev.Stuntman.Core
         }
     }
 }
+
+#endif

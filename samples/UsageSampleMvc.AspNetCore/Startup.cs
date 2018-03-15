@@ -1,60 +1,52 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Microsoft.Extensions.Logging;
 using RimDev.Stuntman.Core;
 
 namespace UsageSampleMvc.AspNetCore
 {
     public class Startup
     {
-        public Startup(IHostingEnvironment env)
+        public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
+        public Startup(IConfiguration configuration)
         {
-            var builder = new ConfigurationBuilder()
-                .SetBasePath(env.ContentRootPath)
-                .AddJsonFile("appsettings.json", optional: true, reloadOnChange: true)
-                .AddJsonFile($"appsettings.{env.EnvironmentName}.json", optional: true)
-                .AddEnvironmentVariables();
-            Configuration = builder.Build();
+            StuntmanOptions
+                .AddUser(new StuntmanUser("user-1", "User 1")
+                    .AddClaim("given_name", "John")
+                    .AddClaim("family_name", "Doe"))
+                .AddUser(new StuntmanUser("user-2", "User 2")
+                    .AddClaim("given_name", "Jane")
+                    .AddClaim("family_name", "Doe"));
+
+            Configuration = configuration;
         }
 
-        public IConfigurationRoot Configuration { get; }
+        public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            // Add framework services.
+            services.AddStuntman(StuntmanOptions);
+
             services.AddMvc();
-
-            services.AddSingleton(new StuntmanOptions()
-                .AddUser(new StuntmanUser("user-1", "User 1")
-                    .AddClaim("given_name", "John")
-                    .AddClaim("family_name", "Doe")));
-
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
-        public void Configure(IApplicationBuilder app, IHostingEnvironment env, ILoggerFactory loggerFactory)
+        public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            loggerFactory.AddConsole(Configuration.GetSection("Logging"));
-            loggerFactory.AddDebug();
-
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
                 app.UseBrowserLink();
-                var options = app.ApplicationServices.GetService<StuntmanOptions>();
-                app.UseStuntman(options);
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseStuntman(StuntmanOptions);
 
             app.UseStaticFiles();
 

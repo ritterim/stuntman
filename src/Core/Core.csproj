@@ -1,113 +1,37 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
-<Project ToolsVersion="12.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
-  <Import Project="..\..\build\Build.Settings.targets" />
-  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
-    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
-    <ProjectGuid>{A3951ED6-0AD3-424C-B5BC-8008C80EEA02}</ProjectGuid>
-    <OutputType>Library</OutputType>
-    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <TargetFrameworks>net461;netcoreapp2.0</TargetFrameworks>
     <RootNamespace>RimDev.Stuntman.Core</RootNamespace>
     <AssemblyName>RimDev.Stuntman.Core</AssemblyName>
-    <TargetFrameworkVersion>v4.5</TargetFrameworkVersion>
-    <FileAlignment>512</FileAlignment>
-    <ErrorReport>prompt</ErrorReport>
-    <WarningLevel>4</WarningLevel>
-    <TreatWarningsAsErrors>true</TreatWarningsAsErrors>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
-    <DebugSymbols>true</DebugSymbols>
-    <DebugType>full</DebugType>
-    <Optimize>false</Optimize>
-    <OutputPath>bin\Debug\</OutputPath>
-    <DefineConstants>DEBUG;TRACE</DefineConstants>
-  </PropertyGroup>
-  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
-    <DebugType>pdbonly</DebugType>
-    <Optimize>true</Optimize>
-    <OutputPath>bin\Release\</OutputPath>
-    <DefineConstants>TRACE</DefineConstants>
+    <Title>Stuntman</Title>
+    <Description>Library for impersonating users during development leveraging ASP.NET Identity.</Description>
+    <Authors>Ritter Insurance Marketing</Authors>
+    <Copyright>Copyright 2018 Ritter Insurance Marketing</Copyright>
+    <Version>2.0.0</Version>
+    <PackageIconUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png</PackageIconUrl>
+    <PackageId>RimDev.Stuntman</PackageId>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/ritterim/stuntman/master/LICENSE</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/ritterim/stuntman</PackageProjectUrl>
+    <PackageTags>rimdev;stuntman;aspnet;identity;impersonation</PackageTags>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="Microsoft.Owin, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.3.0.1\lib\net45\Microsoft.Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.3.0.1\lib\net45\Microsoft.Owin.Security.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.Cookies, Version=3.0.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.Cookies.3.0.1\lib\net45\Microsoft.Owin.Security.Cookies.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="Microsoft.Owin.Security.OAuth">
-      <HintPath>..\..\packages\Microsoft.Owin.Security.OAuth.3.0.1\lib\net45\Microsoft.Owin.Security.OAuth.dll</HintPath>
-    </Reference>
-    <Reference Include="Newtonsoft.Json">
-      <HintPath>..\..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
-    </Reference>
-    <Reference Include="Owin, Version=1.0.0.0, Culture=neutral, PublicKeyToken=f0ebd12fd5e55cc5, processorArchitecture=MSIL">
-      <HintPath>..\..\packages\Owin.1.0\lib\net40\Owin.dll</HintPath>
-      <Private>True</Private>
-    </Reference>
-    <Reference Include="System" />
-    <Reference Include="System.Core" />
+    <PackageReference Include="Newtonsoft.Json" Version="10.0.3" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'net461' ">
+    <PackageReference Include="Microsoft.Owin" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Owin.Security" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Owin.Security.Cookies" Version="3.1.0" />
+    <PackageReference Include="Microsoft.Owin.Security.OAuth" Version="3.1.0" />
+    <PackageReference Include="Owin" Version="1.0" />
     <Reference Include="System.Net.Http" />
-    <Reference Include="System.Xml.Linq" />
-    <Reference Include="System.Data.DataSetExtensions" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="System.Data" />
-    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup Condition=" '$(TargetFramework)' == 'netcoreapp2.0' ">
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Cookies" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.JwtBearer" Version="2.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Http.Abstractions" Version="2.0.1" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\Constants.cs">
-      <Link>common\Constants.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\Resources.cs">
-      <Link>common\Resources.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\StuntmanAlignment.cs">
-      <Link>common\StuntmanAlignment.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\StuntmanClaimConverter.cs">
-      <Link>common\StuntmanClaimConverter.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\StuntmanOptions.cs">
-      <Link>common\StuntmanOptions.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\StuntmanOptionsRetriever.cs">
-      <Link>common\StuntmanOptionsRetriever.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\StuntmanServerResponse.cs">
-      <Link>common\StuntmanServerResponse.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\StuntmanUser.cs">
-      <Link>common\StuntmanUser.cs</Link>
-    </Compile>
-    <Compile Include="..\RimDev.Stuntman.AspNetCore\common\UserPicker.cs">
-      <Link>common\UserPicker.cs</Link>
-    </Compile>
-    <Compile Include="IAppBuilderExtensions.cs" />
-    <Compile Include="OwinStuntmanOptions.cs" />
-    <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="..\..\common\SolutionInfo.cs">
-      <Link>Properties\SolutionInfo.cs</Link>
-    </Compile>
-    <Compile Include="Resources.cs" />
+    <EmbeddedResource Include="assets\stuntman.css" />
+    <EmbeddedResource Include="assets\stuntman-logo.png" />
   </ItemGroup>
-  <ItemGroup>
-    <None Include="Core.nuspec" />
-    <None Include="packages.config" />
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="..\RimDev.Stuntman.AspNetCore\assets\stuntman-logo.png">
-      <Link>assets\stuntman-logo.png</Link>
-    </EmbeddedResource>
-    <EmbeddedResource Include="..\RimDev.Stuntman.AspNetCore\assets\stuntman.css">
-      <Link>assets\stuntman.css</Link>
-    </EmbeddedResource>
-  </ItemGroup>
-  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

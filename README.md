@@ -5,7 +5,6 @@
 | Package                    | Version |
 | -------------------------- | ------- |
 | RimDev.Stuntman            | ![RimDev.Stuntman NuGet Version](https://img.shields.io/nuget/v/RimDev.Stuntman.svg) |
-| RimDev.Stuntman.AspNetCore | ![RimDev.Stuntman.AspNetCore NuGet Version](https://img.shields.io/nuget/v/RimDev.Stuntman.AspNetCore.svg) |
 
 **Stuntman** is a library for impersonating users during development leveraging .NET Claims Identity. Used primarily in web environments like ASP.NET MVC, ASP.NET Web Forms, and OWIN applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.
 
@@ -13,14 +12,10 @@
 
 ## Installation
 
-Install either the [RimDev.Stuntman](https://www.nuget.org/packages/RimDev.Stuntman/) or [RimDev.Stuntman.AspNetCore](https://www.nuget.org/packages/RimDev.Stuntman.AspNetCore/) NuGet package, depending on the environment.
+Install the [RimDev.Stuntman](https://www.nuget.org/packages/RimDev.Stuntman/) NuGet package.
 
 ```
 PM> Install-Package RimDev.Stuntman
-
-or
-
-PM> Install-Package RimDev.Stuntman.AspNetCore
 ```
 
 ## Usage
@@ -66,6 +61,36 @@ public class Startup
         {
             app.UseStuntman(StuntmanOptions);
         }
+    }
+}
+```
+
+```csharp
+// ASP.NET Core
+public class Startup
+{
+    public static readonly StuntmanOptions StuntmanOptions = new StuntmanOptions();
+
+    public Startup(IConfiguration configuration)
+    {
+        StuntmanOptions
+            .AddUser(new StuntmanUser("user-1", "User 1")
+                .AddClaim("given_name", "John")
+                .AddClaim("family_name", "Doe"));
+
+        Configuration = configuration;
+    }
+
+    public IConfiguration Configuration { get; }
+
+    public void ConfigureServices(IServiceCollection services)
+    {
+        services.AddStuntman(StuntmanOptions);
+    }
+
+    public void Configure(IApplicationBuilder app, IHostingEnvironment env)
+    {
+        app.UseStuntman(StuntmanOptions);
     }
 }
 ```
@@ -140,10 +165,18 @@ StuntmanOptions.TryAddConfigurationFromServer("https://some-stuntman-enabled-app
 Here's an example users JSON that can be consumed by `StuntmanOptions.AddUsersFromJson(string pathOrUrl)`:
 
 ```json
-[
-  { "Id": "user-1", "Name": "User 1" },
-  { "Id": "user-2", "Name": "User 2" }
-]
+{
+  "Users": [
+    {
+      "Id": "user-1",
+      "Name": "User 1"
+    },
+    {
+      "Id": "user-2",
+      "Name": "User 2"
+    }
+  ]
+}
 ```
 
 ## Contributing

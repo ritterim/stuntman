@@ -1,11 +1,12 @@
-﻿using Owin;
+using Owin;
 using RimDev.Stuntman.Core;
 using System;
 using System.IO;
 using System.Reflection;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace RimDev.Stuntman.UsageSample
+namespace UsageSample
 {
     public class Startup
     {
@@ -26,13 +27,10 @@ namespace RimDev.Stuntman.UsageSample
                 .AddUser(new StuntmanUser("user-3", "User 3")
                     .AddClaim("given_name", "Sam")
                     .AddClaim("family_name", "Smith"))
-                .AddUsersFromJson("https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample.AspNetCore/test-users-1.json") // Tried this using OWIN locally, didn't get it working.
-                .AddUsersFromJson(Path.Combine(GetBinPath(), "test-users-2.json"));
+                //.AddUsersFromJson("https://raw.githubusercontent.com/ritterim/stuntman/master/samples/UsageSample.AspNetCore/test-server-response-1.json")
+                .AddUsersFromJson(Path.Combine(GetBinPath(), "test-server-response-2.json"));
 
-            if (System.Web.HttpContext.Current.IsDebuggingEnabled)
-            {
-                app.UseStuntman(StuntmanOptions);
-            }
+            app.UseStuntman(StuntmanOptions);
 
             app.Map("/secure", secure =>
             {
@@ -49,11 +47,8 @@ namespace RimDev.Stuntman.UsageSample
                     context.Response.WriteAsync(
                         $"Hello, {userName}. This is the /secure endpoint.");
 
-                    if (System.Web.HttpContext.Current.IsDebuggingEnabled)
-                    {
-                        context.Response.WriteAsync(
-                            StuntmanOptions.UserPicker(context.Request.User));
-                    }
+                    context.Response.WriteAsync(
+                        StuntmanOptions.UserPicker(context.Request.User));
 
                     return Task.FromResult(true);
                 });
@@ -91,7 +86,7 @@ namespace RimDev.Stuntman.UsageSample
             {
                 nonSecure.Run(context =>
                 {
-                    var userName = context.Request.User.Identity.Name;
+                    var userName = context.Request.User?.Identity.Name;
 
                     if (string.IsNullOrEmpty(userName))
                         userName = "Anonymous / Unknown";
@@ -108,13 +103,11 @@ namespace RimDev.Stuntman.UsageSample
 <body>");
 
                     context.Response.WriteAsync(
-                        $"Hello, {userName}.");
+                        $@"Hello, {userName}. <a href=""/secure"">Secure page</a>");
 
-                    if (System.Web.HttpContext.Current.IsDebuggingEnabled)
-                    {
-                        context.Response.WriteAsync(
-                            StuntmanOptions.UserPicker(context.Request.User));
-                    }
+
+                    context.Response.WriteAsync(
+                        StuntmanOptions.UserPicker(context.Request.User ?? new ClaimsPrincipal()));
 
                     context.Response.WriteAsync(
 @"</body>
@@ -125,7 +118,7 @@ namespace RimDev.Stuntman.UsageSample
             });
         }
 
-        // http://stackoverflow.com/a/26265757
+        // https://stackoverflow.com/a/26265757
         private static void AuthenticateAllRequests(IAppBuilder app, params string[] authenticationTypes)
         {
             app.Use((context, continuation) =>
@@ -148,7 +141,7 @@ namespace RimDev.Stuntman.UsageSample
         {
             const string FilePrefix = @"file:\";
 
-            // http://stackoverflow.com/a/3461871/941536
+            // https://stackoverflow.com/a/3461871/941536
             var path = Path.GetDirectoryName(Assembly.GetExecutingAssembly().GetName().CodeBase);
 
             if (!path.StartsWith(FilePrefix, StringComparison.OrdinalIgnoreCase))
