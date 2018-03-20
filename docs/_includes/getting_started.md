@@ -129,13 +129,3 @@ Here's an example users JSON that can be consumed by `StuntmanOptions.AddUsersFr
   ]
 }
 ```
-
-### Support OSS &mdash; buy an official sticker
-
-You can help this project by buying an official Stuntman sticker at the [StickerMule marketplace](https://www.stickermule.com/marketplace/9330-stuntman){: target="_blank"}, and please send us a picture by tweeting at the contributors or by using the **#stuntman** hashtag.
-
-{: .ui.center.aligned.padded.segment }
-![Buy a stuntman sticker](https://www.stickermule.com/marketplace/embed_img/9330)
-
-{: .ui.center.aligned.padded.grid }
-[Buy this sticker](https://www.stickermule.com/marketplace/9330-stuntman){: .ui.huge.red.button }
