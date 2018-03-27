@@ -188,7 +188,3 @@ Find a bug? Open an issue or submit a pull request!
 ## License
 
 MIT License
-
-## Stickers
-
-You can buy an official sticker at the [StickerMule Marketplace](https://www.stickermule.com/marketplace/9330-stuntman).
