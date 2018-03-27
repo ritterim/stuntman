@@ -2,9 +2,9 @@
 
 > "Sometimes you need a Stuntman before you send in real, unsuspecting users!"
 
-| Package                    | Version |
-| -------------------------- | ------- |
-| RimDev.Stuntman            | ![RimDev.Stuntman NuGet Version](https://img.shields.io/nuget/v/RimDev.Stuntman.svg) |
+| Package                       | Version |
+| ----------------------------- | ------- |
+| [RimDev.Stuntman][NuGet link] | [![RimDev.Stuntman NuGet Version](https://img.shields.io/nuget/v/RimDev.Stuntman.svg)][NuGet link] |
 
 **Stuntman** is a library for impersonating users during development leveraging .NET Claims Identity. Used primarily in web environments like ASP.NET MVC, ASP.NET Web Forms, and OWIN applications that serve HTML. This allows you to test different user scenarios that exist in your application with minimal friction. It also allows you to share those scenarios with other team members via source control.
 
@@ -12,7 +12,7 @@
 
 ## Installation
 
-Install the [RimDev.Stuntman](https://www.nuget.org/packages/RimDev.Stuntman/) NuGet package.
+Install the [RimDev.Stuntman][NuGet link] NuGet package.
 
 ```
 PM> Install-Package RimDev.Stuntman
@@ -188,3 +188,5 @@ Find a bug? Open an issue or submit a pull request!
 ## License
 
 MIT License
+
+[NuGet link]: https://www.nuget.org/packages/RimDev.Stuntman
