@@ -70,10 +70,10 @@ namespace RimDev.Stuntman.Core
                                 return;
                             }
 
-                            claims.Add(new Claim(ClaimTypes.Name, user.Name));
+                            claims.Add(new Claim(user.NameClaimType, user.Name));
                             claims.AddRange(user.Claims);
 
-                            var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
+                            var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType, user.NameClaimType, user.RoleClaimType);
 
                             var authManager = context.Authentication;
 
@@ -184,7 +184,7 @@ namespace RimDev.Stuntman.Core
                     claims.Add(new Claim(ClaimTypes.Name, user.Name));
                     claims.AddRange(user.Claims);
 
-                    var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
+                    var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType, user.NameClaimType, user.RoleClaimType);
 
                     context.Validated(identity);
 

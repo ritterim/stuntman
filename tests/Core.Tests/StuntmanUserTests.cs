@@ -52,6 +52,22 @@ namespace RimDev.Stuntman.Core.Tests
             }
 
             [Fact]
+            public void SetsNameType()
+            {
+                var user = new StuntmanUser("user-1", "User 1");
+
+                Assert.Equal(StuntmanUser.DefaultNameClaimType, user.NameClaimType);
+            }
+
+            [Fact]
+            public void SetsRoleType()
+            {
+                var user = new StuntmanUser("user-1", "User 1");
+
+                Assert.Equal(StuntmanUser.DefaultRoleClaimType, user.RoleClaimType);
+            }
+
+            [Fact]
             public void InitializesClaimsCollection()
             {
                 var user = new StuntmanUser("user-1", "User 1");
@@ -112,6 +128,50 @@ namespace RimDev.Stuntman.Core.Tests
                 var claim = user.Claims.Single();
                 Assert.Equal("some_type", claim.Type);
                 Assert.Equal("some_value", claim.Value);
+            }
+        }
+
+        public class AddName
+        {
+            [Fact]
+            public void AddsNameClaimUsingRoleClaimType()
+            {
+                var user = new StuntmanUser("user-1", "User 1")
+                    .AddName("name1");
+
+                Assert.Equal("name1", user.Claims.Single(x => x.Type == user.NameClaimType).Value);
+            }
+
+            [Fact]
+            public void ThrowsForEmptyValue()
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .AddName(string.Empty));
+
+                Assert.Equal("name must not be empty or whitespace.", exception.Message);
+            }
+        }
+
+        public class AddRole
+        {
+            [Fact]
+            public void AddsRoleClaimUsingRoleClaimType()
+            {
+                var user = new StuntmanUser("user-1", "User 1")
+                    .AddRole("role1");
+
+                Assert.Equal("role1", user.Claims.Single(x => x.Type == user.RoleClaimType).Value);
+            }
+
+            [Fact]
+            public void ThrowsForEmptyValue()
+            {
+                var exception = Assert.Throws<ArgumentException>(
+                    () => new StuntmanUser("user-1", "User 1")
+                        .AddRole(string.Empty));
+
+                Assert.Equal("role must not be empty or whitespace.", exception.Message);
             }
         }
 

@@ -104,10 +104,10 @@ namespace RimDev.Stuntman.Core
                     }
                 }
 
-                claims.Add(new Claim(ClaimTypes.Name, user.Name));
+                claims.Add(new Claim(user.NameClaimType, user.Name));
                 claims.AddRange(user.Claims);
 
-                context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType));
+                context.Principal = new ClaimsPrincipal(new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType, user.NameClaimType, user.RoleClaimType));
                 context.Success();
 
                 options.AfterBearerValidateIdentity?.Invoke(context);

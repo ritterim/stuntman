@@ -53,7 +53,7 @@ namespace RimDev.Stuntman.Core
                             claims.Add(new Claim(ClaimTypes.Name, user.Name));
                             claims.AddRange(user.Claims);
 
-                            var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType);
+                            var identity = new ClaimsIdentity(claims, Constants.StuntmanAuthenticationType, user.NameClaimType, user.RoleClaimType);
 
                             await context.SignInAsync(Constants.StuntmanAuthenticationType, new ClaimsPrincipal(identity));
 
