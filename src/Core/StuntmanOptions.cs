@@ -12,7 +12,7 @@ using Microsoft.Owin.Security.OAuth;
 
 #endif
 
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
 
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 
@@ -49,7 +49,7 @@ namespace RimDev.Stuntman.Core
 
 #endif
 
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
 
         /// <summary>
         /// Useful for testing state of IOwinContext post sign-in since the

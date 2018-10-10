@@ -42,7 +42,7 @@ Task("Run-Tests")
     var projectFiles = GetFiles("./tests/**/*.csproj");
     foreach(var file in projectFiles)
     {
-        DotNetCoreTool(file, "xunit", "-configuration " + configuration);
+        DotNetCoreTest(file.FullPath);
     }
 });
 

@@ -6,7 +6,7 @@
             "type": "coreclr",
             "request": "launch",
             "preLaunchTask": "build",
-            "program": "${workspaceRoot}\\samples\\UsageSample.AspNetCore\\bin\\Debug\\netcoreapp2.0\\UsageSample.AspNetCore.dll",
+            "program": "${workspaceRoot}\\samples\\UsageSample.AspNetCore\\bin\\Debug\\netcoreapp2.1\\UsageSample.AspNetCore.dll",
             "args": [],
             "cwd": "${workspaceRoot}",
             "stopAtEntry": false,
