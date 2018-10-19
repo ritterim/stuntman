@@ -10,7 +10,7 @@ using Owin;
 
 #endif
 
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
 
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Http;
@@ -25,7 +25,7 @@ namespace RimDev.Stuntman.Core
 #if NET461
             IOwinContext context,
 #endif
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
             HttpContext context,
 #endif
             StuntmanOptions options)
@@ -35,7 +35,7 @@ namespace RimDev.Stuntman.Core
             foreach (var user in options.Users)
             {
                 var returnUrl = context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey]
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
                     .ToString()
 #endif
                 ;
@@ -58,7 +58,7 @@ namespace RimDev.Stuntman.Core
 #if NET461
             IAppBuilder app
 #endif
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
             IApplicationBuilder app
 #endif
             )
@@ -66,7 +66,7 @@ namespace RimDev.Stuntman.Core
             app.Run(context =>
             {
                 var returnUrl = context.Request.Query[Constants.StuntmanOptions.ReturnUrlQueryStringKey]
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
                     .ToString()
 #endif
                     ;
@@ -92,7 +92,7 @@ namespace RimDev.Stuntman.Core
 #if NET461
                     new[] { returnUrl }
 #endif
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
                     returnUrl
 #endif
                 );
@@ -107,7 +107,7 @@ namespace RimDev.Stuntman.Core
 #if NET461
             IOwinContext context,
 #endif
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
             HttpContext context,
 #endif
             StuntmanOptions options)
@@ -143,7 +143,7 @@ namespace RimDev.Stuntman.Core
 #if NET461
             context.Response.Write(html);
 #endif
-#if NETCOREAPP2_0
+#if NETCOREAPP2_1
             context.Response.WriteAsync(html).ConfigureAwait(false).GetAwaiter().GetResult();
 #endif
         }
