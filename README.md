@@ -1,4 +1,4 @@
-![Stuntman logo](https://raw.githubusercontent.com/ritterim/stuntman/master/images/stuntman-icon-128.png)
+![Stuntman logo](https://raw.githubusercontent.com/ritterim/stuntman/master/stuntman-icon-128.png)
 
 > "Sometimes you need a Stuntman before you send in real, unsuspecting users!"
 
