@@ -7,17 +7,18 @@ namespace RimDev.Stuntman.Core
     public class Resources
     {
         private const string StuntmanEmbeddedAssetsPrefix = "RimDev.Stuntman.Core.assets.";
-
+        private const string StuntManCssFile = "stuntman.css";
+        private const string StuntManLogo = "stuntman-logo.png";
         public static string GetCss()
         {
-            var css = GetStuntmanResource("stuntman.css");
+            var css = GetStuntmanResource(StuntManCssFile);
 
             return css;
         }
 
         public static string GetLogoForInlining()
         {
-            var logoBytes = GetStuntmanResourceBytes("stuntman-logo.png");
+            var logoBytes = GetStuntmanResourceBytes(StuntManLogo);
 
             return "data:image/png;base64," + Convert.ToBase64String(logoBytes);
         }
